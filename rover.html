@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MARS ALIVE // ROVER MISSION CONTROL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #111318;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 227, 253, 0.2);
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#ae3200",
+                        "on-secondary-fixed": "#001f24",
+                        "secondary": "#bdf4ff",
+                        "surface-container": "#1e2024",
+                        "secondary-fixed": "#9cf0ff",
+                        "background": "#111318",
+                        "surface-bright": "#37393e",
+                        "outline-variant": "#5c4037",
+                        "outline": "#ad897e",
+                        "on-primary": "#5e1700",
+                        "tertiary-fixed-dim": "#b9c8dd",
+                        "surface-variant": "#333539",
+                        "on-secondary-container": "#00616d",
+                        "on-primary-container": "#521300",
+                        "tertiary-fixed": "#d5e4f9",
+                        "on-primary-fixed-variant": "#852400",
+                        "inverse-surface": "#e2e2e8",
+                        "primary-container": "#ff571a",
+                        "surface": "#111318",
+                        "on-error": "#690005",
+                        "tertiary-container": "#8492a5",
+                        "primary-fixed-dim": "#ffb59e",
+                        "on-tertiary-fixed-variant": "#3a4859",
+                        "on-background": "#e2e2e8",
+                        "tertiary": "#b9c8dd",
+                        "surface-container-high": "#282a2e",
+                        "on-secondary-fixed-variant": "#004f58",
+                        "on-tertiary-container": "#1d2b3b",
+                        "surface-dim": "#111318",
+                        "primary": "#ffb59e",
+                        "surface-container-low": "#1a1c20",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#00363d",
+                        "secondary-container": "#00e3fd",
+                        "on-tertiary-fixed": "#0e1c2c",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0c0e12",
+                        "surface-tint": "#ffb59e",
+                        "primary-fixed": "#ffdbd0",
+                        "inverse-on-surface": "#2f3035",
+                        "on-tertiary": "#243142",
+                        "on-surface-variant": "#e6beb2",
+                        "surface-container-highest": "#333539",
+                        "secondary-fixed-dim": "#00daf3",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e2e2e8",
+                        "on-primary-fixed": "#3a0b00"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "data-point": ["Space Grotesk"],
+                        "body-base": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "data-point": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-base": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-base overflow-hidden">
+<canvas id="starfield"></canvas>
+<!-- TopNavBar Implementation -->
+<nav class="fixed top-0 w-full border-b border-orange-600/20 bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 z-50 shadow-[0_0_20px_rgba(255,77,0,0.1)]">
+<a class="text-2xl font-black text-orange-600 tracking-tighter italic hover:text-orange-400 transition-colors" href="index.html">MARS ALIVE</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-zinc-500 hover:text-orange-400 transition-colors font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold" href="index.html">HELLAS PLANITIA</a>
+<a class="text-zinc-500 hover:text-orange-400 transition-colors font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold" href="rover.html">OLYMPUS MONS</a>
+<a class="text-orange-500 border-b-2 border-orange-600 pb-1 font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold" href="gallery.html">MISSION LOGS</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-orange-600 font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold">MISSION STATUS: NOMINAL</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-orange-600 cursor-crosshair active:scale-95" data-icon="satellite_alt">satellite_alt</span>
+<span class="material-symbols-outlined text-orange-600 cursor-crosshair active:scale-95" data-icon="settings_input_component">settings_input_component</span>
+</div>
+</div>
+</nav>
+<!-- SideNavBar Implementation -->
+<aside class="fixed left-0 h-full w-20 hover:w-64 border-r border-orange-600/10 bg-zinc-950/40 backdrop-blur-md transition-all duration-500 group flex flex-col py-20 z-40 overflow-hidden">
+<div class="px-6 mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="text-orange-600 font-['Space_Grotesk'] text-[12px] font-bold">SECTOR 7-G</div>
+<div class="text-zinc-500 text-[10px]">LOCAL TIME: 24:40 MSD</div>
+</div>
+<div class="flex flex-col flex-grow">
+<a class="flex items-center gap-4 px-6 py-4 text-zinc-600 hover:bg-orange-600/5 hover:text-white transition-all duration-300 cursor-pointer" href="analysis.html">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity">BIOSENSORS</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-orange-500 bg-orange-600/10 border-r-4 border-orange-600 transition-all duration-300 cursor-pointer" href="rover.html">
+<span class="material-symbols-outlined" data-icon="airwave">airwave</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity">ATMOSPHERICS</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-zinc-600 hover:bg-orange-600/5 hover:text-white transition-all duration-300 cursor-pointer" href="gallery.html">
+<span class="material-symbols-outlined" data-icon="terrain">terrain</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity">GEO-SCAN</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-zinc-600 hover:bg-orange-600/5 hover:text-white transition-all duration-300 cursor-pointer" href="index.html">
+<span class="material-symbols-outlined" data-icon="radar">radar</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity">COMMS</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-zinc-600 hover:bg-orange-600/5 hover:text-white transition-all duration-300 cursor-pointer" href="gallery.html">
+<span class="material-symbols-outlined text-error" data-icon="emergency_home">emergency_home</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity">ANOMALIES</span>
+</a>
+</div>
+<div class="mt-auto px-6 mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<a class="block w-full py-2 bg-inverse-primary text-on-primary font-label-caps text-center hover:brightness-110 transition-all" href="analysis.html">REPORT ANOMALY</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 mt-[72px] h-[calc(100vh-72px)] p-6 flex flex-col gap-6 bg-transparent">
+<!-- Top row: Live Feed & Primary Stats -->
+<div class="grid grid-cols-12 gap-6 h-full max-h-[70%]">
+<!-- Live Rover Feed Viewport -->
+<div class="col-span-8 relative border border-outline-variant bg-surface-container-lowest overflow-hidden group">
+<!-- Decorative HUD scanning elements -->
+<div class="absolute inset-0 z-20 pointer-events-none border-[12px] border-zinc-950/20"></div>
+<div class="absolute top-4 left-4 z-30 flex flex-col gap-2">
+<div class="bg-zinc-950/80 p-2 border-l-2 border-secondary-container">
+<span class="block font-label-caps text-[10px] text-secondary">SOURCE: PERSEVERANCE-M24</span>
+<span class="block font-data-point text-on-surface">LIVE FEED // CAM_01_NAV</span>
+</div>
+</div>
+<div class="absolute top-4 right-4 z-30 flex flex-col items-end gap-2">
+<div class="bg-zinc-950/80 p-3 flex flex-col gap-1 border-r-2 border-primary">
+<div class="flex items-center justify-between gap-4">
+<span class="font-label-caps text-[10px] text-primary">HEADING</span>
+<span class="font-data-point text-on-surface">124.5° SE</span>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-label-caps text-[10px] text-primary">PITCH</span>
+<span class="font-data-point text-on-surface">+1.2°</span>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-label-caps text-[10px] text-primary">ROLL</span>
+<span class="font-data-point text-on-surface">-0.4°</span>
+</div>
+</div>
+</div>
+<!-- Scanning HUD Markers -->
+<div class="absolute inset-8 z-20 pointer-events-none">
+<div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-secondary-container"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-secondary-container"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-secondary-container"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-secondary-container"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/5 rounded-full flex items-center justify-center">
+<div class="w-1 h-24 bg-secondary/10 absolute rotate-90"></div>
+<div class="w-1 h-24 bg-secondary/10 absolute"></div>
+</div>
+</div>
+<!-- Main Feed Image -->
+<img alt="Martian surface" class="w-full h-full object-cover filter brightness-75 grayscale-[0.2]" data-alt="cinematic wide angle low perspective shot of martian red desert floor with rocky formations and dusty hazy orange sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaCgC_YCjaUPOMqyKQIo4PsMohowhLjSu1DN7W6lLBQ_he52ySslzppouUDk9uAI_-x2cd3YpaHoKWgJQLTv2Y1T0SGQnJgq5m4BSz5PsgROsMwYJcmmc642ft83aAVdTZIu8dq0BhSEjylgK_MzcUAeLOvAZooar56L9ucuwPC4bjK0LBvtq96B7sSiI7Emv7ZrWb1FIfKNeqwrk93r0sPqbIraXj7iQgU3TFUNRLnVGWE_syJ04QvWLJ-ybzxZPq-ytzZM2WjWQ"/>
+<div class="scanline"></div>
+</div>
+<!-- Side Dashboard: Status & Metrics -->
+<div class="col-span-4 flex flex-col gap-6">
+<!-- Rover Status Card -->
+<div class="flex-1 bg-surface-container-low/80 backdrop-blur-md border border-outline-variant p-6 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h2 class="font-headline-md text-on-surface uppercase tracking-tighter">ROVER STATUS</h2>
+</div>
+<a class="material-symbols-outlined text-zinc-500 hover:text-primary transition-colors" data-icon="open_in_new" href="rover.html">open_in_new</a>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-on-surface-variant">POWER RESERVE</span>
+<span class="font-data-point text-primary">84%</span>
+</div>
+<div class="h-1 bg-zinc-800 w-full">
+<div class="h-full bg-primary" style="width: 84%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-zinc-900/50 p-4 border border-white/5">
+<span class="block font-label-caps text-on-surface-variant mb-1">SIGNAL</span>
+<span class="font-data-point text-secondary">-92 dBm</span>
+</div>
+<div class="bg-zinc-900/50 p-4 border border-white/5">
+<span class="block font-label-caps text-on-surface-variant mb-1">HEALTH</span>
+<span class="font-data-point text-secondary">OPTIMAL</span>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-white/5">
+<span class="block font-label-caps text-on-surface-variant mb-3">THERMAL SENSORS</span>
+<div class="flex gap-2 flex-wrap">
+<span class="px-2 py-1 bg-secondary-container/10 border border-secondary-container text-secondary text-[10px] font-bold">CORE: 28°C</span>
+<span class="px-2 py-1 bg-secondary-container/10 border border-secondary-container text-secondary text-[10px] font-bold">WHEEL_A: 14°C</span>
+<span class="px-2 py-1 bg-secondary-container/10 border border-secondary-container text-secondary text-[10px] font-bold">CPU: 42°C</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Local Telemetry Card -->
+<div class="flex-1 bg-surface-container-low/80 backdrop-blur-md border border-outline-variant p-6 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="monitoring">monitoring</span>
+<h2 class="font-headline-md text-on-surface uppercase tracking-tighter">LOCAL TELEMETRY</h2>
+</div>
+<a class="material-symbols-outlined text-zinc-500 hover:text-secondary transition-colors" data-icon="open_in_new" href="analysis.html">open_in_new</a>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-base text-on-surface-variant">ATMOS. PRESSURE</span>
+<span class="font-data-point text-on-surface">6.1 hPa</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-base text-on-surface-variant">RADIATION FLUX</span>
+<span class="font-data-point text-on-surface">220 mSv/yr</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-base text-on-surface-variant">WIND VELOCITY</span>
+<span class="font-data-point text-on-surface">12.4 m/s NW</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom row: System Log & Secondary Views -->
+<div class="grid grid-cols-12 gap-6 flex-grow overflow-hidden">
+<!-- System Log Terminal -->
+<div class="col-span-8 bg-black border border-outline-variant p-4 font-mono text-[11px] overflow-y-auto">
+<div class="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="text-primary font-label-caps">LIVE SYSTEM_LOG // KERNEL-7</span>
+</div>
+<div class="space-y-1">
+<div class="text-zinc-500">[ 24:40:12 ] <span class="text-secondary">SYSTEM</span>: Booting telemetry sub-routine... SUCCESS</div>
+<div class="text-zinc-500">[ 24:40:15 ] <span class="text-secondary">NETWORK</span>: Handshake with Sat-7 established via Deep Space Network</div>
+<div class="text-zinc-500">[ 24:41:02 ] <span class="text-primary-container">ALERT</span>: Surface dust accumulation detected on Lens B</div>
+<div class="text-zinc-500">[ 24:41:05 ] <span class="text-on-surface">MAINTENANCE</span>: Activating lens-cleaning protocol...</div>
+<div class="text-zinc-500">[ 24:41:20 ] <span class="text-secondary">SYSTEM</span>: Analysis of Sector 7-G soil sample completed. Trace silicate found.</div>
+<div class="text-zinc-500">[ 24:42:01 ] <span class="text-zinc-400">LOG</span>: Waiting for command from Earth Control...</div>
+</div>
+</div>
+<!-- Mini Radar/Map -->
+<a class="col-span-4 bg-surface-container-low/80 backdrop-blur-md border border-outline-variant relative overflow-hidden flex items-center justify-center cursor-pointer group" href="index.html">
+<div class="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
+<img alt="Satellite view of Mars" class="w-full h-full object-cover" data-alt="top down satellite imagery of martian surface with craters and ridges in deep rust and orange tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKGb16SoNG2wc0-LOO7u1YGqzpSSPzpLtnhZi0JYNYSto9BwhruPD7rEDreZtOZeRbKUudLjJVjX83U7ltwakSAx7-Yh5QGaWvSNeRbnFgz5ZS_BW1ZSlHXu-WqFD7rZHt24vy_XG3ZA0SYG39vb2Dduoom2iegh-VyBJx-qNgZxDN2KM4HtuJt0lUjByvCqrZckUqs7r4yWUzF1N-2bCC_61NSA4UjtiIVX0f9bn-TYfORtBLY7SViOQHLlxhvFF6ckSiy8haVSU"/>
+</div>
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-primary text-4xl block mb-2" data-icon="radar">radar</span>
+<span class="font-label-caps text-on-surface tracking-widest">ACTIVE POSITIONING</span>
+<span class="block text-[10px] text-primary mt-1">18.44°N, 77.45°E</span>
+</div>
+<!-- Radar sweep effect simulated via gradient overlay -->
+<div class="absolute inset-0 bg-[conic-gradient(from_0deg,_transparent_0%,_rgba(255,181,158,0.1)_25%,_transparent_50%)]"></div>
+</a>
+</div>
+</main>
+<!-- Footer Implementation -->
+<footer class="w-full border-t border-orange-600/30 bg-zinc-950 py-8 px-12 flex flex-row justify-between items-center z-50">
+<div class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700">© 2024 MARS ALIVE INITIATIVE // CLASSIFIED</div>
+<div class="flex gap-10">
+<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-orange-400 transition-all" href="analysis.html">STAY_PROTOCOL_42</a>
+<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-orange-400 transition-all" href="gallery.html">BIOLOGICAL_HAZARD_INDEX</a>
+<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-orange-400 transition-all" href="index.html">DEEP_SPACE_NETWORK</a>
+</div>
+</footer>
+<script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    function init() {
+        stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1.5,
+                opacity: Math.random(),
+                speed: Math.random() * 0.005 + 0.002
+            });
+        }
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(star => {
+            ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fill();
+            
+            star.opacity += star.speed;
+            if (star.opacity > 1 || star.opacity < 0) star.speed = -star.speed;
+        });
+        requestAnimationFrame(animate);
+    }
+    
+    window.addEventListener('resize', () => {
+        resize();
+        init();
+    });
+    
+    resize();
+    init();
+    animate();
+</script>
+</body></html>
