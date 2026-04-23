@@ -15,7 +15,7 @@
                     "colors": {
                         "inverse-primary": "#ae3200",
                         "on-secondary-fixed": "#001f24",
-                        "secondary": "#bdf4ff",
+                        "secondary": "#00e3fd",
                         "surface-container": "#1e2024",
                         "secondary-fixed": "#9cf0ff",
                         "background": "#111318",
@@ -30,7 +30,7 @@
                         "tertiary-fixed": "#d5e4f9",
                         "on-primary-fixed-variant": "#852400",
                         "inverse-surface": "#e2e2e8",
-                        "primary-container": "#ff571a",
+                        "primary-container": "#FF4D00",
                         "surface": "#111318",
                         "on-error": "#690005",
                         "tertiary-container": "#8492a5",
@@ -42,15 +42,15 @@
                         "on-secondary-fixed-variant": "#004f58",
                         "on-tertiary-container": "#1d2b3b",
                         "surface-dim": "#111318",
-                        "primary": "#ffb59e",
+                        "primary": "#FF4D00",
                         "surface-container-low": "#1a1c20",
                         "error": "#ffb4ab",
-                        "on-secondary": "#00363d",
+                        "on-secondary": "#ffffff",
                         "secondary-container": "#00e3fd",
                         "on-tertiary-fixed": "#0e1c2c",
                         "error-container": "#93000a",
                         "surface-container-lowest": "#0c0e12",
-                        "surface-tint": "#ffb59e",
+                        "surface-tint": "#FF4D00",
                         "primary-fixed": "#ffdbd0",
                         "inverse-on-surface": "#2f3035",
                         "on-tertiary": "#243142",
@@ -102,9 +102,14 @@
                               radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0));
             background-repeat: repeat;
             background-size: 200px 200px;
+            animation: move-stars 100s linear infinite;
+        }
+        @keyframes move-stars {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
         }
         .scan-line {
-            background: linear-gradient(to bottom, transparent, rgba(0, 227, 253, 0.1) 50%, transparent);
+            background: linear-gradient(to bottom, transparent, rgba(255, 77, 0, 0.1) 50%, transparent);
             height: 100px;
             width: 100%;
             position: absolute;
@@ -119,17 +124,19 @@
 </head>
 <body class="bg-background text-on-background font-body-base selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
 <!-- Top Navigation Bar -->
-<nav class="fixed top-0 w-full border-b border-orange-600/20 bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 z-50 shadow-[0_0_20px_rgba(255,77,0,0.1)]">
-<div class="flex items-center gap-8">
-<a class="text-2xl font-black text-orange-600 tracking-tighter italic font-headline-md hover:opacity-80 transition-opacity" href="index.html">MARS ALIVE</a>
+<nav class="fixed top-0 w-full border-b border-[#FF4D00]/20 bg-zinc-950/80 backdrop-blur-xl flex flex-col md:flex-row justify-between items-center px-6 py-4 z-50 shadow-[0_0_20px_rgba(255,77,0,0.1)]">
+<div class="flex items-center gap-8 w-full md:w-auto justify-between md:justify-start">
 <div class="hidden md:flex gap-6">
-<a class="text-orange-500 border-b-2 border-orange-600 pb-1 font-headline-md text-xs font-bold tracking-widest uppercase" href="index.html">HELLAS PLANITIA</a>
-<a class="text-zinc-500 hover:text-orange-400 transition-colors font-headline-md text-xs font-bold tracking-widest uppercase" href="analysis.html">OLYMPUS MONS</a>
-<a class="text-zinc-500 hover:text-orange-400 transition-colors font-headline-md text-xs font-bold tracking-widest uppercase" href="gallery.html">MISSION LOGS</a>
+<a class="text-[#FF4D00] border-b-2 border-[#FF4D00] pb-1 font-headline-md text-xs font-bold tracking-widest uppercase" href="index.html">HELLAS PLANITIA</a>
+<a class="text-zinc-500 hover:text-[#FF4D00] transition-colors font-headline-md text-xs font-bold tracking-widest uppercase" href="analysis.html">OLYMPUS MONS</a>
+<a class="text-zinc-500 hover:text-[#FF4D00] transition-colors font-headline-md text-xs font-bold tracking-widest uppercase" href="gallery.html">MISSION LOGS</a>
 </div>
 </div>
-<div class="flex items-center gap-4">
-<span class="hidden md:block font-headline-md tracking-widest uppercase text-xs font-bold text-orange-600">MISSION STATUS: NOMINAL</span>
+<div class="absolute left-1/2 -translate-x-1/2">
+<a class="text-2xl font-black text-[#FF4D00] tracking-tighter italic font-headline-md hover:opacity-80 transition-opacity" href="index.html">MARS ALIVE</a>
+</div>
+<div class="flex items-center gap-4 ml-auto md:ml-0">
+<span class="hidden md:block font-headline-md tracking-widest uppercase text-xs font-bold text-[#FF4D00]">MISSION STATUS: NOMINAL</span>
 <div class="flex gap-2">
 <button class="p-2 hover:bg-white/5 transition-all duration-300 cursor-crosshair active:scale-95 text-zinc-400">
 <span class="material-symbols-outlined" data-icon="satellite_alt">satellite_alt</span>
@@ -141,29 +148,29 @@
 </div>
 </nav>
 <!-- Side Navigation Bar -->
-<aside class="fixed left-0 h-full w-20 hover:w-64 border-r border-orange-600/10 bg-zinc-950/40 backdrop-blur-md transition-all duration-500 group flex flex-col py-20 z-40 overflow-hidden">
+<aside class="fixed left-0 h-full w-20 hover:w-64 border-r border-[#FF4D00]/10 bg-zinc-950/40 backdrop-blur-md transition-all duration-500 group flex flex-col py-20 z-40 overflow-hidden">
 <div class="px-6 mb-8 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-<h3 class="font-headline-md text-sm font-bold text-orange-600">SECTOR 7-G</h3>
+<h3 class="font-headline-md text-sm font-bold text-[#FF4D00]">SECTOR 7-G</h3>
 <p class="font-label-caps text-[10px] text-zinc-500">LOCAL TIME: 24:40 MSD</p>
 </div>
 <div class="flex flex-col gap-2 w-full">
-<a class="flex items-center gap-4 px-6 py-3 text-orange-500 bg-orange-600/10 border-r-4 border-orange-600" href="analysis.html">
+<a class="flex items-center gap-4 px-6 py-3 text-[#FF4D00] bg-[#FF4D00]/10 border-r-4 border-[#FF4D00]" href="analysis.html">
 <span class="material-symbols-outlined" data-icon="biotech">biotech</span>
 <span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">BIOSENSORS</span>
 </a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-orange-600/5 hover:text-white cursor-pointer" href="analysis.html">
+<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="analysis.html">
 <span class="material-symbols-outlined" data-icon="airwave">airwave</span>
 <span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">ATMOSPHERICS</span>
 </a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-orange-600/5 hover:text-white cursor-pointer" href="analysis.html">
+<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="analysis.html">
 <span class="material-symbols-outlined" data-icon="terrain">terrain</span>
 <span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">GEO-SCAN</span>
 </a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-orange-600/5 hover:text-white cursor-pointer" href="analysis.html">
+<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="analysis.html">
 <span class="material-symbols-outlined" data-icon="radar">radar</span>
 <span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">COMMS</span>
 </a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-orange-600/5 hover:text-white cursor-pointer" href="gallery.html">
+<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="gallery.html">
 <span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
 <span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">ANOMALIES</span>
 </a>
@@ -173,11 +180,11 @@
                 REPORT ANOMALY
             </a>
 <div class="flex flex-col gap-2">
-<a class="flex items-center gap-4 text-zinc-700 hover:text-orange-400 cursor-pointer" href="gallery.html">
+<a class="flex items-center gap-4 text-zinc-700 hover:text-[#FF4D00] cursor-pointer" href="gallery.html">
 <span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
 <span class="font-headline-md text-[10px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">ARCHIVES</span>
 </a>
-<a class="flex items-center gap-4 text-zinc-700 hover:text-orange-400 cursor-pointer" href="analysis.html">
+<a class="flex items-center gap-4 text-zinc-700 hover:text-[#FF4D00] cursor-pointer" href="analysis.html">
 <span class="material-symbols-outlined" data-icon="terminal">terminal</span>
 <span class="font-headline-md text-[10px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">PROTOCOLS</span>
 </a>
@@ -187,18 +194,18 @@
 <main class="ml-20 min-h-screen relative">
 <!-- Hero Section -->
 <section class="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-<div class="absolute inset-0 starfield opacity-30 z-0"></div>
+<div class="absolute inset-0 starfield opacity-40 z-0"></div>
 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/40 to-background z-0"></div>
 <!-- Technical HUD Elements -->
-<div class="absolute top-24 left-12 border-l border-t border-orange-600/40 p-4 font-data-point text-orange-600/60 z-10 hidden lg:block">
+<div class="absolute top-24 left-12 border-l border-t border-[#FF4D00]/40 p-4 font-data-point text-[#FF4D00]/60 z-10 hidden lg:block">
 <p class="text-[10px] tracking-tighter">LAT: 18.65° N</p>
 <p class="text-[10px] tracking-tighter">LON: 226.2° E</p>
-<div class="w-12 h-0.5 bg-orange-600/40 mt-2"></div>
+<div class="w-12 h-0.5 bg-[#FF4D00]/40 mt-2"></div>
 </div>
-<div class="absolute top-24 right-12 border-r border-t border-orange-600/40 p-4 text-right font-data-point text-orange-600/60 z-10 hidden lg:block">
+<div class="absolute top-24 right-12 border-r border-t border-[#FF4D00]/40 p-4 text-right font-data-point text-[#FF4D00]/60 z-10 hidden lg:block">
 <p class="text-[10px] tracking-tighter">SIGNAL: 400ms DELAY</p>
 <p class="text-[10px] tracking-tighter">DSN: ACTIVE</p>
-<div class="w-12 h-0.5 bg-orange-600/40 mt-2 ml-auto"></div>
+<div class="w-12 h-0.5 bg-[#FF4D00]/40 mt-2 ml-auto"></div>
 </div>
 <div class="relative z-10 flex flex-col items-center text-center px-4">
 <div class="mb-2 px-3 py-1 border border-secondary text-secondary font-label-caps text-[10px] tracking-[0.3em] uppercase">
@@ -209,18 +216,18 @@
                     The Central Mission Hub for Persistent Martian Exploration and Data Analysis.
                 </p>
 <div class="mt-12 flex gap-6">
-<a class="bg-secondary text-on-secondary-fixed font-label-caps px-8 py-3 uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-3" href="analysis.html">
+<a class="bg-secondary text-on-secondary font-label-caps px-8 py-3 uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-3" href="analysis.html">
 <span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
                         Initialize Command
                     </a>
-<a class="border border-orange-600 text-orange-600 font-label-caps px-8 py-3 uppercase tracking-widest hover:bg-orange-600/10 transition-colors flex items-center" href="analysis.html">
+<a class="border border-[#FF4D00] text-[#FF4D00] font-label-caps px-8 py-3 uppercase tracking-widest hover:bg-[#FF4D00]/10 transition-colors flex items-center" href="analysis.html">
                         Protocol 42
                     </a>
 </div>
 </div>
 <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 z-10">
 <span class="font-label-caps text-[10px] text-zinc-500 uppercase tracking-widest">Scroll to Explore</span>
-<div class="w-px h-16 bg-gradient-to-b from-orange-600 to-transparent"></div>
+<div class="w-px h-16 bg-gradient-to-b from-[#FF4D00] to-transparent"></div>
 </div>
 <!-- Scanning HUD Line Overlay -->
 <div class="absolute inset-0 pointer-events-none overflow-hidden z-20">
@@ -247,7 +254,7 @@
 <!-- Archive Card -->
 <a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="gallery.html">
 <div class="absolute inset-0 z-0">
-<img alt="Mars landscape" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" data-alt="dramatic wide shot of red martian craters and ridges under a dusty orange atmosphere in cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI-CmfSqjqKteA35Ul6f-vwrNNgaWcz0eJjEeNnnWRb7lXOqJYzZ2wyFSPZBlFB_UL7d8Sbwt6lymfnGEGxefFHP5sPpNJxMks48-QXvkRg7x2w4T9NnYs8GUSjNzFH0lZqdFmZ_FioDkASUAQypvgl4_xMYrWoE2CtT0ufnNAmRIG2PLsC-iumW-IEjhwAASd99CJFQZ9OdrW_tHyZeqOvM1WCWoOVHxmRJZl18db-4_h9T3qgeUO2lmUFNU8NGQ1EpSqDl3dABE"/>
+<img alt="Mars landscape" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI-CmfSqjqKteA35Ul6f-vwrNNgaWcz0eJjEeNnnWRb7lXOqJYzZ2wyFSPZBlFB_UL7d8Sbwt6lymfnGEGxefFHP5sPpNJxMks48-QXvkRg7x2w4T9NnYs8GUSjNzFH0lZqdFmZ_FioDkASUAQypvgl4_xMYrWoE2CtT0ufnNAmRIG2PLsC-iumW-IEjhwAASd99CJFQZ9OdrW_tHyZeqOvM1WCWoOVHxmRJZl18db-4_h9T3qgeUO2lmUFNU8NGQ1EpSqDl3dABE"/>
 </div>
 <div class="relative z-10">
 <span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="folder_managed">folder_managed</span>
@@ -259,7 +266,7 @@
 <!-- Rover Dashboard Card -->
 <a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="rover.html">
 <div class="absolute inset-0 z-0">
-<img alt="Mars rover" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" data-alt="extreme close-up of a high-tech mars rover wheel and mechanical arm moving over dusty martian regolith" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA1hJ7wOFq_wQoUSJfzZur05YBCnaJmB8Jl4A3sASCrnMVb7g-Vaq_-GCcWLt6BPtTgna0f0c8XzXSdrchRjfx8yQFHOjQ9hXqDnejtXTuLtF0q2mZYPGpfHxOMWk1nBogUN9Zj0yjVP9v4MwOpVrtDyQ6wZBcHTv3fPhHG3jV7Zwc8hc2ghkWlhP3osWsgXIuGOnnXu04ws-O9dp6ntr76V4TR-1dE2uHZPMdQA-EVRGVBuZ_Gq_3Jk-OWaSPnYl21fYG2AC1dUk"/>
+<img alt="Mars rover" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA1hJ7wOFq_wQoUSJfzZur05YBCnaJmB8Jl4A3sASCrnMVb7g-Vaq_-GCcWLt6BPtTgna0f0c8XzXSdrchRjfx8yQFHOjQ9hXqDnejtXTuLtF0q2mZYPGpfHxOMWk1nBogUN9Zj0yjVP9v4MwOpVrtDyQ6wZBcHTv3fPhHG3jV7Zwc8hc2ghkWlhP3osWsgXIuGOnnXu04ws-O9dp6ntr76V4TR-1dE2uHZPMdQA-EVRGVBuZ_Gq_3Jk-OWaSPnYl21fYG2AC1dUk"/>
 </div>
 <div class="relative z-10">
 <span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="precision_manufacturing">precision_manufacturing</span>
@@ -271,7 +278,7 @@
 <!-- Personnel Card -->
 <a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="analysis.html">
 <div class="absolute inset-0 z-0">
-<img alt="Space station interior" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" data-alt="futuristic laboratory interior with glowing blue screens and scientific equipment on mars base" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvpwWuxXDQLUwNmT9UANvWyNIf4ES2tgZ1SBh6TNhKFD2A6VWlrl8LQbhKmw4WCKAd4kEbmF9mJBsSVtAYIJShhMRpTYfswRdA7EdcYUn6l59mJUXgHa_w2bcnPvotm4qJIPmvnPkA9bt6KdnpYv0exwpiAL8yP0Zfit64iJ8WrcN983tlSTRMAhLU0ONt-I75n1eCcwerwtbFiDOyv9rzVCGEBJ9pmglYtCgEZpV1_9wVcHTILCLjWdPsZIGo50F43V_9lEHdAeU"/>
+<img alt="Space station interior" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvpwWuxXDQLUwNmT9UANvWyNIf4ES2tgZ1SBh6TNhKFD2A6VWlrl8LQbhKmw4WCKAd4kEbmF9mJBsSVtAYIJShhMRpTYfswRdA7EdcYUn6l59mJUXgHa_w2bcnPvotm4qJIPmvnPkA9bt6KdnpYv0exwpiAL8yP0Zfit64iJ8WrcN983tlSTRMAhLU0ONt-I75n1eCcwerwtbFiDOyv9rzVCGEBJ9pmglYtCgEZpV1_9wVcHTILCLjWdPsZIGo50F43V_9lEHdAeU"/>
 </div>
 <div class="relative z-10">
 <span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="groups_3">groups_3</span>
@@ -283,7 +290,7 @@
 <!-- Satellite Card -->
 <a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="analysis.html">
 <div class="absolute inset-0 z-0">
-<img alt="Earth from space" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" data-alt="satellite view of the red planet surface with high detail on geological formations and dust storms" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMmW5JVhgW5R_Qp4PoD5nM1khbmqi9leeNXxh5fiGMAfL9w-YehFIcg10QntC_6gfvuI4gYgvr1JhVbcc4qCpzTNQsXBijKyFho89SSMp0iwi8ZBKhSmS8JZg_vsGIWqLatIH59iWluT1K3IzZ33eDoKyjqpBvv77M4g2pFngkvFKpkYgFzSS6xgOLIdP_TPTAWYmqBAkXKRrhaGOg-eOFo5_sw3w4Z1O5nO2P1LcO9qgk-SiKBk_b3FAQ8DHIWR-3LulwlyhZUDM"/>
+<img alt="Earth from space" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMmW5JVhgW5R_Qp4PoD5nM1khbmqi9leeNXxh5fiGMAfL9w-YehFIcg10QntC_6gfvuI4gYgvr1JhVbcc4qCpzTNQsXBijKyFho89SSMp0iwi8ZBKhSmS8JZg_vsGIWqLatIH59iWluT1K3IzZ33eDoKyjqpBvv77M4g2pFngkvFKpkYgFzSS6xgOLIdP_TPTAWYmqBAkXKRrhaGOg-eOFo5_sw3w4Z1O5nO2P1LcO9qgk-SiKBk_b3FAQ8DHIWR-3LulwlyhZUDM"/>
 </div>
 <div class="relative z-10">
 <span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="satellite_alt">satellite_alt</span>
@@ -298,7 +305,7 @@
 <section class="max-w-container-max mx-auto px-12 py-12 flex flex-col lg:flex-row gap-12">
 <div class="lg:w-2/3">
 <a class="block relative group overflow-hidden border border-white/10 aspect-video" href="gallery.html">
-<img alt="Satellite feed" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[20s] linear" data-alt="abstract cosmic view of a distant galaxy swirling with deep blues, purples, and bright science teal starlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzkLAuI7Cw7jCEAIT8uHfe3B2zs7oOAokwR-LTgS0-HGQaUXfclRWW15KgX1tmPBs4qy80yFOJqjdgAA2S32KNela6n5YSnWEX9xOcgaiYhOZQvtLXJF0YSB-wIcgWsKupdo8FUSMOIscgn_unI85WatJRdBgQqi8Fblp97GW4o_pP-dUv2Hz-MjUKHHRxI3BtxDJmIrDLgrLVtnZP5Kwj1aNY3FW_L8QD3PU7Pnj3DqYfxG-01V2QAYWCSCYYYfi96CFbrIHHVtE"/>
+<img alt="Satellite feed" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[20s] linear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzkLAuI7Cw7jCEAIT8uHfe3B2zs7oOAokwR-LTgS0-HGQaUXfclRWW15KgX1tmPBs4qy80yFOJqjdgAA2S32KNela6n5YSnWEX9xOcgaiYhOZQvtLXJF0YSB-wIcgWsKupdo8FUSMOIscgn_unI85WatJRdBgQqi8Fblp97GW4o_pP-dUv2Hz-MjUKHHRxI3BtxDJmIrDLgrLVtnZP5Kwj1aNY3FW_L8QD3PU7Pnj3DqYfxG-01V2QAYWCSCYYYfi96CFbrIHHVtE"/>
 <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent"></div>
 <div class="absolute bottom-8 left-8">
 <div class="flex items-center gap-3 mb-2">
@@ -311,7 +318,7 @@
 </div>
 <div class="lg:w-1/3 flex flex-col gap-6">
 <div class="bg-zinc-900/50 border border-white/5 p-6 backdrop-blur-md">
-<h4 class="font-label-caps text-xs text-orange-600 mb-4 tracking-[0.2em] uppercase">Atmospheric Readings</h4>
+<h4 class="font-label-caps text-xs text-[#FF4D00] mb-4 tracking-[0.2em] uppercase">Atmospheric Readings</h4>
 <div class="space-y-4">
 <div class="flex justify-between items-center border-b border-white/5 pb-2">
 <span class="text-zinc-500 text-xs font-body-base uppercase">Pressure</span>
@@ -337,20 +344,20 @@
 <p class="font-headline-md text-white text-sm tracking-widest uppercase mb-1">Incoming Communication</p>
 <p class="font-body-base text-zinc-500 text-[10px]">Deep Space Network // Uplink 772</p>
 </div>
-<a class="bg-secondary text-on-secondary-fixed font-label-caps px-6 py-2 text-[10px] uppercase w-full block text-center" href="analysis.html">Open Channel</a>
+<a class="bg-secondary text-on-secondary font-label-caps px-6 py-2 text-[10px] uppercase w-full block text-center" href="analysis.html">Open Channel</a>
 </div>
 </div>
 </section>
 <!-- Footer -->
-<footer class="w-full border-t border-orange-600/30 bg-zinc-950 py-8 px-12 flex flex-col md:flex-row justify-between items-center mt-auto">
+<footer class="w-full border-t border-[#FF4D00]/30 bg-zinc-950 py-8 px-12 flex flex-col md:flex-row justify-between items-center mt-auto">
 <p class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 uppercase mb-4 md:mb-0">
                 © 2024 MARS ALIVE INITIATIVE // CLASSIFIED
             </p>
 <div class="flex gap-8">
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-orange-400 transition-opacity duration-500 uppercase" href="analysis.html">STAY_PROTOCOL_42</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-orange-400 transition-opacity duration-500 uppercase" href="analysis.html">BIOLOGICAL_HAZARD_INDEX</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-orange-400 transition-opacity duration-500 uppercase" href="analysis.html">DEEP_SPACE_NETWORK</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-800 hover:text-orange-900 transition-opacity duration-500 uppercase flex items-center gap-1 opacity-50" href="admin.html"><span class="material-symbols-outlined text-[10px]" data-icon="terminal">terminal</span>SEC-07-A</a></div>
+<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-[#FF4D00] transition-opacity duration-500 uppercase" href="analysis.html">STAY_PROTOCOL_42</a>
+<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-[#FF4D00] transition-opacity duration-500 uppercase" href="analysis.html">BIOLOGICAL_HAZARD_INDEX</a>
+<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-[#FF4D00] transition-opacity duration-500 uppercase" href="analysis.html">DEEP_SPACE_NETWORK</a>
+<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-800 hover:text-[#FF4D00] transition-opacity duration-500 uppercase flex items-center gap-1 opacity-50" href="admin.html"><span class="material-symbols-outlined text-[10px]" data-icon="terminal">terminal</span>SEC-07-A</a></div>
 </footer>
 </main>
 </body></html>
