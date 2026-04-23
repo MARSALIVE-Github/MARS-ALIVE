@@ -3,437 +3,351 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MARS ALIVE // ANOMALY ARCHIVE</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        .scanline {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 77, 0, 0.1);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
-            pointer-events: none;
-            box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
-        }
         .glass-panel {
+            background: rgba(10, 12, 16, 0.7);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(173, 137, 126, 0.2);
         }
-        ::-webkit-scrollbar {
-            width: 4px;
+        .inner-glow-orange {
+            box-shadow: inset 0 0 15px rgba(255, 87, 26, 0.05);
         }
-        ::-webkit-scrollbar-track {
-            background: #111318;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #FF4D00;
-        }
-        #starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .scan-line {
+            background: linear-gradient(to bottom, transparent, rgba(0, 227, 253, 0.2), transparent);
+            height: 2px;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            overflow: hidden;
         }
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: move linear infinite;
-        }
-        @keyframes move {
-            from { transform: translateY(100vh); }
-            to { transform: translateY(-100vh); }
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0c0e12; }
+        ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "inverse-primary": "#ae3200",
-                      "on-secondary-fixed": "#001f24",
-                      "secondary": "#bdf4ff",
-                      "surface-container": "#1e2024",
-                      "secondary-fixed": "#9cf0ff",
-                      "background": "#111318",
-                      "surface-bright": "#37393e",
-                      "outline-variant": "#5c4037",
-                      "outline": "#ad897e",
-                      "on-primary": "#5e1700",
-                      "tertiary-fixed-dim": "#b9c8dd",
-                      "surface-variant": "#333539",
-                      "on-secondary-container": "#00616d",
-                      "on-primary-container": "#521300",
-                      "tertiary-fixed": "#d5e4f9",
-                      "on-primary-fixed-variant": "#852400",
-                      "inverse-surface": "#e2e2e8",
-                      "primary-container": "#FF4D00",
-                      "surface": "#111318",
-                      "on-error": "#690005",
-                      "tertiary-container": "#8492a5",
-                      "primary-fixed-dim": "#ffb59e",
-                      "on-tertiary-fixed-variant": "#3a4859",
-                      "on-background": "#e2e2e8",
-                      "tertiary": "#b9c8dd",
-                      "surface-container-high": "#282a2e",
-                      "on-secondary-fixed-variant": "#004f58",
-                      "on-tertiary-container": "#1d2b3b",
-                      "surface-dim": "#111318",
-                      "primary": "#FF4D00",
-                      "surface-container-low": "#1a1c20",
-                      "error": "#ffb4ab",
-                      "on-secondary": "#00363d",
-                      "secondary-container": "#00e3fd",
-                      "on-tertiary-fixed": "#0e1c2c",
-                      "error-container": "#93000a",
-                      "surface-container-lowest": "#0c0e12",
-                      "surface-tint": "#FF4D00",
-                      "primary-fixed": "#ffdbd0",
-                      "inverse-on-surface": "#2f3035",
-                      "on-tertiary": "#243142",
-                      "on-surface-variant": "#e6beb2",
-                      "surface-container-highest": "#333539",
-                      "secondary-fixed-dim": "#00daf3",
-                      "on-error-container": "#ffdad6",
-                      "on-surface": "#e2e2e8",
-                      "on-primary-fixed": "#3a0b00"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.125rem",
-                      "lg": "0.25rem",
-                      "xl": "0.5rem",
-                      "full": "0.75rem"
-              },
-              "fontFamily": {
-                      "headline-md": ["Space Grotesk"],
-                      "label-caps": ["Space Grotesk"],
-                      "data-point": ["Space Grotesk"],
-                      "body-base": ["Space Grotesk"],
-                      "headline-xl": ["Space Grotesk"]
-              },
-              "fontSize": {
-                      "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}],
-                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
-                      "data-point": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                      "body-base": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
-                      "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
-              }
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ffb59e",
+                        "surface-tint": "#ffb59e",
+                        "on-primary": "#5e1700",
+                        "on-surface": "#e2e2e8",
+                        "on-tertiary-fixed-variant": "#3a4859",
+                        "secondary-fixed": "#9cf0ff",
+                        "surface-bright": "#37393e",
+                        "inverse-primary": "#ae3200",
+                        "surface-container-low": "#1a1c20",
+                        "on-surface-variant": "#e6beb2",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-tertiary": "#243142",
+                        "on-secondary-fixed-variant": "#004f58",
+                        "surface-variant": "#333539",
+                        "surface-container-highest": "#333539",
+                        "surface-container-high": "#282a2e",
+                        "primary-container": "#ff571a",
+                        "on-primary-fixed-variant": "#852400",
+                        "secondary-container": "#00e3fd",
+                        "background": "#111318",
+                        "tertiary": "#b9c8dd",
+                        "primary-fixed-dim": "#ffb59e",
+                        "error-container": "#93000a",
+                        "on-secondary": "#00363d",
+                        "outline-variant": "#5c4037",
+                        "on-tertiary-container": "#1d2b3b",
+                        "surface-dim": "#111318",
+                        "secondary": "#bdf4ff",
+                        "on-tertiary-fixed": "#0e1c2c",
+                        "primary-fixed": "#ffdbd0",
+                        "on-secondary-container": "#00616d",
+                        "surface": "#111318",
+                        "on-primary-fixed": "#3a0b00",
+                        "tertiary-fixed-dim": "#b9c8dd",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#2f3035",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#521300",
+                        "surface-container": "#1e2024",
+                        "on-secondary-fixed": "#001f24",
+                        "on-background": "#e2e2e8",
+                        "tertiary-fixed": "#d5e4f9",
+                        "outline": "#ad897e",
+                        "inverse-surface": "#e2e2e8",
+                        "tertiary-container": "#8492a5",
+                        "secondary-fixed-dim": "#00daf3",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin": "48px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "body-base": ["Space Grotesk"],
+                        "data-point": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-base": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "data-point": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                },
             },
-          },
         }
     </script>
 </head>
-<body class="bg-background text-on-background font-body-base antialiased selection:bg-primary-container selection:text-white">
-<div id="starfield"></div>
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full border-b border-primary/20 bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 z-50 shadow-[0_0_20px_rgba(255,77,0,0.1)]">
-<a class="text-2xl font-black text-primary tracking-tighter italic" href="index.html">MARS ALIVE</a>
-<nav class="hidden md:flex items-center space-x-8">
-<a class="font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold text-zinc-500 hover:text-primary transition-colors" href="index.html">HELLAS PLANITIA</a>
-<a class="font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold text-zinc-500 hover:text-primary transition-colors" href="rover.html">OLYMPUS MONS</a>
-<a class="font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold text-primary border-b-2 border-primary pb-1" href="gallery.html">MISSION LOGS</a>
+<body class="bg-background text-on-surface font-body-base selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- Cinematic Background -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&amp;w=2000')] bg-cover bg-center opacity-20 scale-110" data-alt="extreme wide cinematic shot of the martian landscape with dusty orange atmosphere and rocky silhouettes under a dark star-filled sky"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50"></div>
+</div>
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-[#0a0c10]/90 backdrop-blur-2xl border-slate-800/40 border-r-[1px] w-64 ease-in-out duration-300">
+<div class="p-6">
+<div class="text-orange-600 font-black flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-headline-md tracking-tighter">STRATOS-1</span>
+</div>
+<div class="mt-1 font-label-caps text-slate-500 text-[10px]">Mars Sector 7</div>
+</div>
+<nav class="flex-1 px-2 space-y-1 mt-4">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<span class="material-symbols-outlined" data-icon="home_max">home_max</span>
+<span>Home</span>
+</a>
+<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-4 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span>Gallery</span>
+</a>
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span>Rover</span>
+</a>
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>Admin SEC-07-A</span>
+</a>
 </nav>
-<div class="flex items-center space-x-6">
-<div class="font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold text-primary hidden lg:block">MISSION STATUS: NOMINAL</div>
-<div class="flex items-center space-x-4">
-<a class="material-symbols-outlined text-primary cursor-crosshair active:scale-95 hover:bg-white/5 transition-all duration-300 p-2" href="rover.html" title="Rover Status">satellite_alt</a>
-<a class="material-symbols-outlined text-primary cursor-crosshair active:scale-95 hover:bg-white/5 transition-all duration-300 p-2" href="analysis.html" title="Data Analysis">settings_input_component</a>
+<div class="p-6">
+<button class="w-full bg-primary-container text-on-primary-container py-3 font-label-caps uppercase text-[10px] tracking-widest hover:brightness-110 active:scale-95 transition-all">
+                INITIATE SCAN
+            </button>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 left-64 right-0 z-30 bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)]">
+<div class="flex justify-between items-center w-full px-8 py-3">
+<div class="flex items-center gap-8">
+<div class="text-orange-600 font-bold tracking-tighter text-xl font-headline-md">MARS ALIVE</div>
+<div class="h-4 w-[1px] bg-slate-800"></div>
+<div class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-orange-600">ARES-V COMMAND</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-slate-500">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+</span>
+<input class="bg-surface-container-lowest/50 border border-slate-800 rounded-none py-1.5 pl-10 pr-4 text-[10px] font-label-caps tracking-widest focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all w-64" placeholder="QUERY ARCHIVE..." type="text"/>
+</div>
+<div class="flex gap-4 text-slate-500">
+<button class="hover:text-orange-400 transition-all"><span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span></button>
+<button class="hover:text-orange-400 transition-all relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-1.5 h-1.5 bg-orange-600 rounded-full"></span>
+</button>
+<button class="hover:text-orange-400 transition-all"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
 </div>
 </div>
 </header>
-<!-- SideNavBar -->
-<aside class="fixed left-0 h-full w-20 hover:w-64 border-r border-primary/10 bg-zinc-950/40 backdrop-blur-md transition-all duration-500 group flex flex-col py-20 z-40 overflow-hidden">
-<div class="px-6 mb-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-<div class="font-['Space_Grotesk'] text-[10px] uppercase font-medium text-primary">SECTOR 7-G</div>
-<div class="font-['Space_Grotesk'] text-[8px] uppercase font-light text-zinc-500" id="local-time">LOCAL TIME: 00:00 MSD</div>
-</div>
-<nav class="flex-1 space-y-2">
-<a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="analysis.html">
-<span class="material-symbols-outlined">biotech</span>
-<span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">BIOSENSORS</span>
-</a>
-<a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="rover.html">
-<span class="material-symbols-outlined">airwave</span>
-<span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">ATMOSPHERICS</span>
-</a>
-<a class="flex items-center px-6 py-4 text-primary bg-primary/10 border-r-4 border-primary cursor-crosshair" href="gallery.html">
-<span class="material-symbols-outlined">terrain</span>
-<span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">GEO-SCAN</span>
-</a>
-<a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="index.html">
-<span class="material-symbols-outlined">radar</span>
-<span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">MISSION HUB</span>
-</a>
-<a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="gallery.html">
-<span class="material-symbols-outlined">emergency_home</span>
-<span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">ANOMALIES</span>
-</a>
-</nav>
-<div class="mt-auto px-4 pb-8 space-y-4">
-<button class="w-full bg-primary text-white py-3 font-label-caps text-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-primary/20 hover:bg-primary/80 transition-colors" onclick="window.location.href='analysis.html'">
-            REPORT ANOMALY
-        </button>
-<div class="flex flex-col space-y-2">
-<a class="flex items-center px-4 py-2 text-zinc-600 hover:text-primary cursor-crosshair" href="gallery.html">
-<span class="material-symbols-outlined text-sm">folder_open</span>
-<span class="ml-4 font-['Space_Grotesk'] text-[9px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">ARCHIVES</span>
-</a>
-<a class="flex items-center px-4 py-2 text-zinc-600 hover:text-primary cursor-crosshair" href="index.html">
-<span class="material-symbols-outlined text-sm">terminal</span>
-<span class="ml-4 font-['Space_Grotesk'] text-[9px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">PROTOCOLS</span>
-</a>
-</div>
-</div>
-</aside>
-<!-- Main Content -->
-<main class="ml-20 pt-24 pb-12 px-8 min-h-screen relative z-10">
-<!-- Dashboard Header -->
-<div class="mb-12 max-w-7xl mx-auto">
-<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2 uppercase">Anomaly Archive</h1>
-<p class="font-body-base text-on-surface-variant max-w-2xl">Classified biological and geological signatures detected within Hellas Planitia. All data points are synchronised with the Deep Space Network.</p>
-</div>
-<!-- Filter Bar -->
-<div class="max-w-7xl mx-auto mb-10 p-6 bg-surface-container-low/80 border border-outline-variant/30 glass-panel flex flex-wrap gap-6 items-end">
+<!-- Main Canvas -->
+<main class="ml-64 pt-20 h-screen overflow-y-auto px-8 pb-12 relative z-10">
+<!-- Filter HUD Panel -->
+<section class="mt-4 mb-8 glass-panel p-6 border-l-4 border-l-primary-container">
+<div class="flex flex-wrap items-end gap-8">
 <div class="flex-1 min-w-[200px]">
-<label class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Filter by Sol Range (Min - Max)</label>
-<div class="relative flex gap-2">
-<input class="w-1/2 bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all placeholder:text-zinc-700" id="sol-min" placeholder="0" type="number" value="0"/>
-<input class="w-1/2 bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all placeholder:text-zinc-700" id="sol-max" placeholder="4500" type="number" value="4500"/>
+<label class="block font-label-caps text-[10px] text-slate-500 mb-2 uppercase tracking-widest">Temporal Range (Sol)</label>
+<div class="flex items-center gap-4">
+<span class="text-data-point font-data-point text-primary">0000</span>
+<input class="flex-1 accent-primary bg-slate-800 h-1 appearance-none cursor-pointer" max="4000" min="0" type="range" value="1250"/>
+<span class="text-data-point font-data-point text-primary">4000</span>
 </div>
 </div>
-<div class="flex-1 min-w-[200px]">
-<label class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Filter by Rover</label>
-<select class="w-full bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all appearance-none cursor-pointer" id="rover-filter">
-<option value="all">ALL UNITS</option>
-<option value="perseverance">PERSEVERANCE</option>
-<option value="curiosity">CURIOSITY</option>
-<option value="mro">MARS RECON ORBITER</option>
-<option value="ds4">DEEP SPACE 4</option>
+<div class="w-48">
+<label class="block font-label-caps text-[10px] text-slate-500 mb-2 uppercase tracking-widest">Active Rover</label>
+<select class="w-full bg-surface-container-lowest border-slate-800 text-on-surface font-label-caps text-[10px] p-2 outline-none focus:border-primary">
+<option>PERSEVERANCE</option>
+<option>CURIOSITY</option>
+<option>SPIRIT</option>
+<option>OPPORTUNITY</option>
 </select>
 </div>
-<div class="flex-1 min-w-[200px]">
-<label class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Mission Status</label>
-<div class="flex space-x-2">
-<button class="flex-1 py-2 px-3 border border-primary text-primary font-label-caps text-[10px] hover:bg-primary hover:text-white transition-all bg-primary/10" id="status-active" onclick="toggleStatusFilter('active')">ACTIVE</button>
-<button class="flex-1 py-2 px-3 border border-outline-variant text-outline-variant font-label-caps text-[10px] hover:border-primary hover:text-primary transition-all" id="status-archived" onclick="toggleStatusFilter('archived')">ARCHIVED</button>
+<div class="w-48">
+<label class="block font-label-caps text-[10px] text-slate-500 mb-2 uppercase tracking-widest">Mission Status</label>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-1 border border-primary bg-primary/10 text-primary font-label-caps text-[9px] text-center">ACTIVE</button>
+<button class="flex-1 py-2 px-1 border border-slate-800 text-slate-500 font-label-caps text-[9px] text-center hover:border-slate-600">ARCHIVED</button>
 </div>
 </div>
-<button class="bg-primary text-white font-label-caps text-[10px] px-8 py-3 hover:bg-primary/80 transition-colors h-[41px]" onclick="applyFilters()">EXECUTE SEARCH</button>
+<button class="h-10 px-6 bg-secondary-container text-on-secondary-container font-label-caps text-[10px] tracking-widest hover:brightness-110 active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_alt">filter_alt</span>
+                    APPLY FILTERS
+                </button>
 </div>
-<!-- Anomaly Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto" id="anomaly-grid">
-<!-- Grid contents injected via JS -->
+</section>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Discovery Card 1 -->
+<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Anomaly 01" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="close-up view of unusual hexagonal rock formations on a dusty martian surface with sharp shadows and red dust details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIRWXjnV-iKYLS_kjb4dLGMn_nTbVrdRfc0fSApVZ_ZnbQzlGC0Xe4gsSCGk_f7ZqrUpThGHP0G1ufzR1MREfAcuH_9c_SdhA9IdvlIxrXXOMqJiZjGiUVjZ2n6svGnkzMnUnBjdbD0Mf4YtKJHYb5CGJiy1Z-7Aw6yymdq7ODsBJrW5SYJgTo7LcAypVixyRbZRHWIf-AHDMBF-1_FTE5mYYfaqjt3uNwUdlNQzURAfj-WzrLJnZC0dsBu--EVsmSMJkDRbjQepo"/>
+<div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute top-2 left-2 flex gap-1">
+<span class="bg-primary/20 text-primary text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-primary/30">GEOLOGICAL</span>
 </div>
-</main>
-<!-- Footer -->
-<footer class="w-full border-t border-primary/30 bg-zinc-950 py-8 px-12 flex flex-col md:flex-row justify-between items-center mt-auto relative z-20 gap-4">
-<div class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700">© 2024 MARS ALIVE INITIATIVE // CLASSIFIED</div>
-<div class="flex flex-wrap justify-center space-x-6">
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-primary transition-colors" href="index.html">STAY_PROTOCOL_42</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-primary transition-colors" href="gallery.html">BIOLOGICAL_HAZARD_INDEX</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-primary transition-colors" href="rover.html">DEEP_SPACE_NETWORK</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-800 hover:text-primary transition-colors" href="admin.html">SEC-07-A</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-primary transition-colors" href="admin.html">CORE_SYSTEM_ACCESS</a>
+<div class="absolute bottom-2 right-2 flex gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="monitored_heart" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">HEXAGONAL CRYSTALLINE STRATA</h3>
+<span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 3412</span>
+</div>
+<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
+                        Anomalous geometric formations detected in the Jezero Crater floor. Structural integrity suggests non-volcanic origin.
+                    </p>
+<div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
+<span class="font-label-caps text-[10px] text-slate-400">PERSEVERANCE</span>
+</div>
+<button class="text-primary hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Discovery Card 2 -->
+<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Anomaly 02" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="satellite view of martian atmosphere showing glowing blue auroras or thin atmospheric ripples against the curvature of the dark planet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNC-mSBaCaN1SC8BLbsFMyD_keSNDOnaTlcr-4p5USHVoolk8Ke1B-CRappgmgst4BMIr7tt8cHB7V2XD6YMUU16xf79zPI1kI6grJDf8-CveIJTGDJprxirIJs7w7Dt6-LD78yfR3MxpgmNrG_yOyEIRd91_D9gVa9DkUdxFkS_0xiMA9bMmI7N9ULRKWMgvoluNx-Yp8QvBHnT-iX8bUbN6OaXsnaVHwO4pYbAA7nzPCAq5aA-6_NXVMKMu_spxIxt2mbLT_l34"/>
+<div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute top-2 left-2 flex gap-1">
+<span class="bg-secondary-container/20 text-secondary-container text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-secondary-container/30">ATMOSPHERIC</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">METHANE PLUME PHENOMENON</h3>
+<span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 1288</span>
+</div>
+<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
+                        High-concentration methane spike detected in Gale Crater. Temporal variance indicates possible subsurface biological activity.
+                    </p>
+<div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
+<span class="font-label-caps text-[10px] text-slate-400">CURIOSITY</span>
+</div>
+<button class="text-primary hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Discovery Card 3 -->
+<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Anomaly 03" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="macro photo of iridescent metallic soil grains glinting under sunlight on a dark sandy surface of mars" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAInlR0Gs-5mIwVO6iugxRTpPeVkimOBdbkvhoJexGJ9aLCARGkvLzCRGAFId0hcKGBC9vY0SqkcbOyNx8FQpr-Q3PfAR-okH_RIUeW3AZcXc1PDWwI-EuZLHlAYGmR9BuiwONqlEFNDv1lM9icM2YAOdPXswnzdPCKfeZVZEhNPHG7qsHBzbLSCIfYQC2GWfIJFhAPmICduZ5WmpHsuFgwUMZqy7XRrxV4M3ijujnVYwlSx2KLibUqxoWzPYcnaUshrBS54FBHNY8"/>
+<div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute top-2 left-2 flex gap-1">
+<span class="bg-error-container/20 text-error text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-error/30">MINERALOGICAL</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">METALLIC VEIN INTRUSION</h3>
+<span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 0452</span>
+</div>
+<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
+                        Exposed rich iron-nickel vein in the Burns Cliff formation. High reflectivity interfering with infrared spectrometers.
+                    </p>
+<div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
+<span class="font-label-caps text-[10px] text-slate-400">OPPORTUNITY</span>
+</div>
+<button class="text-primary hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Discovery Card 4 -->
+<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Anomaly 04" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="frozen blue water ice trapped in deep rocky crevices on a shadowed martian crater wall at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALk3SmN6vqe-sAl1Q4480ig7mnw6gSPv7wnEfzcvS2sQvgxa-RmqvH2_ARKAtTzGpRk9Fg6q51s4s1MB1hvnpxHvEcfrIcaBW1toRWBpct-FqCRZfGMbvJDErteeLRaZ-xFQ4PD4ZFP9Sg4UYKr21qBFiQ3TiQJI45FR-jsNONT6F2aYf7ah8yxC8CblZxOqhE_gX4opVR2ubcjYmSYgBJRobOc5iBW5-Vra2Tc8qHTgtQ2in3Rsi7mPrFJsfFOF8U4UkU4rT-NYs"/>
+<div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute top-2 left-2 flex gap-1">
+<span class="bg-primary/20 text-primary text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-primary/30">HYDROMORPHIC</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">PERMAFROST SUBLIMATION REVEAL</h3>
+<span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 2110</span>
+</div>
+<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
+                        Fresh exposure of water-ice strata in a recent impact crater. Sublimation rate exceeding prior mathematical models.
+                    </p>
+<div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
+<span class="font-label-caps text-[10px] text-slate-400">CURIOSITY</span>
+</div>
+<button class="text-primary hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Placeholder for Local Storage Sync Posts -->
+<div class="col-span-full border border-dashed border-slate-800 flex flex-col items-center justify-center py-12 opacity-50">
+<span class="material-symbols-outlined text-4xl mb-2" data-icon="sync">sync</span>
+<p class="font-label-caps text-[10px] uppercase tracking-widest text-slate-500">Syncing custom logs from Admin Terminal SEC-07-A...</p>
+</div>
+</div>
+<!-- Footer Data -->
+<footer class="mt-12 flex justify-between items-center text-slate-500 font-label-caps text-[9px] uppercase tracking-widest border-t border-slate-800 pt-6">
+<div class="flex gap-6">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-orange-600 rounded-full"></span> STATION ACTIVE</span>
+<span>LAT: 18.44°N | LON: 77.45°E</span>
+<span>LINK: QUANTUM-7 (STABLE)</span>
+</div>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">PRIVACY PROTOCOL</a>
+<a class="hover:text-primary transition-colors" href="#">COMMAND MANUAL</a>
 </div>
 </footer>
-<!-- Scanning HUD Overlay decorative corners -->
-<div class="fixed top-24 left-24 w-12 h-12 border-t-2 border-l-2 border-primary/20 pointer-events-none z-0"></div>
-<div class="fixed top-24 right-12 w-12 h-12 border-t-2 border-r-2 border-primary/20 pointer-events-none z-0"></div>
-<div class="fixed bottom-24 left-24 w-12 h-12 border-b-2 border-l-2 border-primary/20 pointer-events-none z-0"></div>
-<div class="fixed bottom-24 right-12 w-12 h-12 border-b-2 border-r-2 border-primary/20 pointer-events-none z-0"></div>
-<script>
-    // Initialize Starfield
-    const starfield = document.getElementById('starfield');
-    for (let i = 0; i < 200; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2 + 1 + 'px';
-        star.style.width = size;
-        star.style.height = size;
-        star.style.left = Math.random() * 100 + 'vw';
-        star.style.top = Math.random() * 100 + 'vh';
-        star.style.animationDuration = Math.random() * 30 + 20 + 's';
-        star.style.opacity = Math.random();
-        starfield.appendChild(star);
-    }
-
-    // Demo Data
-    const demoAnomalies = [
-        {
-            id: 'demo-1',
-            title: 'BLUE QUARTZITE',
-            subtitle: 'SIG: 99.4% BIOTIC',
-            tag: 'ANOMALY: LEVEL 4',
-            sol: 3442,
-            rover: 'perseverance',
-            roverName: 'Perseverance',
-            credit: 'ARES DATA NETWORK',
-            icon: 'zoom_in',
-            status: 'active',
-            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDH1t_yhPzKu9nu9NLZ4D5Od5nmRUyFSq0cMPepbAC8wfU7EU4PUCn_Z0tOGCj8BeltpsR8RYqj8rT5eXRA77em8I5F0wX9UU0wjrXPJXyRHLm8KeZno-IZg86M78l-AwRRZJwbIkVnhuu96dopb1V5x_ARFJW_o7_-CUjVKuFY27kJ2VybE0KoTC_ijjmNkqozb2MmjgEBs2m4ViVhpbn6sHhTGYTQlINQW7mDZV1_NIXpztwA468B74DUJaFKSG-Gy_jKy4s-OfA'
-        },
-        {
-            id: 'demo-2',
-            title: 'JEZERO VORTEX',
-            subtitle: 'ATMOSPHERIC ANOMALY',
-            tag: 'THERMAL SPIKE',
-            sol: 4102,
-            rover: 'mro',
-            roverName: 'Mars Recon Orbiter',
-            credit: 'NASA / JPL-CALTECH',
-            icon: 'analytics',
-            status: 'active',
-            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBR3jLwnCmZHlATD0kYllyIMUC-5ntGsjIiQ4yvWiQSZ2F_HfvQ9pZ4SrdmWjqp1s9Gan5DUHDITT6ZBwKELsnIjraZeBpyYlMXMROPGzc7xrZQibJWk_2-5NgajEDs_HJ4-XGytYt8NyXz4GrMLEx7EeyXhtVt0Ryb7wiyFIUIJlcDliXvIip7iLkCL881W0kaXzG5F6tIg5tdX1r0oDdBbKLGiWEyrfwlFUUzhVIsl9lqp0DR_JfcS4AOCmrcw7QVtDzNxcoe1dg'
-        },
-        {
-            id: 'demo-3',
-            title: 'CELLULAR STRATA',
-            subtitle: 'FOSSILIZED MATRIX',
-            tag: 'MICROSCOPIC',
-            sol: 1289,
-            rover: 'curiosity',
-            roverName: 'Curiosity',
-            credit: 'HELLAS GEOLOGY TEAM',
-            icon: 'biotech',
-            status: 'archived',
-            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCz0mKIs-1GQOh5XhfeG-WjxNIZVyupqY1MOkDmm-DOCJnmrQTn0hEmGrZD5vL2OP-jS4vhoP8dm98Vm8WgFGQD3LzjFSyrv0qaM5nJ6hpMAjFmpJPLMQk3StBst7DJ53MzfX40ZhmenDB1Ljo-6AYaAR2q7MkYR5rEZs3KMGAyP2esV6rqXzV_OlYfrROabFMJ0lckrLfu3jj83XsaSH_ZADff40p4iEbjK_J8bDipRaSbyOd4-p9wPwQ_7uZc6bnVBACr0lz-gZo'
-        },
-        {
-            id: 'demo-4',
-            title: 'AURORA MARS',
-            subtitle: 'MAGNETIC DISTURBANCE',
-            tag: 'LUMINANCE',
-            sol: 822,
-            rover: 'ds4',
-            roverName: 'Deep Space 4',
-            credit: 'ARES DATA NETWORK',
-            icon: 'waves',
-            status: 'active',
-            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYZyktOs8iR_JJLnDET4EQatfjdLsq72q2gmX9Mo_uVUVLkhmjhMKPrVWZHRYmDJlQV0b-6-w50nJG5Nx8Q8KMBeghr6dSCJYJY9s7JY1-wkIlUZl2dyxSbTLDC434gdltRnK2yqHjxEp1ZN8rrWtjrB74zRVlJ9AlA5qQcN4M6fpq89E8FANqk6102Gw1V88_v6Nu3tCaj7dJ9knR_EbZ__rh9Ni0B72I_QGTf2dKbW-CJ4-mpIp6dYE7jbpZMNO5XtFisU-DoPo'
-        }
-    ];
-
-    let currentStatusFilter = 'active';
-
-    function getAnomalies() {
-        const localData = localStorage.getItem('mars_anomalies');
-        const localAnomalies = localData ? JSON.parse(localData) : [];
-        return [...localAnomalies, ...demoAnomalies];
-    }
-
-    function createAnomalyCard(data) {
-        return `
-            <div class="anomaly-card group relative overflow-hidden border border-outline-variant/30 bg-surface-container-lowest transition-all duration-500 hover:border-primary/50" 
-                 data-sol="${data.sol}" 
-                 data-rover="${data.rover}" 
-                 data-status="${data.status}">
-                <div class="scanline"></div>
-                <div class="relative aspect-[4/5] overflow-hidden">
-                    <img alt="${data.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" src="${data.img}"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-                    <div class="absolute top-4 right-4 flex flex-col gap-2">
-                        <span class="bg-primary/20 backdrop-blur-md text-primary text-[9px] font-label-caps px-2 py-1 border border-primary/40">${data.tag}</span>
-                    </div>
-                    <div class="absolute bottom-4 left-4">
-                        <div class="font-headline-md text-headline-md text-white drop-shadow-lg">${data.title}</div>
-                        <div class="font-label-caps text-primary text-[10px] tracking-widest mt-1">${data.subtitle}</div>
-                    </div>
-                </div>
-                <div class="p-5 space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <div class="text-zinc-500 font-label-caps text-[8px] uppercase">Sol Count</div>
-                            <div class="font-data-point text-on-surface text-sm">${data.sol}</div>
-                        </div>
-                        <div>
-                            <div class="text-zinc-500 font-label-caps text-[8px] uppercase">Unit ID</div>
-                            <div class="font-data-point text-on-surface text-sm">${data.roverName}</div>
-                        </div>
-                    </div>
-                    <div class="pt-4 border-t border-white/5 flex justify-between items-center">
-                        <span class="text-zinc-600 font-label-caps text-[8px]">CREDIT: ${data.credit}</span>
-                        <a class="material-symbols-outlined text-primary hover:text-white transition-colors" href="analysis.html">
-                            ${data.icon}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    function renderGallery() {
-        const grid = document.getElementById('anomaly-grid');
-        const anomalies = getAnomalies();
-        grid.innerHTML = anomalies.map(data => createAnomalyCard(data)).join('');
-        applyFilters();
-    }
-
-    function toggleStatusFilter(status) {
-        currentStatusFilter = status;
-        const activeBtn = document.getElementById('status-active');
-        const archivedBtn = document.getElementById('status-archived');
-        
-        if (status === 'active') {
-            activeBtn.classList.add('bg-primary/10', 'border-primary', 'text-primary');
-            activeBtn.classList.remove('border-outline-variant', 'text-outline-variant');
-            archivedBtn.classList.add('border-outline-variant', 'text-outline-variant');
-            archivedBtn.classList.remove('bg-primary/10', 'border-primary', 'text-primary');
-        } else {
-            archivedBtn.classList.add('bg-primary/10', 'border-primary', 'text-primary');
-            archivedBtn.classList.remove('border-outline-variant', 'text-outline-variant');
-            activeBtn.classList.add('border-outline-variant', 'text-outline-variant');
-            activeBtn.classList.remove('bg-primary/10', 'border-primary', 'text-primary');
-        }
-        applyFilters();
-    }
-
-    function applyFilters() {
-        const minSol = parseInt(document.getElementById('sol-min').value) || 0;
-        const maxSol = parseInt(document.getElementById('sol-max').value) || 99999;
-        const rover = document.getElementById('rover-filter').value;
-        const cards = document.querySelectorAll('.anomaly-card');
-
-        cards.forEach(card => {
-            const sol = parseInt(card.dataset.sol);
-            const cardRover = card.dataset.rover;
-            const cardStatus = card.dataset.status;
-
-            const solMatch = sol >= minSol && sol <= maxSol;
-            const roverMatch = rover === 'all' || rover === cardRover;
-            const statusMatch = cardStatus === currentStatusFilter;
-
-            if (solMatch && roverMatch && statusMatch) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-
-    // Initial Load
-    window.addEventListener('DOMContentLoaded', () => {
-        renderGallery();
-        
-        // Update Local Time
-        setInterval(() => {
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('local-time').textContent = `LOCAL TIME: ${h}:${m} MSD`;
-        }, 1000);
-    });
-</script>
+</main>
+<!-- FAB Action Button -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-none flex items-center justify-center shadow-[0_0_20px_rgba(255,181,158,0.4)] hover:scale-105 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="add_photo_alternate">add_photo_alternate</span>
+</button>
 </body></html>
