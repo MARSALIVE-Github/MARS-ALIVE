@@ -5,7 +5,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -112,21 +111,35 @@
             box-shadow: 0 0 10px #ffb59e;
             opacity: 0.3;
         }
+        .glitch-text {
+            animation: glitch 2s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-base selection:bg-primary selection:text-on-primary overflow-hidden">
 <div class="fixed inset-0 starfield pointer-events-none"></div>
-<header class="bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)] fixed top-0 w-full z-50 flex justify-between items-center px-6 py-3">
+<header class="bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)] fixed top-0 w-full z-50 flex justify-between items-center px-6 py-2">
 <div class="flex items-center gap-4">
 <span class="text-orange-600 font-bold tracking-tighter text-xl">ARES-V COMMAND</span>
 <div class="h-4 w-[1px] bg-slate-800"></div>
 <span class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-slate-500">ANOMALY DETECTOR SEC-07</span>
 </div>
-<div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
-<span class="font-label-caps text-label-caps text-orange-500">MARS ALIVE</span>
+<div class="absolute left-1/2 -translate-x-1/2 flex items-center">
+<img alt="Mars Alive Logo" class="h-10 object-contain brightness-110 drop-shadow-[0_0_8px_rgba(255,181,158,0.4)]" src="https://lh3.googleusercontent.com/aida/ADBb0ugNiodTF6cPUPc8slf-jxKD2YzYBntq-MV-TaRK4Vdo-zKQcGmKN5aqlo8cl6CEhtaHhHRujbTrNtg1-otEOUBCS9t8LYBkam6iXWTHAtQzQCuc0o2ylUVUJS4yjzFcGCRTdTljqBwuNpwbp-7-M9aGgKoxqVtpBi3CbME--K2Bil5NNYa78OMMrmfJWl8mIlF2yxD9BsUgjTb7PLWlvgH9CMX_1WQHY63nW0M-Vx2__0fQ6nQRiMlcwOh5t24rmLzhY_wR1XOEew"/>
 </div>
 <div class="flex items-center gap-6">
+<div class="flex items-center gap-2 mr-4">
+<div class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
+<span class="font-label-caps text-[10px] text-orange-500 tracking-widest uppercase">Live Stream</span>
+</div>
 <button class="material-symbols-outlined text-slate-500 hover:text-orange-400 transition-all scale-95 active:scale-90">settings_input_component</button>
 <button class="material-symbols-outlined text-slate-500 hover:text-orange-400 transition-all scale-95 active:scale-90">notifications</button>
 <button class="material-symbols-outlined text-slate-500 hover:text-orange-400 transition-all scale-95 active:scale-90">account_circle</button>
@@ -144,25 +157,25 @@
 </div>
 </div>
 <button class="w-full py-2 bg-orange-600/10 border border-orange-600/30 text-orange-500 font-label-caps text-[10px] tracking-[0.2em] hover:bg-orange-600/20 transition-all">
-                INITIATE SCAN
-            </button>
+            INITIATE SCAN
+        </button>
 </div>
 <nav class="flex-1 py-4">
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 transition-colors group" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 transition-colors group" href="index.html">
 <span class="material-symbols-outlined group-hover:text-slate-300">home_max</span>
 <span class="font-label-caps text-[10px]">Home</span>
 </a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 transition-colors group" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 transition-colors group" href="gallery.html">
 <span class="material-symbols-outlined group-hover:text-slate-300">grid_view</span>
 <span class="font-label-caps text-[10px]">Gallery</span>
 </a>
-<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-6" href="#">
+<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-6" href="rover.html">
 <span class="material-symbols-outlined">precision_manufacturing</span>
 <span class="font-label-caps text-[10px]">Rover</span>
 </a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 transition-colors group" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 transition-colors group" href="admin.html">
 <span class="material-symbols-outlined group-hover:text-slate-300">security</span>
-<span class="font-label-caps text-[10px]">Admin SEC-07-A</span>
+<span class="font-label-caps text-[10px]">Admin</span>
 </a>
 </nav>
 <div class="p-6 bg-slate-900/40">
@@ -176,64 +189,96 @@
 </div>
 </aside>
 <main class="ml-64 pt-16 h-screen overflow-hidden flex flex-col md:flex-row">
-<div class="flex-1 relative bg-surface-container-lowest group">
-<img alt="Martian Landscape" class="w-full h-full object-cover opacity-80" data-alt="ultra high resolution panoramic view of martian landscape with jagged orange rock formations and dusty red horizon under a pale sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9F0fbfL1OkraWYJdo-dPq8cOQdkZjY52jX0-kgWfJdtuBcZ9YPg1X6OaMd9WaqSUc-sP4VzX7kJjzy5jHqt2j5NYD0dhgM6ttKWcCztii9EaXlNNKyuEj3IrdaExKBEgIFB04ACGFBIYTxzKD8xzh1OO4lQZ6A6UIueA2ErtXhdLjyZApF9vpbZNDcIXmHMmJ9-sA2YyUO5ZZNeOraYUD9d1hHKZw3y7wZdkcxE6LuZdwUcA4QPOmpsbL6evWCNQXEgieyUW-jDM"/>
-<div class="absolute inset-0 pointer-events-none border-[24px] border-background/20 backdrop-brightness-75"></div>
-<div class="absolute top-12 left-12 w-32 h-32 pointer-events-none">
-<div class="hud-bracket border-b-0 border-r-0 absolute top-0 left-0"></div>
-<div class="hud-bracket border-b-0 border-l-0 absolute top-0 right-0"></div>
-<div class="hud-bracket border-t-0 border-r-0 absolute bottom-0 left-0"></div>
-<div class="hud-bracket border-t-0 border-l-0 absolute bottom-0 right-0"></div>
+<!-- Visual Analysis Center -->
+<div class="flex-1 relative bg-surface-container-lowest group overflow-hidden">
+<img alt="Martian Landscape" class="w-full h-full object-cover opacity-70" data-alt="ultra high resolution panoramic view of martian landscape with jagged orange rock formations and dusty red horizon under a pale sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9F0fbfL1OkraWYJdo-dPq8cOQdkZjY52jX0-kgWfJdtuBcZ9YPg1X6OaMd9WaqSUc-sP4VzX7kJjzy5jHqt2j5NYD0dhgM6ttKWcCztii9EaXlNNKyuEj3IrdaExKBEgIFB04ACGFBIYTxzKD8xzh1OO4lQZ6A6UIueA2ErtXhdLjyZApF9vpbZNDcIXmHMmJ9-sA2YyUO5ZZNeOraYUD9d1hHKZw3y7wZdkcxE6LuZdwUcA4QPOmpsbL6evWCNQXEgieyUW-jDM"/>
+<!-- HUD ELEMENTS -->
+<div class="absolute inset-0 pointer-events-none">
+<!-- Central Targeting Brackets -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-64 border border-primary/20">
+<div class="hud-bracket border-b-0 border-r-0 absolute -top-1 -left-1"></div>
+<div class="hud-bracket border-b-0 border-l-0 absolute -top-1 -right-1"></div>
+<div class="hud-bracket border-t-0 border-r-0 absolute -bottom-1 -left-1"></div>
+<div class="hud-bracket border-t-0 border-l-0 absolute -bottom-1 -right-1"></div>
+<!-- Telemetry HUD Overlays -->
+<div class="absolute -top-12 left-0 font-mono text-[9px] text-primary/60 flex gap-4 uppercase tracking-tighter">
+<span class="flex items-center gap-1"><span class="w-1 h-1 bg-primary rounded-full"></span> PRSS: 0.61 kPa</span>
+<span class="flex items-center gap-1"><span class="w-1 h-1 bg-primary rounded-full"></span> VIBE: 0.002 g</span>
+<span class="flex items-center gap-1"><span class="w-1 h-1 bg-primary rounded-full"></span> RAD: 22 μSv/h</span>
 </div>
-<div class="absolute top-12 left-12 p-4 font-label-caps text-[10px] space-y-1">
-<div class="text-orange-500 flex items-center gap-2">
-<span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                    TRACKING ACTIVE: ANOMALY-774
-                </div>
-<div class="text-slate-400">LAT: 18.6521° N</div>
-<div class="text-slate-400">LNG: 226.2045° E</div>
 </div>
+<!-- Side HUD Stats -->
+<div class="absolute left-12 top-1/2 -translate-y-1/2 space-y-8 font-mono text-[10px] text-primary/40">
+<div class="space-y-1">
+<div class="flex justify-between w-24"><span>SCAN_01</span><span>88%</span></div>
+<div class="w-24 h-0.5 bg-slate-800"><div class="h-full bg-primary/40 w-[88%]"></div></div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between w-24"><span>SCAN_02</span><span>42%</span></div>
+<div class="w-24 h-0.5 bg-slate-800"><div class="h-full bg-primary/40 w-[42%]"></div></div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between w-24"><span>SCAN_03</span><span>91%</span></div>
+<div class="w-24 h-0.5 bg-slate-800"><div class="h-full bg-primary/40 w-[91%]"></div></div>
+</div>
+</div>
+</div>
+<!-- Tracking Marker -->
+<div class="absolute top-24 left-24 p-4 border-l border-primary/40 bg-black/20 backdrop-blur-sm">
+<div class="font-label-caps text-[10px] text-primary flex items-center gap-2 mb-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                ANOMALY-774 DETECTED
+            </div>
+<div class="space-y-0.5 font-mono text-[9px] text-slate-300">
+<div>COORD_LAT: 18.65213 N</div>
+<div>COORD_LNG: 226.20455 E</div>
+<div>DEPTH_REF: -44.2m MSL</div>
+</div>
+</div>
+<!-- Bottom Labeling -->
 <div class="absolute bottom-12 right-12 text-right">
-<div class="font-headline-xl text-primary drop-shadow-2xl">SOL 3412</div>
-<div class="font-label-caps text-sm text-slate-300 tracking-[0.3em]">CURIOSITY // MASTCAM-Z</div>
+<div class="font-headline-xl text-primary drop-shadow-2xl opacity-90">SOL 3412</div>
+<div class="font-label-caps text-[10px] text-slate-300 tracking-[0.4em] uppercase">Curiosity // MastCam-Z // PDS-3301</div>
 </div>
 <div class="absolute top-0 w-full scan-line"></div>
+<!-- Quick Actions -->
 <div class="absolute bottom-12 left-12 flex gap-4">
-<button class="bg-primary text-on-primary px-6 py-2 font-label-caps text-xs flex items-center gap-2 hover:brightness-110 transition-all">
+<button class="bg-primary text-on-primary px-6 py-2 font-label-caps text-[10px] flex items-center gap-2 hover:brightness-110 transition-all border border-primary">
 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">analytics</span>
-                    RUN DEEP ANALYSIS
-                </button>
-<button class="border border-error text-error px-6 py-2 font-label-caps text-xs flex items-center gap-2 hover:bg-error/10 transition-all">
+                RUN DEEP ANALYSIS
+            </button>
+<button class="border border-error text-error px-6 py-2 font-label-caps text-[10px] flex items-center gap-2 hover:bg-error/10 transition-all backdrop-blur-sm">
 <span class="material-symbols-outlined text-sm">report_problem</span>
-                    REPORT ANOMALY
-                </button>
+                REPORT ANOMALY
+            </button>
 </div>
 </div>
+<!-- Metadata Sidebar -->
 <aside class="w-full md:w-96 border-l border-slate-800/50 bg-surface-dim overflow-y-auto custom-scrollbar">
 <div class="p-8 space-y-8">
 <section>
 <h3 class="font-label-caps text-label-caps text-slate-500 mb-6 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm">database</span>
-                        TECHNICAL METADATA
-                    </h3>
-<div class="grid grid-cols-1 gap-4">
+                    TECHNICAL DATA
+                </h3>
+<div class="space-y-4">
 <div class="bg-surface-container-low border border-slate-800 p-4">
-<span class="font-label-caps text-[10px] text-slate-500 block mb-1 uppercase">Mission Identifier</span>
-<span class="font-data-point text-on-surface">MSL-003412-SEC7</span>
-</div>
-<div class="bg-surface-container-low border border-slate-800 p-4">
-<span class="font-label-caps text-[10px] text-slate-500 block mb-1 uppercase">Instrument Credits</span>
-<span class="font-data-point text-on-surface">NASA/JPL-Caltech/MSSS/ASU</span>
+<span class="font-label-caps text-[9px] text-slate-500 block mb-1 uppercase tracking-widest">Anomaly Description</span>
+<p class="text-sm text-on-surface leading-snug">Irregular thermal signature detected beneath basaltic crust layer. Possible geothermal venting or biological trace methane discharge originating from the North-East fissure system.</p>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="bg-surface-container-low border border-slate-800 p-4">
-<span class="font-label-caps text-[10px] text-slate-500 block mb-1 uppercase">Altitude</span>
-<span class="font-data-point text-on-surface">1,420 m</span>
+<span class="font-label-caps text-[9px] text-slate-500 block mb-1 uppercase">Sol Date</span>
+<span class="font-data-point text-on-surface">3412.14</span>
 </div>
 <div class="bg-surface-container-low border border-slate-800 p-4">
-<span class="font-label-caps text-[10px] text-slate-500 block mb-1 uppercase">Visibility</span>
-<span class="font-data-point text-on-surface">94.2%</span>
+<span class="font-label-caps text-[9px] text-slate-500 block mb-1 uppercase">Rover Unit</span>
+<span class="font-data-point text-on-surface">MSL-01 Curiosity</span>
 </div>
+</div>
+<div class="bg-surface-container-low border border-slate-800 p-4">
+<span class="font-label-caps text-[9px] text-slate-500 block mb-1 uppercase">Data Credits</span>
+<span class="font-data-point text-on-surface text-xs">NASA / JPL-CALTECH / MSSS / ASU / PDS</span>
 </div>
 </div>
 </section>
@@ -241,9 +286,8 @@
 <div class="flex justify-between items-end mb-6">
 <h3 class="font-label-caps text-label-caps text-slate-500 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm">query_stats</span>
-                            MULTI-SPECTRAL LOGS
-                        </h3>
-<span class="text-[10px] text-orange-500 font-label-caps animate-pulse">LIVE STREAM</span>
+                        MULTI-SPECTRAL LOGS
+                    </h3>
 </div>
 <div class="space-y-3">
 <div class="bg-slate-900/60 border-l-2 border-primary p-3 font-mono text-[10px] text-primary/80">
@@ -270,7 +314,7 @@
 </div>
 </section>
 <section>
-<h3 class="font-label-caps text-label-caps text-slate-500 mb-6">ATMOSPHERIC COMPOSITION</h3>
+<h3 class="font-label-caps text-label-caps text-slate-500 mb-6 uppercase tracking-widest">Atmospheric Composition</h3>
 <div class="space-y-4">
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] font-label-caps uppercase">
@@ -302,25 +346,27 @@
 </div>
 </section>
 <div class="pt-8 border-t border-slate-800/40">
-<div class="flex items-center gap-3 opacity-50 grayscale">
-<span class="material-symbols-outlined text-4xl">travel_explore</span>
-<div class="font-label-caps text-[10px] leading-tight">
-                            NASA PLANETARY DATA SYSTEM<br/>
-                            AUTHORIZED ACCESS ONLY
-                        </div>
+<div class="flex items-center gap-3 opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all cursor-default">
+<span class="material-symbols-outlined text-3xl">travel_explore</span>
+<div class="font-label-caps text-[9px] leading-tight tracking-wider uppercase">
+                        NASA Planetary Data System<br/>
+                        Encrypted Uplink Protocol V8.4
+                    </div>
 </div>
 </div>
 </div>
 </aside>
 </main>
-<footer class="fixed bottom-0 w-full bg-[#0a0c10]/40 backdrop-blur-md px-6 py-2 flex justify-between items-center text-[10px] font-label-caps text-slate-500 z-50">
-<div class="flex gap-6">
-<span class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-green-500"></span> NETWORK STABLE</span>
-<span>UPLINK: 42.1 MB/S</span>
-<span>PING: 14m 22s</span>
+<footer class="fixed bottom-0 w-full bg-[#0a0c10]/60 backdrop-blur-md px-6 py-2 flex justify-between items-center text-[9px] font-label-caps text-slate-500 z-50 border-t border-slate-800/20">
+<div class="flex gap-8">
+<span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></span> NETWORK STABLE</span>
+<span class="uppercase tracking-widest">Uplink: 42.1 MB/S</span>
+<span class="uppercase tracking-widest">Ping: 14m 22s (Earth-Mars)</span>
 </div>
-<div>
-            SYSTEM VERSION: 8.4.1-AR / MARS SECTOR 7
-        </div>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors text-slate-600 font-bold" href="admin.html">SEC-07-A</a>
+<div class="w-[1px] h-3 bg-slate-800"></div>
+<span class="uppercase tracking-widest">SYSTEM VERSION: 8.4.1-AR // MARS SECTOR 7</span>
+</div>
 </footer>
 </body></html>
