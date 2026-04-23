@@ -3,361 +3,420 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MARS ALIVE // MISSION HUB</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-primary": "#ae3200",
-                        "on-secondary-fixed": "#001f24",
-                        "secondary": "#00e3fd",
-                        "surface-container": "#1e2024",
-                        "secondary-fixed": "#9cf0ff",
-                        "background": "#111318",
-                        "surface-bright": "#37393e",
-                        "outline-variant": "#5c4037",
-                        "outline": "#ad897e",
-                        "on-primary": "#5e1700",
-                        "tertiary-fixed-dim": "#b9c8dd",
-                        "surface-variant": "#333539",
-                        "on-secondary-container": "#00616d",
-                        "on-primary-container": "#521300",
-                        "tertiary-fixed": "#d5e4f9",
-                        "on-primary-fixed-variant": "#852400",
-                        "inverse-surface": "#e2e2e8",
-                        "primary-container": "#FF4D00",
-                        "surface": "#111318",
-                        "on-error": "#690005",
-                        "tertiary-container": "#8492a5",
-                        "primary-fixed-dim": "#ffb59e",
-                        "on-tertiary-fixed-variant": "#3a4859",
-                        "on-background": "#e2e2e8",
-                        "tertiary": "#b9c8dd",
-                        "surface-container-high": "#282a2e",
-                        "on-secondary-fixed-variant": "#004f58",
-                        "on-tertiary-container": "#1d2b3b",
-                        "surface-dim": "#111318",
-                        "primary": "#FF4D00",
-                        "surface-container-low": "#1a1c20",
-                        "error": "#ffb4ab",
-                        "on-secondary": "#ffffff",
-                        "secondary-container": "#00e3fd",
-                        "on-tertiary-fixed": "#0e1c2c",
-                        "error-container": "#93000a",
-                        "surface-container-lowest": "#0c0e12",
-                        "surface-tint": "#FF4D00",
-                        "primary-fixed": "#ffdbd0",
-                        "inverse-on-surface": "#2f3035",
-                        "on-tertiary": "#243142",
-                        "on-surface-variant": "#e6beb2",
-                        "surface-container-highest": "#333539",
-                        "secondary-fixed-dim": "#00daf3",
-                        "on-error-container": "#ffdad6",
-                        "on-surface": "#e2e2e8",
-                        "on-primary-fixed": "#3a0b00"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "unit": "4px",
-                        "container-max": "1440px",
-                        "margin": "48px",
-                        "gutter": "24px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Space Grotesk"],
-                        "label-caps": ["Space Grotesk"],
-                        "data-point": ["Space Grotesk"],
-                        "body-base": ["Space Grotesk"],
-                        "headline-xl": ["Space Grotesk"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}],
-                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
-                        "data-point": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                        "body-base": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
-                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
-                    }
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ffb59e",
+                    "surface-tint": "#ffb59e",
+                    "on-primary": "#5e1700",
+                    "on-surface": "#e2e2e8",
+                    "on-tertiary-fixed-variant": "#3a4859",
+                    "secondary-fixed": "#9cf0ff",
+                    "surface-bright": "#37393e",
+                    "inverse-primary": "#ae3200",
+                    "surface-container-low": "#1a1c20",
+                    "on-surface-variant": "#e6beb2",
+                    "surface-container-lowest": "#0c0e12",
+                    "on-tertiary": "#243142",
+                    "on-secondary-fixed-variant": "#004f58",
+                    "surface-variant": "#333539",
+                    "surface-container-highest": "#333539",
+                    "surface-container-high": "#282a2e",
+                    "primary-container": "#ff571a",
+                    "on-primary-fixed-variant": "#852400",
+                    "secondary-container": "#00e3fd",
+                    "background": "#111318",
+                    "tertiary": "#b9c8dd",
+                    "primary-fixed-dim": "#ffb59e",
+                    "error-container": "#93000a",
+                    "on-secondary": "#00363d",
+                    "outline-variant": "#5c4037",
+                    "on-tertiary-container": "#1d2b3b",
+                    "surface-dim": "#111318",
+                    "secondary": "#bdf4ff",
+                    "on-tertiary-fixed": "#0e1c2c",
+                    "primary-fixed": "#ffdbd0",
+                    "on-secondary-container": "#00616d",
+                    "surface": "#111318",
+                    "on-primary-fixed": "#3a0b00",
+                    "tertiary-fixed-dim": "#b9c8dd",
+                    "on-error": "#690005",
+                    "inverse-on-surface": "#2f3035",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#521300",
+                    "surface-container": "#1e2024",
+                    "on-secondary-fixed": "#001f24",
+                    "on-background": "#e2e2e8",
+                    "tertiary-fixed": "#d5e4f9",
+                    "outline": "#ad897e",
+                    "inverse-surface": "#e2e2e8",
+                    "tertiary-container": "#8492a5",
+                    "secondary-fixed-dim": "#00daf3",
+                    "error": "#ffb4ab"
             },
-        }
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "label-caps": ["Space Grotesk"],
+                    "headline-xl": ["Space Grotesk"],
+                    "body-base": ["Space Grotesk"],
+                    "data-point": ["Space Grotesk"],
+                    "headline-md": ["Space Grotesk"]
+            }
+          },
+        },
+      }
     </script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #0a0c10; color: #e2e2e8; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 87, 26, 0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(255, 87, 26, 0.2);
+        }
+        .hud-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: rgba(255, 181, 158, 0.4);
         }
         .starfield {
-            background-image: radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
-                              radial-gradient(1.5px 1.5px at 40px 70px, #ffffff, rgba(0,0,0,0)),
-                              radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0));
+            background-image: radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                              radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                              radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+                              radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0));
             background-repeat: repeat;
             background-size: 200px 200px;
-            animation: move-stars 100s linear infinite;
+            opacity: 0.15;
         }
-        @keyframes move-stars {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
-        }
-        .scan-line {
-            background: linear-gradient(to bottom, transparent, rgba(255, 77, 0, 0.1) 50%, transparent);
-            height: 100px;
-            width: 100%;
-            position: absolute;
-            top: -100px;
-            animation: scan 8s linear infinite;
-        }
-        @keyframes scan {
-            0% { top: -100px; }
-            100% { top: 100%; }
+        .glass-panel {
+            background: rgba(16, 19, 24, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(173, 137, 126, 0.2);
         }
     </style>
 </head>
-<body class="bg-background text-on-background font-body-base selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Cinematic Background -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute inset-0 bg-[#0a0c10]"></div>
+<div class="absolute inset-0 starfield"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-[#0a0c10]/40"></div>
+</div>
 <!-- Top Navigation Bar -->
-<nav class="fixed top-0 w-full border-b border-[#FF4D00]/20 bg-zinc-950/80 backdrop-blur-xl flex flex-col md:flex-row justify-between items-center px-6 py-4 z-50 shadow-[0_0_20px_rgba(255,77,0,0.1)]">
-<div class="flex items-center gap-8 w-full md:w-auto justify-between md:justify-start">
-<div class="hidden md:flex gap-6">
-<a class="text-[#FF4D00] border-b-2 border-[#FF4D00] pb-1 font-headline-md text-xs font-bold tracking-widest uppercase" href="index.html">HELLAS PLANITIA</a>
-<a class="text-zinc-500 hover:text-[#FF4D00] transition-colors font-headline-md text-xs font-bold tracking-widest uppercase" href="analysis.html">OLYMPUS MONS</a>
-<a class="text-zinc-500 hover:text-[#FF4D00] transition-colors font-headline-md text-xs font-bold tracking-widest uppercase" href="gallery.html">MISSION LOGS</a>
-</div>
-</div>
-<div class="absolute left-1/2 -translate-x-1/2">
-<a class="text-2xl font-black text-[#FF4D00] tracking-tighter italic font-headline-md hover:opacity-80 transition-opacity" href="index.html">MARS ALIVE</a>
-</div>
-<div class="flex items-center gap-4 ml-auto md:ml-0">
-<span class="hidden md:block font-headline-md tracking-widest uppercase text-xs font-bold text-[#FF4D00]">MISSION STATUS: NOMINAL</span>
-<div class="flex gap-2">
-<button class="p-2 hover:bg-white/5 transition-all duration-300 cursor-crosshair active:scale-95 text-zinc-400">
-<span class="material-symbols-outlined" data-icon="satellite_alt">satellite_alt</span>
-</button>
-<button class="p-2 hover:bg-white/5 transition-all duration-300 cursor-crosshair active:scale-95 text-zinc-400">
-<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
-</button>
-</div>
-</div>
+<header class="bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)] fixed top-0 z-50 w-full px-6 py-3 flex justify-between items-center">
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-orange-500 font-bold font-['Space_Grotesk'] uppercase tracking-widest text-xs hover:text-orange-400 transition-all" href="#">Home</a>
+<a class="text-slate-500 font-['Space_Grotesk'] uppercase tracking-widest text-xs hover:text-orange-400 transition-all" href="#">Gallery</a>
 </nav>
-<!-- Side Navigation Bar -->
-<aside class="fixed left-0 h-full w-20 hover:w-64 border-r border-[#FF4D00]/10 bg-zinc-950/40 backdrop-blur-md transition-all duration-500 group flex flex-col py-20 z-40 overflow-hidden">
-<div class="px-6 mb-8 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-<h3 class="font-headline-md text-sm font-bold text-[#FF4D00]">SECTOR 7-G</h3>
-<p class="font-label-caps text-[10px] text-zinc-500">LOCAL TIME: 24:40 MSD</p>
 </div>
-<div class="flex flex-col gap-2 w-full">
-<a class="flex items-center gap-4 px-6 py-3 text-[#FF4D00] bg-[#FF4D00]/10 border-r-4 border-[#FF4D00]" href="analysis.html">
-<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
-<span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">BIOSENSORS</span>
-</a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="analysis.html">
-<span class="material-symbols-outlined" data-icon="airwave">airwave</span>
-<span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">ATMOSPHERICS</span>
-</a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="analysis.html">
-<span class="material-symbols-outlined" data-icon="terrain">terrain</span>
-<span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">GEO-SCAN</span>
-</a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="analysis.html">
-<span class="material-symbols-outlined" data-icon="radar">radar</span>
-<span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">COMMS</span>
-</a>
-<a class="flex items-center gap-4 px-6 py-3 text-zinc-600 hover:bg-[#FF4D00]/5 hover:text-white cursor-pointer" href="gallery.html">
-<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
-<span class="font-headline-md text-[10px] uppercase font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">ANOMALIES</span>
-</a>
+<div class="absolute left-1/2 -translate-x-1/2 flex items-center">
+<img alt="MARS ALIVE Logo" class="h-10 w-auto" data-alt="high-tech minimalist logo for MARS ALIVE mission featuring geometric mars planet icon and sharp industrial typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANDWTKo9jKySPslCC6d3Hp3RDU_YEHALx2MTQHuD2Bi0siDFseLqjqMJ0H8XM2vEJkwclNYaE0dO4dUUCQDzCH4m-WCWUQroUUVJXQCUke3LQT0bmt9TI-PuQmbDMoTDb7JkLB0e3ywzpKs6zGB__5HPq9839AWiAvM7fYwATmHDpE_h2dJFfsypofxRdMjN5_hyB1NqRt2RcBMUuwHFM3dTf6Zwzy70ujx2k5G0Av6wbRi98UYzoHi7b7Gi5GYRth25VaEXqBvO8"/>
 </div>
-<div class="mt-auto px-6 flex flex-col gap-4">
-<a class="bg-primary text-on-primary py-2 px-4 rounded-lg font-label-caps text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity uppercase font-black text-center" href="gallery.html">
-                REPORT ANOMALY
-            </a>
-<div class="flex flex-col gap-2">
-<a class="flex items-center gap-4 text-zinc-700 hover:text-[#FF4D00] cursor-pointer" href="gallery.html">
-<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
-<span class="font-headline-md text-[10px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">ARCHIVES</span>
-</a>
-<a class="flex items-center gap-4 text-zinc-700 hover:text-[#FF4D00] cursor-pointer" href="analysis.html">
-<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
-<span class="font-headline-md text-[10px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">PROTOCOLS</span>
-</a>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-orange-400 hover:bg-slate-800/30 transition-all scale-95 active:scale-90 duration-150 p-2">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-slate-500 hover:text-orange-400 hover:bg-slate-800/30 transition-all scale-95 active:scale-90 duration-150 p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full border border-orange-600/30 bg-surface-container overflow-hidden">
+<img alt="Commander Avatar" class="h-full w-full object-cover" data-alt="professional portrait of a high-ranking space commander in a sleek charcoal jumpsuit with subtle orange accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6td-BcgrPaw3TTdtofEy9LWOP-sSLqpsAs7vFe6hWFozThdW6R55uHflJEx1W_3Kqf6N-I-h8vrQiI-GyAG-94-b73KNrQAhnGSe5_8RKHpwKTj8FjNViFu5uTP_3VGFrPU-Oy2sgGsr64QKoTUCiLAoqh4gyY8AvRptSJVUNweCA59XI2RFsNesG_FX3mp2EURV1reSWUjJRR9AXpgoFlANBfJbCmOkaixdb8sySGxyOdY2aiMCEP3EPp4t7YYNpcl9viBcORvM"/>
 </div>
+</div>
+</header>
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-[#0a0c10]/90 backdrop-blur-2xl border-slate-800/40 border-r-[1px] w-64 pt-20 hidden md:flex">
+<div class="px-6 py-4 mb-6">
+<div class="text-orange-600 font-black font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">STRATOS-1</div>
+<div class="text-slate-500 font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Mars Sector 7</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-6 hover:bg-slate-800/50 transition-colors ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="home_max">home_max</span>
+<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Home</span>
+</a>
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Gallery</span>
+</a>
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-in-out duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Rover</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps py-4 rounded-lg flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="radar">radar</span>
+                INITIATE SCAN
+            </button>
 </div>
 </aside>
-<main class="ml-20 min-h-screen relative">
-<!-- Hero Section -->
-<section class="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-<div class="absolute inset-0 starfield opacity-40 z-0"></div>
-<div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/40 to-background z-0"></div>
-<!-- Technical HUD Elements -->
-<div class="absolute top-24 left-12 border-l border-t border-[#FF4D00]/40 p-4 font-data-point text-[#FF4D00]/60 z-10 hidden lg:block">
-<p class="text-[10px] tracking-tighter">LAT: 18.65° N</p>
-<p class="text-[10px] tracking-tighter">LON: 226.2° E</p>
-<div class="w-12 h-0.5 bg-[#FF4D00]/40 mt-2"></div>
+<!-- Main Canvas -->
+<main class="flex-1 mt-16 md:ml-64 p-8 relative z-10">
+<!-- HUD Telemetry Header -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="glass-panel p-4 relative overflow-hidden">
+<div class="hud-corner border-t-2 border-l-2 top-0 left-0"></div>
+<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">LOCAL TIME (SOL 492)</div>
+<div class="text-primary text-2xl font-bold font-data-point">14:42:09 <span class="text-xs text-orange-600/50">LST</span></div>
 </div>
-<div class="absolute top-24 right-12 border-r border-t border-[#FF4D00]/40 p-4 text-right font-data-point text-[#FF4D00]/60 z-10 hidden lg:block">
-<p class="text-[10px] tracking-tighter">SIGNAL: 400ms DELAY</p>
-<p class="text-[10px] tracking-tighter">DSN: ACTIVE</p>
-<div class="w-12 h-0.5 bg-[#FF4D00]/40 mt-2 ml-auto"></div>
+<div class="glass-panel p-4 relative overflow-hidden">
+<div class="hud-corner border-t-2 border-l-2 top-0 left-0"></div>
+<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">ORBITAL VELOCITY</div>
+<div class="text-primary text-2xl font-bold font-data-point">3.41 <span class="text-xs text-orange-600/50">KM/S</span></div>
 </div>
-<div class="relative z-10 flex flex-col items-center text-center px-4">
-<div class="mb-2 px-3 py-1 border border-secondary text-secondary font-label-caps text-[10px] tracking-[0.3em] uppercase">
-                    Interplanetary Explorer Node 01
+<div class="glass-panel p-4 relative overflow-hidden">
+<div class="hud-corner border-t-2 border-l-2 top-0 left-0"></div>
+<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">SIGNAL STRENGTH</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex gap-1">
+<div class="h-4 w-1 bg-primary"></div>
+<div class="h-4 w-1 bg-primary"></div>
+<div class="h-4 w-1 bg-primary"></div>
+<div class="h-4 w-1 bg-slate-700"></div>
+</div>
+<span class="text-primary text-sm font-bold">-74 dBm</span>
+</div>
+</div>
+<div class="glass-panel p-4 relative overflow-hidden">
+<div class="hud-corner border-t-2 border-l-2 top-0 left-0"></div>
+<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">MISSION STATUS</div>
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                    OPERATIONAL
                 </div>
-<img alt="MARS ALIVE" class="w-full max-w-4xl h-auto mb-4 drop-shadow-[0_0_30px_rgba(255,77,0,0.4)] relative z-10" src="https://lh3.googleusercontent.com/aida/ADBb0uhL3iF5DCJeFCmSSMQKHyhEM-ioNGQwT2uAYZjMxxK9b53DS4vAS-YKTKXxHMNtka0GHCT_sWa4ZlaJdMdN3T7F5jne1vx7glnROgRgI4nl_e4IW-w_7H9_6_1xqhBb2miAwgK5-_b7IQwSSDI0GwkoE4USYSTGNBz26udWf-_pkXHVtL1fgoVxiBEg4cAXaAXygEv6NMjoksvZC1KsAjeGZpCf7_18TaPxUvduFUtBRDluWfWLvyJHfxmejnI29OY0O0aGNOrDQA"/>
-<p class="font-headline-md text-lg text-zinc-400 max-w-2xl tracking-widest uppercase">
-                    The Central Mission Hub for Persistent Martian Exploration and Data Analysis.
-                </p>
-<div class="mt-12 flex gap-6">
-<a class="bg-secondary text-on-secondary font-label-caps px-8 py-3 uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-3" href="analysis.html">
-<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
-                        Initialize Command
-                    </a>
-<a class="border border-[#FF4D00] text-[#FF4D00] font-label-caps px-8 py-3 uppercase tracking-widest hover:bg-[#FF4D00]/10 transition-colors flex items-center" href="analysis.html">
-                        Protocol 42
-                    </a>
-</div>
-</div>
-<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 z-10">
-<span class="font-label-caps text-[10px] text-zinc-500 uppercase tracking-widest">Scroll to Explore</span>
-<div class="w-px h-16 bg-gradient-to-b from-[#FF4D00] to-transparent"></div>
-</div>
-<!-- Scanning HUD Line Overlay -->
-<div class="absolute inset-0 pointer-events-none overflow-hidden z-20">
-<div class="scan-line"></div>
-<div class="absolute top-10 left-10 w-8 h-8 border-t-2 border-l-2 border-secondary/30"></div>
-<div class="absolute top-10 right-10 w-8 h-8 border-t-2 border-r-2 border-secondary/30"></div>
-<div class="absolute bottom-10 left-10 w-8 h-8 border-b-2 border-l-2 border-secondary/30"></div>
-<div class="absolute bottom-10 right-10 w-8 h-8 border-b-2 border-r-2 border-secondary/30"></div>
 </div>
 </section>
-<!-- Mission Entry Grid -->
-<section class="max-w-container-max mx-auto px-12 py-24">
-<div class="flex justify-between items-end mb-12 border-b border-white/5 pb-6">
-<div>
-<h2 class="font-headline-xl text-3xl text-white uppercase tracking-tighter mb-2">MISSION DIRECTORY</h2>
-<p class="font-body-base text-zinc-500 text-sm">Select a sector to initiate data transmission and remote operations.</p>
+<!-- Main Hero Visualization -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="lg:col-span-2 relative group aspect-video lg:aspect-auto h-[500px] border border-slate-800/40 overflow-hidden">
+<img alt="Martian Surface" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="vast cinematic vista of martian landscape with crimson dust clouds orange sky and jagged crater rim in sharp detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkegbdIU6ppjQvP7pRJvP1Qia58e5FABBW_kZSGmSagfdceHX_fIMb9C3RlAsIRDK9HM2wFJDT45xJY1OCalleV5ypSF_VxYg5wE4QC3yMfC40RMJ03YeLjMHyKtOfQOJWqDeUuJs4O-sCKjYC3qF1aOXWCYUdAEKMCtjA-w9eZZY1eEdryNcYzXiQhkdCJPgy4oa20AHH439gW8PSZ534gk3oMgfVLMNd_tPGaW68b1y-HW6Zly2AAfZAZL2NhOfvVhr_nYOr7cs"/>
+<!-- Scanning Overlay -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="scanline animate-scan"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-30">
+<div class="w-[80%] h-[80%] border border-primary/20 flex items-center justify-center">
+<div class="w-8 h-8 border-t-2 border-l-2 border-primary"></div>
+<div class="w-full h-full flex items-center justify-center">
+<div class="w-4 w-4 bg-primary/20 rounded-full blur-xl"></div>
 </div>
-<div class="text-right">
-<span class="font-data-point text-secondary text-xs block">SYSTEM: NOMINAL</span>
-<span class="font-label-caps text-zinc-600 text-[10px]">VER: 4.8.2-MARS</span>
+<div class="w-8 h-8 border-b-2 border-r-2 border-primary absolute bottom-0 right-0 translate-x-[40%] translate-y-[40%]"></div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+<div class="flex items-center justify-between">
+<div>
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-1 rounded tracking-[0.2em] mb-2 inline-block">LIVE TELEMETRY FEED</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Jezero Crater - Sector 7</h2>
+</div>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-4 py-2 rounded-full flex items-center gap-2 hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="fullscreen">fullscreen</span>
+                            WIDE VIEW
+                        </button>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="glass-panel flex-1 p-6 relative">
+<h3 class="font-label-caps text-label-caps text-slate-500 mb-4 flex items-center justify-between">
+                        ANOMALY DETECTOR
+                        <span class="material-symbols-outlined text-sm" data-icon="troubleshoot">troubleshoot</span>
+</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-3 bg-slate-800/30 border-l-2 border-orange-600">
+<div class="h-10 w-10 bg-slate-900 flex items-center justify-center border border-slate-700">
+<span class="material-symbols-outlined text-orange-600" data-icon="volcano">volcano</span>
+</div>
+<div>
+<div class="text-xs font-bold text-on-surface">Seismic Spike #42</div>
+<div class="text-[10px] text-slate-500 uppercase">Mag 2.4 - Northern Rift</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-slate-800/10 border-l-2 border-slate-600">
+<div class="h-10 w-10 bg-slate-900 flex items-center justify-center border border-slate-700">
+<span class="material-symbols-outlined text-slate-500" data-icon="air">air</span>
+</div>
+<div>
+<div class="text-xs font-bold text-on-surface">Atmospheric Shift</div>
+<div class="text-[10px] text-slate-500 uppercase">Methane +0.4% - Gale Crater</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-slate-800/10 border-l-2 border-slate-600">
+<div class="h-10 w-10 bg-slate-900 flex items-center justify-center border border-slate-700">
+<span class="material-symbols-outlined text-slate-500" data-icon="radio">radio</span>
+</div>
+<div>
+<div class="text-xs font-bold text-on-surface">Signal Interference</div>
+<div class="text-[10px] text-slate-500 uppercase">Unknown Origin - Sector 7-B</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<button class="w-full border border-slate-700 text-slate-400 font-label-caps text-label-caps py-3 hover:bg-slate-800/50 hover:text-on-surface transition-all">
+                            VIEW FULL LOGS
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery & Recent Anomalies Grid -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="browse_gallery">browse_gallery</span>
+                    RECENT DISCOVERIES
+                </h2>
+<div class="flex gap-2">
+<button class="h-10 w-10 glass-panel flex items-center justify-center text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="h-10 w-10 glass-panel flex items-center justify-center text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
 </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Archive Card -->
-<a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="gallery.html">
-<div class="absolute inset-0 z-0">
-<img alt="Mars landscape" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI-CmfSqjqKteA35Ul6f-vwrNNgaWcz0eJjEeNnnWRb7lXOqJYzZ2wyFSPZBlFB_UL7d8Sbwt6lymfnGEGxefFHP5sPpNJxMks48-QXvkRg7x2w4T9NnYs8GUSjNzFH0lZqdFmZ_FioDkASUAQypvgl4_xMYrWoE2CtT0ufnNAmRIG2PLsC-iumW-IEjhwAASd99CJFQZ9OdrW_tHyZeqOvM1WCWoOVHxmRJZl18db-4_h9T3qgeUO2lmUFNU8NGQ1EpSqDl3dABE"/>
-</div>
-<div class="relative z-10">
-<span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="folder_managed">folder_managed</span>
-<h3 class="font-headline-md text-white text-xl tracking-widest uppercase mb-1">ARCHIVES</h3>
-<p class="font-body-base text-zinc-400 text-xs">Historical mission data and biological specimens.</p>
-</div>
-<div class="absolute top-4 right-4 text-secondary/30 font-data-point text-[10px] group-hover:text-secondary">001</div>
-</a>
-<!-- Rover Dashboard Card -->
-<a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="rover.html">
-<div class="absolute inset-0 z-0">
-<img alt="Mars rover" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA1hJ7wOFq_wQoUSJfzZur05YBCnaJmB8Jl4A3sASCrnMVb7g-Vaq_-GCcWLt6BPtTgna0f0c8XzXSdrchRjfx8yQFHOjQ9hXqDnejtXTuLtF0q2mZYPGpfHxOMWk1nBogUN9Zj0yjVP9v4MwOpVrtDyQ6wZBcHTv3fPhHG3jV7Zwc8hc2ghkWlhP3osWsgXIuGOnnXu04ws-O9dp6ntr76V4TR-1dE2uHZPMdQA-EVRGVBuZ_Gq_3Jk-OWaSPnYl21fYG2AC1dUk"/>
-</div>
-<div class="relative z-10">
-<span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="precision_manufacturing">precision_manufacturing</span>
-<h3 class="font-headline-md text-white text-xl tracking-widest uppercase mb-1">ROVER DASHBOARD</h3>
-<p class="font-body-base text-zinc-400 text-xs">Direct telemetry and movement control interfaces.</p>
-</div>
-<div class="absolute top-4 right-4 text-secondary/30 font-data-point text-[10px] group-hover:text-secondary">002</div>
-</a>
-<!-- Personnel Card -->
-<a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="analysis.html">
-<div class="absolute inset-0 z-0">
-<img alt="Space station interior" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvpwWuxXDQLUwNmT9UANvWyNIf4ES2tgZ1SBh6TNhKFD2A6VWlrl8LQbhKmw4WCKAd4kEbmF9mJBsSVtAYIJShhMRpTYfswRdA7EdcYUn6l59mJUXgHa_w2bcnPvotm4qJIPmvnPkA9bt6KdnpYv0exwpiAL8yP0Zfit64iJ8WrcN983tlSTRMAhLU0ONt-I75n1eCcwerwtbFiDOyv9rzVCGEBJ9pmglYtCgEZpV1_9wVcHTILCLjWdPsZIGo50F43V_9lEHdAeU"/>
-</div>
-<div class="relative z-10">
-<span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="groups_3">groups_3</span>
-<h3 class="font-headline-md text-white text-xl tracking-widest uppercase mb-1">PERSONNEL</h3>
-<p class="font-body-base text-zinc-400 text-xs">Crew vitals, assignments, and biological status.</p>
-</div>
-<div class="absolute top-4 right-4 text-secondary/30 font-data-point text-[10px] group-hover:text-secondary">003</div>
-</a>
-<!-- Satellite Card -->
-<a class="group relative aspect-square border border-white/10 overflow-hidden flex flex-col justify-end p-6 cursor-pointer hover:border-secondary transition-colors" href="analysis.html">
-<div class="absolute inset-0 z-0">
-<img alt="Earth from space" class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMmW5JVhgW5R_Qp4PoD5nM1khbmqi9leeNXxh5fiGMAfL9w-YehFIcg10QntC_6gfvuI4gYgvr1JhVbcc4qCpzTNQsXBijKyFho89SSMp0iwi8ZBKhSmS8JZg_vsGIWqLatIH59iWluT1K3IzZ33eDoKyjqpBvv77M4g2pFngkvFKpkYgFzSS6xgOLIdP_TPTAWYmqBAkXKRrhaGOg-eOFo5_sw3w4Z1O5nO2P1LcO9qgk-SiKBk_b3FAQ8DHIWR-3LulwlyhZUDM"/>
-</div>
-<div class="relative z-10">
-<span class="material-symbols-outlined text-secondary mb-4 text-3xl" data-icon="satellite_alt">satellite_alt</span>
-<h3 class="font-headline-md text-white text-xl tracking-widest uppercase mb-1">SATELLITE IMAGERY</h3>
-<p class="font-body-base text-zinc-400 text-xs">High-resolution scans and multispectral data.</p>
-</div>
-<div class="absolute top-4 right-4 text-secondary/30 font-data-point text-[10px] group-hover:text-secondary">004</div>
-</a>
-</div>
-</section>
-<!-- Asymmetric Data Section -->
-<section class="max-w-container-max mx-auto px-12 py-12 flex flex-col lg:flex-row gap-12">
-<div class="lg:w-2/3">
-<a class="block relative group overflow-hidden border border-white/10 aspect-video" href="gallery.html">
-<img alt="Satellite feed" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[20s] linear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzkLAuI7Cw7jCEAIT8uHfe3B2zs7oOAokwR-LTgS0-HGQaUXfclRWW15KgX1tmPBs4qy80yFOJqjdgAA2S32KNela6n5YSnWEX9xOcgaiYhOZQvtLXJF0YSB-wIcgWsKupdo8FUSMOIscgn_unI85WatJRdBgQqi8Fblp97GW4o_pP-dUv2Hz-MjUKHHRxI3BtxDJmIrDLgrLVtnZP5Kwj1aNY3FW_L8QD3PU7Pnj3DqYfxG-01V2QAYWCSCYYYfi96CFbrIHHVtE"/>
-<div class="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent"></div>
-<div class="absolute bottom-8 left-8">
-<div class="flex items-center gap-3 mb-2">
-<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
-<span class="font-label-caps text-[10px] text-white tracking-widest">LIVE FEED // MRO-SATELLITE 09</span>
-</div>
-<h3 class="font-headline-md text-3xl text-white uppercase tracking-tighter">SURFACE ANOMALY DETECTED</h3>
-</div>
-</a>
-</div>
-<div class="lg:w-1/3 flex flex-col gap-6">
-<div class="bg-zinc-900/50 border border-white/5 p-6 backdrop-blur-md">
-<h4 class="font-label-caps text-xs text-[#FF4D00] mb-4 tracking-[0.2em] uppercase">Atmospheric Readings</h4>
-<div class="space-y-4">
-<div class="flex justify-between items-center border-b border-white/5 pb-2">
-<span class="text-zinc-500 text-xs font-body-base uppercase">Pressure</span>
-<span class="text-white font-data-point">0.636 kPa</span>
-</div>
-<div class="flex justify-between items-center border-b border-white/5 pb-2">
-<span class="text-zinc-500 text-xs font-body-base uppercase">Temperature</span>
-<span class="text-white font-data-point">-63° C</span>
-</div>
-<div class="flex justify-between items-center border-b border-white/5 pb-2">
-<span class="text-zinc-500 text-xs font-body-base uppercase">Wind Speed</span>
-<span class="text-white font-data-point">12.4 m/s</span>
-</div>
-<div class="flex justify-between items-center border-b border-white/5 pb-2">
-<span class="text-zinc-500 text-xs font-body-base uppercase">Visibility</span>
-<span class="text-white font-data-point">NOMINAL</span>
+<!-- Discovery Card 1 -->
+<div class="group border border-slate-800/40 bg-transparent flex flex-col">
+<div class="aspect-square relative overflow-hidden">
+<img alt="Space imagery" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up high-resolution satellite image of layered sediment on mars cliff face with golden light highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ErsEJiaUsbtYXkd4MJaDlhwTS9FrsQRgkiUDGVf5X7bsfGjPqLsaC7gSoqowBEDStdoFTaFTmkObiEch5YKM_tCqx66VPu6YFALZECXXeFBKMfFbsK2lt6IQL0gczN0Mz3oYPz2kA3EQX73P7nFnkpMrMFPDTUz9MOGHCINY1yPIOHnECGQtYTAjt5zxoe4gcuH-sGptYpC7vBEVJKhVi5wGoO37xNZXj3VS0Uz1x44CpT4-lMIrdBs1ovRyZUm2qQI6QtSXduc"/>
+<div class="absolute top-3 left-3">
+<span class="bg-primary text-on-primary text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">GEOLOGICAL</span>
 </div>
 </div>
+<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
+<div class="text-on-surface font-bold text-sm uppercase tracking-wide">Sedimentary Strata</div>
+<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
+<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
+                            Eberswalde Delta
+                        </div>
 </div>
-<div class="border border-secondary/20 p-6 flex flex-col items-center justify-center text-center gap-4 bg-secondary/5">
-<span class="material-symbols-outlined text-secondary text-4xl" data-icon="notifications_active">notifications_active</span>
-<div>
-<p class="font-headline-md text-white text-sm tracking-widest uppercase mb-1">Incoming Communication</p>
-<p class="font-body-base text-zinc-500 text-[10px]">Deep Space Network // Uplink 772</p>
 </div>
-<a class="bg-secondary text-on-secondary font-label-caps px-6 py-2 text-[10px] uppercase w-full block text-center" href="analysis.html">Open Channel</a>
+<!-- Discovery Card 2 -->
+<div class="group border border-slate-800/40 bg-transparent flex flex-col">
+<div class="aspect-square relative overflow-hidden">
+<img alt="Orbital view" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="dramatic orbital view of earth at night with electric blue city lights shimmering through thin cloud layer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAJcrnlMx7AnrtSoXKBEA-fji01MbZQybVos6dYGdaNh5LPYDj7TwW6U3foNBooXtrUZLALwrsaBXmEw0LRQHQsyzBWvdO4X5bKaRHy5LpSEYBSbeBAtuW9NnRDQwzNo-2lrhMIXWn4lHGgklfWxvJcnsnkr8CkzgNnIgEV65mgHN2Juo7oksGOktSas1_ASbTPhYIXpd6gZJYLWX67GHRFLkEn6NyzwAp-ZMIs9DauEAC37q_RPis_fG3HItpMyHUNqwmzFlSNzk"/>
+<div class="absolute top-3 left-3">
+<span class="bg-secondary-container text-on-secondary-container text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">ORBITAL</span>
+</div>
+</div>
+<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
+<div class="text-on-surface font-bold text-sm uppercase tracking-wide">Lumina Scan V-1</div>
+<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
+<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
+                            Orbital Path 9
+                        </div>
+</div>
+</div>
+<!-- Discovery Card 3 -->
+<div class="group border border-slate-800/40 bg-transparent flex flex-col">
+<div class="aspect-square relative overflow-hidden">
+<img alt="Rover view" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="monochrome thermal scan of martian ground showing varied heat signatures in cold blue and white tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQoHXpcW7Id05XpJNg4W0DT6-wmPqIEU0c1mznUa-eFzmVISi-ijG6ukcV5hbeqUflB0JghB0f8gQ5Mj3a74Sm9VtFyIUGM8BjczsF1KiMgaZijAgsFqVI50QnMRaSQmOv89RXP32SpnSbRDDrHAI4grSDcgP5RUpmrgdd1cW7B_XglJ2576mRLVuLva5NmXpevXEOm8TUD4dPkS5kPtDeK_yA_hHyWHjS5gWR5TIp1DuoBwzRtWjW9lju7Hc9RDe_fL9W3ckdGmw"/>
+<div class="absolute top-3 left-3">
+<span class="bg-error text-on-error text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">THERMAL</span>
+</div>
+</div>
+<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
+<div class="text-on-surface font-bold text-sm uppercase tracking-wide">Basaltic Heat Sig</div>
+<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
+<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
+                            Gusev Crater
+                        </div>
+</div>
+</div>
+<!-- Discovery Card 4 -->
+<div class="group border border-slate-800/40 bg-transparent flex flex-col">
+<div class="aspect-square relative overflow-hidden">
+<img alt="Sky view" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="dark starry martian night sky with the planet earth appearing as a bright blue star on the horizon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3aDQRFL18LPZn_V_qutQpQgGPaaPXLfMhn_-rVz4WsFiKPIz2IHfGPKXrMBlvPloFsPrbNQKDvMXCrKhMoMZfoR_PzK8Aq52L66Ws-zRcZBtA-_4P_Per7HNt4ida1v-Vt6TSdO4a9A5i3Llqbxp9XANeG_UxBxyonZM0VcR1yxQvxOKWC7yVPc8Zua4wComYAoUiZucmfdNbLUx5-US269BD4jifUOsfK653LgfVj06hpgkSI_b1frA7GysuXI05TTk1kE_lqnY"/>
+<div class="absolute top-3 left-3">
+<span class="bg-tertiary text-on-tertiary text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">CELESTIAL</span>
+</div>
+</div>
+<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
+<div class="text-on-surface font-bold text-sm uppercase tracking-wide">Earth Alignment</div>
+<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
+<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
+                            Horizon Cam
+                        </div>
+</div>
 </div>
 </div>
 </section>
-<!-- Footer -->
-<footer class="w-full border-t border-[#FF4D00]/30 bg-zinc-950 py-8 px-12 flex flex-col md:flex-row justify-between items-center mt-auto">
-<p class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 uppercase mb-4 md:mb-0">
-                © 2024 MARS ALIVE INITIATIVE // CLASSIFIED
-            </p>
-<div class="flex gap-8">
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-[#FF4D00] transition-opacity duration-500 uppercase" href="analysis.html">STAY_PROTOCOL_42</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-[#FF4D00] transition-opacity duration-500 uppercase" href="analysis.html">BIOLOGICAL_HAZARD_INDEX</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-700 hover:text-[#FF4D00] transition-opacity duration-500 uppercase" href="analysis.html">DEEP_SPACE_NETWORK</a>
-<a class="font-['Space_Grotesk'] text-[9px] tracking-[0.2em] font-light text-zinc-800 hover:text-[#FF4D00] transition-opacity duration-500 uppercase flex items-center gap-1 opacity-50" href="admin.html"><span class="material-symbols-outlined text-[10px]" data-icon="terminal">terminal</span>SEC-07-A</a></div>
-</footer>
 </main>
+<!-- Footer -->
+<footer class="mt-auto relative z-10 p-8 border-t border-slate-800/40 bg-[#0a0c10]/95 backdrop-blur-md">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-4">
+<img alt="MARS ALIVE" class="h-6 opacity-50 grayscale" data-alt="mission logo watermark in grayscale minimalist style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVIDlvQFPLOsSwU00841EgS50u55fi_tFfL__R7-GjgVfPK9rQR5M6fG4VG_mEHOAM7EEn_ZC4YGR8FCVp-jla2q8AbrzwwNaHErcmNWXxV0lwgrH36gDlKYYtgd8iBozSnbOYzknydFHqCZTDZaXVjBVcO6EiL4pqdYaO_2wVkZwhRIv0a-YfW6NvPn12cV9Ni_kCyYnpup5kOffD8WB3MhHbYTfv00iedIEuGFJn2jKdGhFQWgBZp155AQ0DmAE2abWd8JzB5aw"/>
+<div class="text-slate-600 font-label-caps text-[10px] tracking-widest border-l border-slate-800 pl-4">
+                    © 2042 MARS ALIVE MISSION CONTROL. ALL DATA ENCRYPTED.
+                </div>
+</div>
+<div class="flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-slate-500 hover:text-primary transition-all font-label-caps text-[10px]" href="#">PROTOCOLS</a>
+<a class="text-slate-500 hover:text-primary transition-all font-label-caps text-[10px]" href="#">TELEMETRY API</a>
+<a class="text-slate-500 hover:text-primary transition-all font-label-caps text-[10px]" href="#">ARCHIVE</a>
+</nav>
+<!-- Hidden Admin Entry -->
+<a class="group flex items-center gap-2 opacity-20 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined text-slate-500 text-sm group-hover:text-error transition-colors" data-icon="security">security</span>
+<span class="text-slate-600 group-hover:text-error font-mono text-[9px] transition-colors">SEC-07-A</span>
+</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#0a0c10]/90 backdrop-blur-xl border-t border-slate-800/40 flex justify-around p-4 z-50">
+<a class="flex flex-col items-center gap-1 text-orange-500" href="#">
+<span class="material-symbols-outlined" data-icon="home_max">home_max</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Gallery</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Rover</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Admin</span>
+</a>
+</nav>
+<style>
+        @keyframes scan {
+            from { top: 0%; opacity: 0.1; }
+            50% { opacity: 0.3; }
+            to { top: 100%; opacity: 0.1; }
+        }
+        .animate-scan {
+            animation: scan 4s linear infinite;
+        }
+    </style>
 </body></html>
