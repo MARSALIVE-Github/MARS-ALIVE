@@ -5,14 +5,13 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <style>
         body {
             background-color: #0a0c10;
-            background-image: 
-                radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
             background-size: 40px 40px;
+            overflow-x: hidden;
         }
         .scanline {
             width: 100%;
@@ -35,6 +34,30 @@
         .inner-glow-orange {
             box-shadow: inset 0 0 15px rgba(255, 87, 26, 0.05);
         }
+        .security-gate {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gate-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.1) translateY(-20px);
+        }
+        .dashboard-content {
+            transition: all 1s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .dashboard-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes scan {
+            from { top: 0; }
+            to { top: 100%; }
+        }
+        .animate-scan {
+            animation: scan 4s linear infinite;
+        }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -46,49 +69,8 @@
                         "surface-tint": "#ffb59e",
                         "on-primary": "#5e1700",
                         "on-surface": "#e2e2e8",
-                        "on-tertiary-fixed-variant": "#3a4859",
-                        "secondary-fixed": "#9cf0ff",
-                        "surface-bright": "#37393e",
-                        "inverse-primary": "#ae3200",
-                        "surface-container-low": "#1a1c20",
-                        "on-surface-variant": "#e6beb2",
-                        "surface-container-lowest": "#0c0e12",
-                        "on-tertiary": "#243142",
-                        "on-secondary-fixed-variant": "#004f58",
-                        "surface-variant": "#333539",
-                        "surface-container-highest": "#333539",
-                        "surface-container-high": "#282a2e",
                         "primary-container": "#ff571a",
-                        "on-primary-fixed-variant": "#852400",
-                        "secondary-container": "#00e3fd",
-                        "background": "#111318",
-                        "tertiary": "#b9c8dd",
-                        "primary-fixed-dim": "#ffb59e",
-                        "error-container": "#93000a",
-                        "on-secondary": "#00363d",
-                        "outline-variant": "#5c4037",
-                        "on-tertiary-container": "#1d2b3b",
-                        "surface-dim": "#111318",
-                        "secondary": "#bdf4ff",
-                        "on-tertiary-fixed": "#0e1c2c",
-                        "primary-fixed": "#ffdbd0",
-                        "on-secondary-container": "#00616d",
-                        "surface": "#111318",
-                        "on-primary-fixed": "#3a0b00",
-                        "tertiary-fixed-dim": "#b9c8dd",
-                        "on-error": "#690005",
-                        "inverse-on-surface": "#2f3035",
-                        "on-error-container": "#ffdad6",
-                        "on-primary-container": "#521300",
                         "surface-container": "#1e2024",
-                        "on-secondary-fixed": "#001f24",
-                        "on-background": "#e2e2e8",
-                        "tertiary-fixed": "#d5e4f9",
-                        "outline": "#ad897e",
-                        "inverse-surface": "#e2e2e8",
-                        "tertiary-container": "#8492a5",
-                        "secondary-fixed-dim": "#00daf3",
-                        "error": "#ffb4ab"
                     },
                     "borderRadius": {
                         "DEFAULT": "0.125rem",
@@ -108,7 +90,31 @@
         }
     </script>
 </head>
-<body class="font-body-base text-on-surface selection:bg-primary-container selection:text-white">
+<body class="font-body-base text-on-surface selection:bg-primary-container selection:text-white min-h-screen">
+<!-- Security Gate Overlay -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0c10] security-gate" id="securityGate">
+<div class="scanline animate-scan"></div>
+<div class="glass-panel p-12 max-w-md w-full text-center space-y-8 inner-glow-orange border-orange-600/30">
+<div class="space-y-2">
+<span class="material-symbols-outlined text-6xl text-orange-600 mb-4" data-icon="lock_open">lock_open</span>
+<h1 class="text-2xl font-bold tracking-[0.2em] text-orange-500 uppercase">Mission Control</h1>
+<p class="text-[10px] font-label-caps text-slate-500 tracking-widest">ACCESS LEVEL: COMMANDER ALPHA</p>
+</div>
+<div class="space-y-4">
+<div class="relative">
+<input class="w-full bg-slate-900/50 border border-slate-800 p-4 text-center text-orange-500 font-mono tracking-widest focus:border-orange-600 focus:ring-1 focus:ring-orange-600 outline-none placeholder:text-slate-700" id="accessCode" placeholder="ENTER ACCESS CODE" type="password"/>
+<div class="hidden absolute -bottom-6 left-0 w-full text-[10px] text-red-500 font-bold tracking-tighter uppercase" id="errorMessage">ACCESS DENIED - RETRY REQUIRED</div>
+</div>
+<button class="w-full bg-orange-600/10 border border-orange-600 text-orange-500 py-4 font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold hover:bg-orange-600 hover:text-black transition-all" onclick="validateAccess()">
+                AUTHORIZE SYSTEM OVERRIDE
+            </button>
+</div>
+<div class="text-[9px] text-slate-600 font-mono">
+            ID: ARES-V-SEC-AUTH // IP: 10.77.24.1
+        </div>
+</div>
+</div>
+<div class="dashboard-content hidden" id="dashboard">
 <!-- TopAppBar -->
 <header class="fixed top-0 z-50 w-full bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)] flex justify-between items-center px-6 py-3">
 <div class="flex items-center space-x-4">
@@ -125,7 +131,7 @@
 <span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-orange-400 scale-95 active:scale-90 duration-150" data-icon="settings_input_component">settings_input_component</span>
 <span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-orange-400 scale-95 active:scale-90 duration-150" data-icon="notifications">notifications</span>
 <div class="w-8 h-8 rounded-full border border-orange-600/30 overflow-hidden bg-slate-800">
-<img alt="Commander Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a futuristic space commander in a dark uniform with subtle glowing orange insignia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv5EGQLbP6AWjknf6w-4MXC2VnVPCO-JENSIsIaG6S0m_yV3RASadEYzC61pYrZkTrcP-Up7nOiDIYAcN6aeOOzyD986Ea21QTN7tsZOYE1jMiKLVOEgDbkSKzwuGigrvrL5AaWPWUBpSTTs5ALCZbvzFEmC8mVPpgOPsOKsoq5UDC8rNxxAC6fWST2zuxDoyBOL1wa49Xfrsw898dYq0FBO38kKea_b2foyouZrsHW_H5cbiTM5oNiYhs1K3jIwQPLSnH5U9aHPk"/>
+<img alt="Commander Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv5EGQLbP6AWjknf6w-4MXC2VnVPCO-JENSIsIaG6S0m_yV3RASadEYzC61pYrZkTrcP-Up7nOiDIYAcN6aeOOzyD986Ea21QTN7tsZOYE1jMiKLVOEgDbkSKzwuGigrvrL5AaWPWUBpSTTs5ALCZbvzFEmC8mVPpgOPsOKsoq5UDC8rNxxAC6fWST2zuxDoyBOL1wa49Xfrsw898dYq0FBO38kKea_b2foyouZrsHW_H5cbiTM5oNiYhs1K3jIwQPLSnH5U9aHPk"/>
 </div>
 </div>
 </div>
@@ -137,19 +143,19 @@
 <p class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px] text-slate-500">Mars Sector 7 / Operational</p>
 </div>
 <nav class="flex-1">
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="index.html">
 <span class="material-symbols-outlined" data-icon="home_max">home_max</span>
 <span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Home</span>
 </a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="gallery.html">
 <span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
 <span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Gallery</span>
 </a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="rover.html">
 <span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
 <span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Rover</span>
 </a>
-<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-6 duration-300" href="#">
+<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-6 duration-300" href="admin.html">
 <span class="material-symbols-outlined" data-icon="security">security</span>
 <span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Admin SEC-07-A</span>
 </a>
@@ -161,20 +167,24 @@
 </div>
 </aside>
 <!-- Main Canvas -->
-<main class="pl-64 pt-20 min-h-screen bg-[#0a0c10] relative overflow-hidden">
+<main class="pl-64 pt-20 min-h-screen bg-[#0a0c10] relative">
 <div class="scanline"></div>
 <div class="max-w-7xl mx-auto p-10 space-y-12">
-<!-- Header & Security Check -->
+<!-- Centered Logo -->
+<div class="flex justify-center mb-12">
+<img alt="Mars Alive Logo" class="h-24 md:h-32 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugNiodTF6cPUPc8slf-jxKD2YzYBntq-MV-TaRK4Vdo-zKQcGmKN5aqlo8cl6CEhtaHhHRujbTrNtg1-otEOUBCS9t8LYBkam6iXWTHAtQzQCuc0o2ylUVUJS4yjzFcGCRTdTljqBwuNpwbp-7-M9aGgKoxqVtpBi3CbME--K2Bil5NNYa78OMMrmfJWl8mIlF2yxD9BsUgjTb7PLWlvgH9CMX_1WQHY63nW0M-Vx2__0fQ6nQRiMlcwOh5t24rmLzhY_wR1XOEew"/>
+</div>
+<!-- Header -->
 <div class="flex justify-between items-end border-b border-slate-800 pb-8">
 <div>
 <h1 class="font-headline-xl text-primary terminal-text uppercase">Mission Control</h1>
 <p class="text-slate-500 font-label-caps mt-2">SECURE ADMINISTRATION PANEL // VERSION 4.0.12</p>
 </div>
 <div class="glass-panel p-4 flex items-center space-x-4 inner-glow-orange">
-<span class="material-symbols-outlined text-orange-600" data-icon="lock">lock</span>
+<span class="material-symbols-outlined text-emerald-500" data-icon="verified_user">verified_user</span>
 <div class="space-y-1">
-<p class="text-[10px] font-label-caps text-slate-500">ACCESS CODE REQUIRED</p>
-<input class="bg-transparent border-b border-orange-600/30 text-orange-500 font-mono text-sm focus:outline-none focus:border-orange-600 w-32 placeholder:text-slate-700" placeholder="••••••••" type="password"/>
+<p class="text-[10px] font-label-caps text-slate-500">AUTHORIZED ACCESS</p>
+<p class="text-orange-500 font-mono text-xs">CMD_THORNE_7</p>
 </div>
 </div>
 </div>
@@ -189,18 +199,18 @@
 </h2>
 <span class="text-[10px] font-label-caps text-slate-600">INPUT-BUFFER-07</span>
 </div>
-<form class="grid grid-cols-2 gap-6">
+<form class="grid grid-cols-2 gap-6" id="anomalyForm">
 <div class="col-span-2 space-y-2">
 <label class="text-[10px] font-label-caps text-slate-500">ANOMALY TITLE</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 focus:ring-1 focus:ring-orange-600 outline-none" placeholder="e.g. CRYSTALLINE FORMATION ALPHA-1" type="text"/>
+<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 focus:ring-1 focus:ring-orange-600 outline-none" name="title" placeholder="e.g. CRYSTALLINE FORMATION ALPHA-1" required="" type="text"/>
 </div>
 <div class="space-y-2">
 <label class="text-[10px] font-label-caps text-slate-500">SOL CYCLE</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" placeholder="422" type="number"/>
+<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="sol" placeholder="422" required="" type="number"/>
 </div>
 <div class="space-y-2">
 <label class="text-[10px] font-label-caps text-slate-500">ROVER UNIT</label>
-<select class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none">
+<select class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="rover">
 <option>ARES-VII</option>
 <option>PERSISTENCE-IV</option>
 <option>SOJOURNER-MKII</option>
@@ -208,25 +218,25 @@
 </div>
 <div class="space-y-2">
 <label class="text-[10px] font-label-caps text-slate-500">DISCOVERED BY</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" placeholder="Dr. Elias Thorne" type="text"/>
+<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="lead" placeholder="Dr. Elias Thorne" required="" type="text"/>
 </div>
 <div class="space-y-2">
 <label class="text-[10px] font-label-caps text-slate-500">CREDITS / SOURCE</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" placeholder="NASA/JPL-Caltech" type="text"/>
+<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="source" placeholder="NASA/JPL-Caltech" type="text"/>
 </div>
 <div class="col-span-2 space-y-2">
 <label class="text-[10px] font-label-caps text-slate-500">DESCRIPTION (SCIENTIFIC OVERVIEW)</label>
-<textarea class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" placeholder="Enter detailed geological or atmospheric analysis..." rows="4"></textarea>
+<textarea class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="description" placeholder="Enter detailed geological or atmospheric analysis..." rows="4"></textarea>
 </div>
 <div class="col-span-2 space-y-2">
 <label class="text-[10px] font-label-caps text-slate-500">HIGH-RESOLUTION IMAGE URL</label>
 <div class="relative">
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-mono text-xs focus:border-orange-600 outline-none pr-12" placeholder="https://mars.nasa.gov/system/resources/..." type="text"/>
+<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-mono text-xs focus:border-orange-600 outline-none pr-12" id="imageInput" name="imageUrl" placeholder="https://mars.nasa.gov/system/resources/..." type="text"/>
 <span class="material-symbols-outlined absolute right-3 top-3 text-slate-600" data-icon="link">link</span>
 </div>
 </div>
 <div class="col-span-2 flex justify-end pt-4">
-<button class="bg-primary text-on-primary px-8 py-3 font-label-caps hover:brightness-110 active:scale-95 transition-all" type="button">
+<button class="bg-primary text-on-primary px-8 py-3 font-label-caps hover:brightness-110 active:scale-95 transition-all" type="submit">
                                 SUBMIT TO ARCHIVE
                             </button>
 </div>
@@ -244,19 +254,11 @@
 </div>
 </div>
 <div class="bg-slate-950 p-4 rounded border border-slate-800/50 font-mono text-[11px] leading-relaxed text-emerald-500/80 h-full overflow-hidden">
-<p class="opacity-50">// REAL-TIME STREAM</p>
-<p>{</p>
-<p class="ml-4">"id": <span class="text-orange-400">"ANOM-8821"</span>,</p>
-<p class="ml-4">"timestamp": <span class="text-orange-400">"2024-11-23T14:44:02Z"</span>,</p>
-<p class="ml-4">"coordinates": {</p>
-<p class="ml-8">"lat": <span class="text-orange-400">-18.442</span>,</p>
-<p class="ml-8">"long": <span class="text-orange-400">77.443</span></p>
-<p class="ml-4">},</p>
-<p class="ml-4">"metadata": {</p>
-<p class="ml-8">"spectrometer": <span class="text-orange-400">"HE-3_ACTIVE"</span>,</p>
-<p class="ml-8">"hazard_level": <span class="text-orange-400">0</span></p>
-<p class="ml-4">}</p>
-<p>}</p>
+<p class="opacity-50" id="jsonStreamLabel">// REAL-TIME STREAM READY</p>
+<pre class="whitespace-pre-wrap break-all" id="jsonPreview">{
+  "status": "AWAITING_INPUT",
+  "buffer": "SEC-07-ALPHA"
+}</pre>
 </div>
 </div>
 <div class="glass-panel p-6 inner-glow-orange relative overflow-hidden group">
@@ -289,11 +291,9 @@
 <h2 class="font-headline-md">MISSION ARCHIVES</h2>
 </div>
 <div class="flex space-x-2">
+<button class="px-3 py-1 border border-slate-700 text-slate-500 hover:text-red-500 transition-colors text-[10px] font-label-caps" onclick="clearArchives()">PURGE</button>
 <button class="px-3 py-1 border border-slate-700 text-slate-500 hover:text-white transition-colors">
 <span class="material-symbols-outlined text-sm align-middle" data-icon="filter_list">filter_list</span>
-</button>
-<button class="px-3 py-1 border border-slate-700 text-slate-500 hover:text-white transition-colors">
-<span class="material-symbols-outlined text-sm align-middle" data-icon="download">download</span>
 </button>
 </div>
 </div>
@@ -309,61 +309,13 @@
 <th class="px-6 py-4 text-right">Actions</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-slate-800/50">
-<tr class="hover:bg-orange-600/5 transition-colors group">
-<td class="px-6 py-4">
-<span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></span>
-<span class="text-xs text-emerald-500">Verified</span>
-</td>
-<td class="px-6 py-4 font-medium text-on-surface">Blue Dune Sediment</td>
-<td class="px-6 py-4 text-slate-400">392</td>
-<td class="px-6 py-4 text-slate-400">ARES-VII</td>
-<td class="px-6 py-4 text-slate-400">Commander J. Miller</td>
-<td class="px-6 py-4 text-right">
-<button class="text-slate-600 hover:text-orange-500 transition-colors">
-<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
-</button>
-</td>
-</tr>
-<tr class="hover:bg-orange-600/5 transition-colors">
-<td class="px-6 py-4">
-<span class="inline-block w-2 h-2 rounded-full bg-orange-500 mr-2 shadow-[0_0_8px_rgba(245,158,11,0.4)]"></span>
-<span class="text-xs text-orange-500">Pending</span>
-</td>
-<td class="px-6 py-4 font-medium text-on-surface">Thermal Vent B-12</td>
-<td class="px-6 py-4 text-slate-400">415</td>
-<td class="px-6 py-4 text-slate-400">PERSISTENCE-IV</td>
-<td class="px-6 py-4 text-slate-400">Dr. Sarah Vogt</td>
-<td class="px-6 py-4 text-right">
-<button class="text-slate-600 hover:text-orange-500 transition-colors">
-<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
-</button>
-</td>
-</tr>
-<tr class="hover:bg-orange-600/5 transition-colors">
-<td class="px-6 py-4">
-<span class="inline-block w-2 h-2 rounded-full bg-slate-600 mr-2"></span>
-<span class="text-xs text-slate-500">Archived</span>
-</td>
-<td class="px-6 py-4 font-medium text-on-surface">Frozen Water Tracer</td>
-<td class="px-6 py-4 text-slate-400">210</td>
-<td class="px-6 py-4 text-slate-400">ARES-V</td>
-<td class="px-6 py-4 text-slate-400">System Auto</td>
-<td class="px-6 py-4 text-right">
-<button class="text-slate-600 hover:text-orange-500 transition-colors">
-<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
-</button>
-</td>
-</tr>
+<tbody class="divide-y divide-slate-800/50" id="archivesBody">
+<!-- Dynamic Content -->
 </tbody>
 </table>
 </div>
-<div class="p-4 bg-slate-900/30 flex justify-between items-center text-[10px] font-label-caps text-slate-600">
-<span>Showing 1-3 of 88 entries</span>
-<div class="flex space-x-4">
-<button class="hover:text-orange-500">PREV</button>
-<button class="hover:text-orange-500">NEXT</button>
-</div>
+<div class="p-4 bg-slate-900/30 flex justify-between items-center text-[10px] font-label-caps text-slate-600" id="paginationLabel">
+<span>Showing 0 entries</span>
 </div>
 </div>
 </div>
@@ -371,7 +323,6 @@
 <!-- Decorative Background Elements -->
 <div class="absolute top-[10%] left-[5%] w-px h-64 bg-gradient-to-b from-orange-600/50 to-transparent opacity-20"></div>
 <div class="absolute top-[40%] right-[10%] w-px h-96 bg-gradient-to-b from-orange-600/50 to-transparent opacity-20"></div>
-<div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0a0c10] to-transparent z-10"></div>
 </main>
 <!-- Floating HUD Elements -->
 <div class="fixed bottom-8 right-8 z-50 flex flex-col items-end space-y-4">
@@ -381,4 +332,115 @@
 <span class="text-[10px] font-label-caps text-slate-500">TEMP: -62°C</span>
 </div>
 </div>
+</div>
+<script>
+    const ACCESS_CODE = 'MarsAlive1967!';
+
+    function validateAccess() {
+        const input = document.getElementById('accessCode');
+        const gate = document.getElementById('securityGate');
+        const dashboard = document.getElementById('dashboard');
+        const error = document.getElementById('errorMessage');
+
+        if (input.value === ACCESS_CODE) {
+            gate.classList.add('gate-hidden');
+            setTimeout(() => {
+                gate.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+                setTimeout(() => {
+                    dashboard.classList.add('dashboard-visible');
+                    renderArchives();
+                }, 50);
+            }, 800);
+        } else {
+            error.classList.remove('hidden');
+            input.classList.add('border-red-600');
+            setTimeout(() => {
+                error.classList.add('hidden');
+                input.classList.remove('border-red-600');
+            }, 3000);
+        }
+    }
+
+    // Allow Enter key to trigger login
+    document.getElementById('accessCode').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') validateAccess();
+    });
+
+    // Form Handling & Local Storage
+    const anomalyForm = document.getElementById('anomalyForm');
+    const jsonPreview = document.getElementById('jsonPreview');
+    const jsonStreamLabel = document.getElementById('jsonStreamLabel');
+
+    anomalyForm.addEventListener('input', (e) => {
+        const formData = new FormData(anomalyForm);
+        const data = Object.fromEntries(formData.entries());
+        data.id = "ANOM-" + Math.floor(Math.random() * 9000 + 1000);
+        data.timestamp = new Date().toISOString();
+        jsonPreview.textContent = JSON.stringify(data, null, 2);
+        jsonStreamLabel.textContent = "// STREAMING BUFFER...";
+    });
+
+    anomalyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(anomalyForm);
+        const entry = Object.fromEntries(formData.entries());
+        entry.id = "ANOM-" + Math.floor(Math.random() * 9000 + 1000);
+        entry.timestamp = new Date().toISOString();
+        entry.status = "Pending";
+
+        let archives = JSON.parse(localStorage.getItem('mars_archives') || '[]');
+        archives.unshift(entry);
+        localStorage.setItem('mars_archives', JSON.stringify(archives));
+
+        anomalyForm.reset();
+        jsonPreview.textContent = '{\n  "status": "TRANSMISSION_COMPLETE",\n  "id": "' + entry.id + '"\n}';
+        jsonStreamLabel.textContent = "// REAL-TIME STREAM READY";
+        renderArchives();
+    });
+
+    function renderArchives() {
+        const archives = JSON.parse(localStorage.getItem('mars_archives') || '[]');
+        const body = document.getElementById('archivesBody');
+        const label = document.getElementById('paginationLabel');
+        
+        body.innerHTML = '';
+        
+        if (archives.length === 0) {
+            body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-600 font-mono text-xs uppercase">No mission data recorded in local buffer</td></tr>';
+            label.innerHTML = '<span>Showing 0 entries</span>';
+            return;
+        }
+
+        archives.forEach((entry, index) => {
+            const row = document.createElement('tr');
+            row.className = 'hover:bg-orange-600/5 transition-colors group border-b border-slate-800/50';
+            row.innerHTML = `
+                <td class="px-6 py-4">
+                    <span class="inline-block w-2 h-2 rounded-full ${index === 0 ? 'bg-orange-500' : 'bg-emerald-500'} mr-2"></span>
+                    <span class="text-xs ${index === 0 ? 'text-orange-500' : 'text-emerald-500'}">${index === 0 ? 'Pending' : 'Verified'}</span>
+                </td>
+                <td class="px-6 py-4 font-medium text-on-surface">${entry.title}</td>
+                <td class="px-6 py-4 text-slate-400">${entry.sol}</td>
+                <td class="px-6 py-4 text-slate-400">${entry.rover}</td>
+                <td class="px-6 py-4 text-slate-400">${entry.lead}</td>
+                <td class="px-6 py-4 text-right">
+                    <button class="text-slate-600 hover:text-orange-500 transition-colors">
+                        <span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+                    </button>
+                </td>
+            `;
+            body.appendChild(row);
+        });
+
+        label.innerHTML = `<span>Showing 1-${archives.length} of ${archives.length} entries</span>`;
+    }
+
+    function clearArchives() {
+        if(confirm('PURGE LOCAL BUFFER? This action is irreversible.')) {
+            localStorage.removeItem('mars_archives');
+            renderArchives();
+        }
+    }
+</script>
 </body></html>
