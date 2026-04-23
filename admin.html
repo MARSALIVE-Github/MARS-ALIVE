@@ -119,6 +119,10 @@
         .animate-flicker {
             animation: flicker 0.1s infinite;
         }
+        .drop-zone--over {
+            border-color: #ff571a !important;
+            background: rgba(255, 87, 26, 0.05) !important;
+        }
     </style>
 </head>
 <body class="font-body-base text-on-background min-h-screen selection:bg-primary-container selection:text-white">
@@ -277,16 +281,16 @@
 <form class="grid grid-cols-2 gap-x-8 gap-y-6">
 <div class="col-span-2 md:col-span-1">
 <label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Anomaly Title</label>
-<input class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" placeholder="e.g. Subsurface Hydration Signature" type="text"/>
+<input class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" id="anomaly-title" placeholder="e.g. Subsurface Hydration Signature" type="text"/>
 </div>
 <div class="col-span-2 md:col-span-1 grid grid-cols-2 gap-4">
 <div>
 <label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Sol Number</label>
-<input class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" type="number" value="3942"/>
+<input class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" id="sol-number" type="number" value="3942"/>
 </div>
 <div>
 <label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Rover Source</label>
-<select class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0 uppercase font-data-point text-xs">
+<select class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0 uppercase font-data-point text-xs" id="rover-source">
 <option>Perseverance</option>
 <option>Curiosity</option>
 <option>Spirit</option>
@@ -298,13 +302,30 @@
 <label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Lead Researcher</label>
 <input class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" placeholder="Dr. Aris Thorne" type="text"/>
 </div>
+<!-- Multi-Image Media Manager -->
 <div class="col-span-2 md:col-span-1">
-<label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Visual Data Link (URL)</label>
-<input class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" placeholder="https://mars.nasa.gov/raw_data/..." type="text"/>
+<label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Multi-Image Media Manager</label>
+<div class="border-2 border-dashed border-outline-variant/30 bg-background/40 p-4 transition-colors hover:border-primary-container/50 group relative" id="drop-zone">
+<input accept="image/*" class="hidden" id="file-input" multiple="" type="file"/>
+<div class="flex flex-col items-center justify-center py-2 pointer-events-none">
+<span class="material-symbols-outlined text-outline group-hover:text-primary-container transition-colors mb-2" data-icon="cloud_upload">cloud_upload</span>
+<p class="text-[10px] text-outline uppercase tracking-widest mb-3">Drag &amp; Drop Assets Here</p>
+<button class="px-4 py-2 bg-surface-container-highest text-primary font-label-caps text-[10px] uppercase tracking-widest border border-primary/20 hover:bg-primary/10 transition-colors pointer-events-auto" onclick="document.getElementById('file-input').click()" type="button">
+            UPLOAD MISSION IMAGES
+        </button>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2" id="preview-container">
+<!-- Thumbnails will be injected here -->
+</div>
+<div class="mt-4">
+<label class="block font-label-caps text-[9px] text-outline mb-1 uppercase opacity-60">External Image URL (Backup)</label>
+<input class="w-full bg-background/30 border border-outline-variant/30 focus:border-primary-container text-on-surface text-xs p-2 transition-all focus:ring-0" id="external-url" placeholder="https://mars.nasa.gov/raw_data/..." type="text"/>
+</div>
 </div>
 <div class="col-span-2">
 <label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Technical Description</label>
-<textarea class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" placeholder="Input spectral analysis and visual observation notes..." rows="4"></textarea>
+<textarea class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" id="tech-description" placeholder="Input spectral analysis and visual observation notes..." rows="4"></textarea>
 </div>
 <div class="col-span-2 flex justify-end gap-4">
 <button class="px-8 py-3 border border-outline-variant text-outline font-label-caps text-label-caps uppercase tracking-widest hover:bg-outline-variant/10 transition-colors" type="reset">Clear Deck</button>
@@ -329,11 +350,8 @@
     "title": "Subsurface Hydration Signature",
     "sol": 3942,
     "source": "PERSEVERANCE",
+    "images": [],
     "coordinates": "18.44°N 77.45°E",
-    "spectrometry": [
-      {"layer": "0-10cm", "h2o_pct": 2.4},
-      {"layer": "10-50cm", "h2o_pct": 8.1}
-    ],
     "timestamp": "2024-05-20T14:22:01Z"
   },
   "encryption": "AES-4096-QUANTUM",
@@ -433,6 +451,9 @@
 </div>
 </div>
 <script>
+        // State for Multi-Image Manager
+        let selectedImages = [];
+
         function handleInitialize() {
             const accessCode = document.getElementById('access-code').value;
             const gate = document.getElementById('security-gate');
@@ -463,6 +484,109 @@
                 handleInitialize();
             }, 1200);
         }
+
+        // Image Manager Logic
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const previewContainer = document.getElementById('preview-container');
+        const jsonPreview = document.getElementById('json-preview');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('drop-zone--over'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('drop-zone--over'), false);
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            ([...files]).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onloadend = () => {
+                        selectedImages.push({
+                            id: Date.now() + Math.random(),
+                            name: file.name,
+                            data: reader.result
+                        });
+                        updatePreview();
+                        updateJSON();
+                    };
+                }
+            });
+        }
+
+        function removeImage(id) {
+            selectedImages = selectedImages.filter(img => img.id !== id);
+            updatePreview();
+            updateJSON();
+        }
+
+        function updatePreview() {
+            previewContainer.innerHTML = '';
+            selectedImages.forEach(img => {
+                const div = document.createElement('div');
+                div.className = 'relative w-16 h-16 border border-outline-variant/30 bg-surface-container-low p-1 group';
+                div.innerHTML = `
+                    <img src="${img.data}" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all">
+                    <button type="button" onclick="removeImage(${img.id})" class="absolute -top-2 -right-2 bg-error text-on-error w-5 h-5 rounded-none flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                        <span class="material-symbols-outlined text-[12px]" data-icon="close">close</span>
+                    </button>
+                `;
+                previewContainer.appendChild(div);
+            });
+        }
+
+        function updateJSON() {
+            const title = document.getElementById('anomaly-title').value || "Subsurface Hydration Signature";
+            const sol = document.getElementById('sol-number').value || 3942;
+            const source = document.getElementById('rover-source').value || "PERSEVERANCE";
+            const extUrl = document.getElementById('external-url').value;
+            
+            const imageList = selectedImages.map(img => img.name);
+            if (extUrl) imageList.push(extUrl);
+
+            const payload = {
+                packet_id: "MARS-77-DELTA",
+                origin: "JEZERO-CRATER",
+                payload: {
+                    title: title,
+                    sol: parseInt(sol),
+                    source: source,
+                    images: imageList,
+                    coordinates: "18.44°N 77.45°E",
+                    timestamp: new Date().toISOString()
+                },
+                encryption: "AES-4096-QUANTUM",
+                status: "AWAITING_UPLINK"
+            };
+            jsonPreview.innerText = JSON.stringify(payload, null, 2);
+        }
+
+        // Live updating of JSON on input
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', updateJSON);
+        });
 
         document.getElementById('github-export-btn').addEventListener('click', function() {
             const icon = this.querySelector('.material-symbols-outlined');
@@ -498,7 +622,10 @@
                     submitBtn.classList.replace('bg-secondary-container', 'bg-primary-container');
                     submitBtn.classList.replace('text-on-secondary-container', 'text-on-primary-container');
                     submitBtn.disabled = false;
+                    selectedImages = [];
+                    updatePreview();
                     e.target.reset();
+                    updateJSON();
                 }, 2000);
             }, 1500);
         });
