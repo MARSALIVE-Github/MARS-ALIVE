@@ -3,444 +3,295 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>ARES COMMAND - MISSION CONTROL</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<style>
-        body {
-            background-color: #0a0c10;
-            background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-            background-size: 40px 40px;
-            overflow-x: hidden;
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-fixed": "#3a0b00",
+                "secondary-container": "#1b3324",
+                "on-background": "#fcdcd3",
+                "on-surface": "#fcdcd3",
+                "tertiary-container": "#2492ff",
+                "on-primary-fixed-variant": "#852400",
+                "on-secondary-container": "#a7d1b5",
+                "on-error-container": "#ffdad6",
+                "background": "#0d1310",
+                "surface-tint": "#e67e54",
+                "surface-container": "#1a241f",
+                "on-tertiary-container": "#002a53",
+                "inverse-primary": "#ae3200",
+                "outline": "#8a9c92",
+                "tertiary-fixed": "#d4e3ff",
+                "secondary": "#57b878",
+                "on-surface-variant": "#c4d1c9",
+                "secondary-fixed": "#bbefc9",
+                "primary-fixed": "#ffdbd0",
+                "on-tertiary": "#00315e",
+                "surface-bright": "#24312a",
+                "error": "#ffb4ab",
+                "outline-variant": "#3d4d44",
+                "surface-container-low": "#131a16",
+                "on-secondary-fixed-variant": "#205034",
+                "primary-fixed-dim": "#e67e54",
+                "on-primary-container": "#4a1800",
+                "inverse-surface": "#fcdcd3",
+                "inverse-on-surface": "#1a241f",
+                "secondary-fixed-dim": "#9fd2ae",
+                "on-tertiary-fixed": "#001c3a",
+                "primary": "#e67e54",
+                "tertiary": "#a5c8ff",
+                "surface-container-highest": "#2a3b33",
+                "on-primary": "#4a1800",
+                "on-tertiary-fixed-variant": "#004785",
+                "surface-variant": "#2a3b33",
+                "surface-dim": "#0d1310",
+                "on-secondary-fixed": "#00210f",
+                "surface-container-high": "#1f2b24",
+                "surface-container-lowest": "#0a0f0d",
+                "primary-container": "#e67e54",
+                "error-container": "#93000a",
+                "surface": "#0d1310",
+                "on-error": "#690005",
+                "tertiary-fixed-dim": "#a5c8ff",
+                "on-secondary": "#0d2b1a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "panel-padding": "24px",
+                "stack-gap": "8px",
+                "margin": "32px",
+                "unit": "4px",
+                "gutter": "16px"
+            },
+            "fontFamily": {
+                "data-mono": ["Space Grotesk"],
+                "display-xl": ["Space Grotesk"],
+                "label-sm": ["Space Grotesk"],
+                "body-md": ["Space Grotesk"],
+                "headline-lg": ["Space Grotesk"]
+            },
+            "fontSize": {
+                "data-mono": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
         }
-        .scanline {
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, rgba(255, 87, 26, 0.2), transparent);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 50;
+      }
+    </script>
+<style>
+        .scan-lines {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(230, 126, 84, 0.02), rgba(87, 184, 120, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 3px 100%;
             pointer-events: none;
+            z-index: 100;
+        }
+        .starfield {
+            background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px);
+            background-size: 550px 550px;
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(230, 126, 84, 0.15), inset 0 0 5px rgba(87, 184, 120, 0.05);
         }
         .glass-panel {
-            background: rgba(10, 12, 16, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 87, 26, 0.1);
+            background: rgba(13, 19, 16, 0.85);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(167, 209, 181, 0.1);
         }
-        .terminal-text {
-            text-shadow: 0 0 8px rgba(255, 87, 26, 0.4);
-        }
-        .inner-glow-orange {
-            box-shadow: inset 0 0 15px rgba(255, 87, 26, 0.05);
-        }
-        .security-gate {
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .gate-hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(1.1) translateY(-20px);
-        }
-        .dashboard-content {
-            transition: all 1s ease-out;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .dashboard-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        @keyframes scan {
-            from { top: 0; }
-            to { top: 100%; }
-        }
-        .animate-scan {
-            animation: scan 4s linear infinite;
+        .stealth-gradient {
+            background: linear-gradient(135deg, #131a16 0%, #0d1310 100%);
         }
     </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "primary": "#ffb59e",
-                        "surface-tint": "#ffb59e",
-                        "on-primary": "#5e1700",
-                        "on-surface": "#e2e2e8",
-                        "primary-container": "#ff571a",
-                        "surface-container": "#1e2024",
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "label-caps": ["Space Grotesk"],
-                        "headline-xl": ["Space Grotesk"],
-                        "body-base": ["Space Grotesk"],
-                        "data-point": ["Space Grotesk"],
-                        "headline-md": ["Space Grotesk"]
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="font-body-base text-on-surface selection:bg-primary-container selection:text-white min-h-screen">
-<!-- Security Gate Overlay -->
-<div class="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0c10] security-gate" id="securityGate">
-<div class="scanline animate-scan"></div>
-<div class="glass-panel p-12 max-w-md w-full text-center space-y-8 inner-glow-orange border-orange-600/30">
-<div class="space-y-2">
-<span class="material-symbols-outlined text-6xl text-orange-600 mb-4" data-icon="lock_open">lock_open</span>
-<h1 class="text-2xl font-bold tracking-[0.2em] text-orange-500 uppercase">Mission Control</h1>
-<p class="text-[10px] font-label-caps text-slate-500 tracking-widest">ACCESS LEVEL: COMMANDER ALPHA</p>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-white overflow-x-hidden">
+<div class="fixed inset-0 scan-lines opacity-40"></div>
+<div class="fixed inset-0 starfield opacity-10"></div>
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-10 h-20 bg-black/80 backdrop-blur-xl border-b border-secondary/20 shadow-[0_1px_15px_rgba(0,0,0,0.5)]">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<img alt="Mars Alive Logo" class="h-10 w-auto opacity-90 brightness-110" src="https://lh3.googleusercontent.com/aida/ADBb0uhOzysinEjAc3Q_L61jEx8T5zL3fkYq0jfbvPk43sD12oXHfSLB9mJZxYrYlWxmehGlb02Rxig4ihJ84vVdv-8bCaULf4ZphXUGlmpHcV9K7mZ3Gy5lYEIe0vqUGp18xY2-Xy4EaHm5gV6La9BiYMSytcJVAk_YQ6oPNqFdtxKDYq_AHXWlYMgy6DJO7JE3q3NgD7Ka8WGh9kK04OrH75n7-60hqv2R4W15lAN8INZL_ZczLbL_Ym45FgSCdx0Ugdkj4-2OeQL5Fw"/>
+<span class="text-2xl font-black text-primary drop-shadow-[0_0_8px_rgba(230,126,84,0.4)] tracking-widest font-['Space_Grotesk'] uppercase ml-2">ARES COMMAND</span>
 </div>
-<div class="space-y-4">
-<div class="relative">
-<input class="w-full bg-slate-900/50 border border-slate-800 p-4 text-center text-orange-500 font-mono tracking-widest focus:border-orange-600 focus:ring-1 focus:ring-orange-600 outline-none placeholder:text-slate-700" id="accessCode" placeholder="ENTER ACCESS CODE" type="password"/>
-<div class="hidden absolute -bottom-6 left-0 w-full text-[10px] text-red-500 font-bold tracking-tighter uppercase" id="errorMessage">ACCESS DENIED - RETRY REQUIRED</div>
-</div>
-<button class="w-full bg-orange-600/10 border border-orange-600 text-orange-500 py-4 font-['Space_Grotesk'] tracking-widest uppercase text-xs font-bold hover:bg-orange-600 hover:text-black transition-all" onclick="validateAccess()">
-                AUTHORIZE SYSTEM OVERRIDE
-            </button>
-</div>
-<div class="text-[9px] text-slate-600 font-mono">
-            ID: ARES-V-SEC-AUTH // IP: 10.77.24.1
-        </div>
+<div class="hidden md:flex gap-6 ml-10">
+<a class="text-primary border-b-2 border-primary font-black brightness-110 font-['Space_Grotesk'] tracking-tighter uppercase text-sm cursor-pointer active:scale-95 transition-transform" href="#">Telemetry</a>
+<a class="text-slate-400 font-medium hover:text-secondary font-['Space_Grotesk'] tracking-tighter uppercase text-sm cursor-pointer active:scale-95 transition-transform" href="#">Sector Map</a>
+<a class="text-slate-400 font-medium hover:text-secondary font-['Space_Grotesk'] tracking-tighter uppercase text-sm cursor-pointer active:scale-95 transition-transform" href="#">Comms</a>
+<a class="text-slate-400 font-medium hover:text-secondary font-['Space_Grotesk'] tracking-tighter uppercase text-sm cursor-pointer active:scale-95 transition-transform" href="#">Archive</a>
 </div>
 </div>
-<div class="dashboard-content hidden" id="dashboard">
-<!-- TopAppBar -->
-<header class="fixed top-0 z-50 w-full bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)] flex justify-between items-center px-6 py-3">
-<div class="flex items-center space-x-4">
-<span class="text-orange-600 font-bold tracking-tighter text-xl">ARES-V COMMAND</span>
-<span class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-slate-500 border-l border-slate-700 pl-4">Sector 7 Alpha-Prime</span>
-</div>
-<div class="flex items-center space-x-6">
-<div class="hidden md:flex space-x-8">
-<button class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-slate-500 hover:text-orange-400 transition-all">Telemetry</button>
-<button class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-slate-500 hover:text-orange-400 transition-all">Systems</button>
-<button class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-orange-500 font-bold">Admin SEC-07-A</button>
-</div>
-<div class="flex items-center space-x-4">
-<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-orange-400 scale-95 active:scale-90 duration-150" data-icon="settings_input_component">settings_input_component</span>
-<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-orange-400 scale-95 active:scale-90 duration-150" data-icon="notifications">notifications</span>
-<div class="w-8 h-8 rounded-full border border-orange-600/30 overflow-hidden bg-slate-800">
-<img alt="Commander Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv5EGQLbP6AWjknf6w-4MXC2VnVPCO-JENSIsIaG6S0m_yV3RASadEYzC61pYrZkTrcP-Up7nOiDIYAcN6aeOOzyD986Ea21QTN7tsZOYE1jMiKLVOEgDbkSKzwuGigrvrL5AaWPWUBpSTTs5ALCZbvzFEmC8mVPpgOPsOKsoq5UDC8rNxxAC6fWST2zuxDoyBOL1wa49Xfrsw898dYq0FBO38kKea_b2foyouZrsHW_H5cbiTM5oNiYhs1K3jIwQPLSnH5U9aHPk"/>
-</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors" data-icon="settings">settings</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary overflow-hidden shadow-[0_0_10px_rgba(230,126,84,0.3)]">
+<img alt="Commander Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE7iOVXEPIwDyggDLiiRzNXLeNCa3bwSH1DLyq_l67MpFXONeRbOTAsKorgiUseZG1F2EhmwRSRHtrndYcBUnpxG1nCzULc2n4NstBo68KANRgkot-p322kztkJidqmalnYWenHf2SHkAkVLmZ1fm3Jpg02vEP5yseC2Y7vJigySOLSnVJlgmZc_g4KLksm2smpDjGBMWRD4t3EerG2hbxgV8PKdr8vqvmK_zYuUg5EVfPmy11S8fGrhK8Ex1WwIM7rd4UJldRy6E"/>
 </div>
 </div>
 </header>
-<!-- SideNavBar -->
-<aside class="fixed left-0 top-0 h-full w-64 bg-[#0a0c10]/90 backdrop-blur-2xl border-slate-800/40 border-r-[1px] flex flex-col z-40 pt-20">
-<div class="px-6 mb-8">
-<h2 class="text-orange-600 font-black font-['Space_Grotesk'] text-lg tracking-tighter">STRATOS-1</h2>
-<p class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px] text-slate-500">Mars Sector 7 / Operational</p>
-</div>
-<nav class="flex-1">
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="index.html">
-<span class="material-symbols-outlined" data-icon="home_max">home_max</span>
-<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Home</span>
-</a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="gallery.html">
-<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
-<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Gallery</span>
-</a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:bg-slate-800/50 hover:text-slate-300 transition-colors duration-300" href="rover.html">
-<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
-<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Rover</span>
-</a>
-<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-6 duration-300" href="admin.html">
-<span class="material-symbols-outlined" data-icon="security">security</span>
-<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Admin SEC-07-A</span>
-</a>
-</nav>
-<div class="p-6">
-<button class="w-full bg-orange-600/10 border border-orange-600 text-orange-500 py-3 font-['Space_Grotesk'] tracking-widest uppercase text-[10px] font-bold hover:bg-orange-600 hover:text-black transition-all">
-                INITIATE SCAN
-            </button>
-</div>
-</aside>
-<!-- Main Canvas -->
-<main class="pl-64 pt-20 min-h-screen bg-[#0a0c10] relative">
-<div class="scanline"></div>
-<div class="max-w-7xl mx-auto p-10 space-y-12">
-<!-- Centered Logo -->
-<div class="flex justify-center mb-12">
-<img alt="Mars Alive Logo" class="h-24 md:h-32 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugNiodTF6cPUPc8slf-jxKD2YzYBntq-MV-TaRK4Vdo-zKQcGmKN5aqlo8cl6CEhtaHhHRujbTrNtg1-otEOUBCS9t8LYBkam6iXWTHAtQzQCuc0o2ylUVUJS4yjzFcGCRTdTljqBwuNpwbp-7-M9aGgKoxqVtpBi3CbME--K2Bil5NNYa78OMMrmfJWl8mIlF2yxD9BsUgjTb7PLWlvgH9CMX_1WQHY63nW0M-Vx2__0fQ6nQRiMlcwOh5t24rmLzhY_wR1XOEew"/>
-</div>
-<!-- Header -->
-<div class="flex justify-between items-end border-b border-slate-800 pb-8">
+<main class="pt-32 pb-24 px-8 max-w-7xl mx-auto relative z-10">
+<div class="flex flex-col gap-8">
+<section class="flex flex-col md:flex-row justify-between items-end gap-4 border-l-4 border-primary pl-6 py-2">
 <div>
-<h1 class="font-headline-xl text-primary terminal-text uppercase">Mission Control</h1>
-<p class="text-slate-500 font-label-caps mt-2">SECURE ADMINISTRATION PANEL // VERSION 4.0.12</p>
+<span class="font-data-mono text-label-sm text-secondary uppercase tracking-widest">[ SECURITY CLEARANCE: LEVEL 5 ]</span>
+<h1 class="font-display-xl text-display-xl uppercase leading-none mt-2 text-on-background">Mission Control</h1>
 </div>
-<div class="glass-panel p-4 flex items-center space-x-4 inner-glow-orange">
-<span class="material-symbols-outlined text-emerald-500" data-icon="verified_user">verified_user</span>
-<div class="space-y-1">
-<p class="text-[10px] font-label-caps text-slate-500">AUTHORIZED ACCESS</p>
-<p class="text-orange-500 font-mono text-xs">CMD_THORNE_7</p>
+<div class="text-right font-data-mono text-label-sm opacity-60 text-secondary">
+<p>SOL 1,284 | L-TIME: 04:22:18</p>
+<p>LOCATION: JEZERO CRATER ADMIN HUB</p>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-4 flex flex-col gap-8">
+<div class="glass-panel p-panel-padding glow-border flex flex-col gap-6 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary opacity-50"></div>
+<div class="flex justify-between items-center border-b border-outline-variant pb-4">
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary">Secure Gate</h2>
+<span class="material-symbols-outlined text-primary" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-data-mono text-label-sm uppercase text-secondary/70">Master Access Code</label>
+<input class="bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-primary font-data-mono transition-colors" readonly="" type="password" value="MarsAlive1967!"/>
+<p class="text-[10px] text-secondary opacity-80 mt-1 uppercase tracking-tighter">Identity verified: Administrator Alpha-7</p>
+</div>
+<div class="flex items-center gap-4 bg-secondary-container/40 p-4 border border-secondary/20">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+<div>
+<p class="font-data-mono text-label-sm text-secondary uppercase">Uplink Status</p>
+<p class="text-[11px] text-on-secondary-container">Deep Space Network Active</p>
 </div>
 </div>
 </div>
-<!-- Bento Layout Content -->
-<div class="grid grid-cols-12 gap-6">
-<!-- Anomaly Entry Form -->
-<div class="col-span-12 lg:col-span-8 glass-panel p-8 space-y-8 inner-glow-orange">
-<div class="flex items-center justify-between">
-<h2 class="font-headline-md text-on-surface flex items-center space-x-3">
-<span class="material-symbols-outlined text-orange-500" data-icon="add_circle">add_circle</span>
-<span>NEW ANOMALY ENTRY</span>
-</h2>
-<span class="text-[10px] font-label-caps text-slate-600">INPUT-BUFFER-07</span>
+<div class="glass-panel p-panel-padding border-l-2 border-secondary/50">
+<h3 class="font-data-mono text-label-sm uppercase text-secondary mb-4">Network Load</h3>
+<div class="flex flex-col gap-4">
+<div class="h-12 flex gap-1 items-end">
+<div class="w-full bg-secondary/20 h-[20%]"></div>
+<div class="w-full bg-secondary/20 h-[40%]"></div>
+<div class="w-full bg-secondary/20 h-[80%]"></div>
+<div class="w-full bg-secondary h-[60%]"></div>
+<div class="w-full bg-secondary/20 h-[30%]"></div>
+<div class="w-full bg-secondary h-[90%] shadow-[0_0_10px_rgba(87,184,120,0.3)]"></div>
+<div class="w-full bg-secondary/20 h-[50%]"></div>
 </div>
-<form class="grid grid-cols-2 gap-6" id="anomalyForm">
-<div class="col-span-2 space-y-2">
-<label class="text-[10px] font-label-caps text-slate-500">ANOMALY TITLE</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 focus:ring-1 focus:ring-orange-600 outline-none" name="title" placeholder="e.g. CRYSTALLINE FORMATION ALPHA-1" required="" type="text"/>
+<div class="flex justify-between font-data-mono text-[10px] uppercase text-secondary/60">
+<span>Signal Delay: 14.2m</span>
+<span>Packet Loss: 0.00%</span>
 </div>
-<div class="space-y-2">
-<label class="text-[10px] font-label-caps text-slate-500">SOL CYCLE</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="sol" placeholder="422" required="" type="number"/>
 </div>
-<div class="space-y-2">
-<label class="text-[10px] font-label-caps text-slate-500">ROVER UNIT</label>
-<select class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="rover">
-<option>ARES-VII</option>
-<option>PERSISTENCE-IV</option>
-<option>SOJOURNER-MKII</option>
+</div>
+</div>
+<div class="lg:col-span-8">
+<div class="glass-panel p-panel-padding glow-border relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#e67e54]"></div>
+<span class="font-data-mono text-[10px] uppercase tracking-widest text-primary">Recording</span>
+</div>
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-secondary" data-icon="satellite_alt">satellite_alt</span>
+<h2 class="font-headline-lg text-headline-lg uppercase tracking-tight text-on-background">Anomaly Transmit Terminal</h2>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-8">
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="font-data-mono text-label-sm uppercase text-secondary/60">Anomaly Title</label>
+<input class="bg-surface-container-low border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-headline-lg uppercase placeholder:opacity-20 py-4 px-0" placeholder="e.g. MONOLITH_SIG-01" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-data-mono text-label-sm uppercase text-secondary/60">Sol (Martian Day)</label>
+<input class="bg-surface-container-low border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-data-mono py-2 px-0" placeholder="1284" type="number"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-data-mono text-label-sm uppercase text-secondary/60">Rover Unit</label>
+<select class="bg-surface-container-low border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-data-mono py-2 px-0 appearance-none cursor-pointer">
+<option>PERSEVERANCE_01</option>
+<option>CURIOSITY_02</option>
+<option>INGENUITY_V4</option>
+<option>ZHU_RONG_X</option>
 </select>
 </div>
-<div class="space-y-2">
-<label class="text-[10px] font-label-caps text-slate-500">DISCOVERED BY</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="lead" placeholder="Dr. Elias Thorne" required="" type="text"/>
+<div class="flex flex-col gap-2">
+<label class="font-data-mono text-label-sm uppercase text-secondary/60">Discovered By</label>
+<input class="bg-surface-container-low border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-data-mono py-2 px-0" placeholder="OPERATOR_XRAY" type="text"/>
 </div>
-<div class="space-y-2">
-<label class="text-[10px] font-label-caps text-slate-500">CREDITS / SOURCE</label>
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="source" placeholder="NASA/JPL-Caltech" type="text"/>
+<div class="flex flex-col gap-2">
+<label class="font-data-mono text-label-sm uppercase text-secondary/60">Credit / Source</label>
+<input class="bg-surface-container-low border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-data-mono py-2 px-0" placeholder="NASA / JPL / ESA" type="text"/>
 </div>
-<div class="col-span-2 space-y-2">
-<label class="text-[10px] font-label-caps text-slate-500">DESCRIPTION (SCIENTIFIC OVERVIEW)</label>
-<textarea class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-data-point focus:border-orange-600 outline-none" name="description" placeholder="Enter detailed geological or atmospheric analysis..." rows="4"></textarea>
+<div class="flex flex-col gap-4 md:col-span-2 mt-4">
+<div class="flex justify-between items-center">
+<label class="font-data-mono text-label-sm uppercase text-secondary/60">Visual Feed Multi-Support (URLs)</label>
+<button class="text-[10px] uppercase font-bold text-primary flex items-center gap-1 hover:brightness-125 transition-all" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add Field
+                                </button>
 </div>
-<div class="col-span-2 space-y-2">
-<label class="text-[10px] font-label-caps text-slate-500">HIGH-RESOLUTION IMAGE URL</label>
-<div class="relative">
-<input class="w-full bg-slate-900/50 border border-slate-800 p-3 text-on-surface font-mono text-xs focus:border-orange-600 outline-none pr-12" id="imageInput" name="imageUrl" placeholder="https://mars.nasa.gov/system/resources/..." type="text"/>
-<span class="material-symbols-outlined absolute right-3 top-3 text-slate-600" data-icon="link">link</span>
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[10px] text-secondary/40">01</span>
+<input class="flex-grow bg-surface-container-lowest border border-outline-variant focus:border-secondary focus:ring-0 text-on-surface text-[12px] font-data-mono py-2 px-4 rounded-lg" placeholder="https://mars.nasa.gov/raw_images/..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[10px] text-secondary/40">02</span>
+<input class="flex-grow bg-surface-container-lowest border border-outline-variant focus:border-secondary focus:ring-0 text-on-surface text-[12px] font-data-mono py-2 px-4 rounded-lg" placeholder="https://mars.nasa.gov/raw_images/..." type="text"/>
 </div>
 </div>
-<div class="col-span-2 flex justify-end pt-4">
-<button class="bg-primary text-on-primary px-8 py-3 font-label-caps hover:brightness-110 active:scale-95 transition-all" type="submit">
-                                SUBMIT TO ARCHIVE
-                            </button>
+</div>
+<div class="md:col-span-2 mt-8 pt-8 border-t border-outline-variant/30">
+<button class="w-full bg-primary-container hover:brightness-110 transition-all duration-300 py-6 flex items-center justify-center gap-4 group rounded-lg shadow-[0_4px_20px_rgba(230,126,84,0.2)]" type="button">
+<span class="font-headline-lg uppercase text-on-primary-container font-black tracking-widest group-active:scale-95 transition-transform">Transmit to Hub</span>
+<span class="material-symbols-outlined text-on-primary-container animate-pulse" data-icon="send">send</span>
+</button>
+<div class="mt-4 flex justify-between font-data-mono text-[10px] text-secondary/50 uppercase">
+<span>Encrypted via AES-256</span>
+<span>Dest: HUB_CENTRAL_MARS</span>
+</div>
 </div>
 </form>
 </div>
-<!-- Live JSON Preview -->
-<div class="col-span-12 lg:col-span-4 flex flex-col space-y-6">
-<div class="glass-panel p-6 flex-1 inner-glow-orange border-l-4 border-l-orange-600">
-<div class="flex items-center justify-between mb-4">
-<h3 class="text-[10px] font-label-caps text-orange-500">RAW_DATA_PREVIEW.JSON</h3>
-<div class="flex space-x-1">
-<div class="w-2 h-2 rounded-full bg-red-500/50"></div>
-<div class="w-2 h-2 rounded-full bg-orange-500/50"></div>
-<div class="w-2 h-2 rounded-full bg-green-500/50"></div>
 </div>
 </div>
-<div class="bg-slate-950 p-4 rounded border border-slate-800/50 font-mono text-[11px] leading-relaxed text-emerald-500/80 h-full overflow-hidden">
-<p class="opacity-50" id="jsonStreamLabel">// REAL-TIME STREAM READY</p>
-<pre class="whitespace-pre-wrap break-all" id="jsonPreview">{
-  "status": "AWAITING_INPUT",
-  "buffer": "SEC-07-ALPHA"
-}</pre>
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+<div class="glass-panel p-6 flex flex-col gap-2 border-b-2 border-b-transparent hover:border-b-primary transition-all duration-500">
+<span class="font-data-mono text-[10px] text-secondary/60 uppercase">Total Transmissions</span>
+<p class="text-3xl font-black text-on-surface font-['Space_Grotesk']">14,209</p>
 </div>
+<div class="glass-panel p-6 flex flex-col gap-2 border-b-2 border-b-transparent hover:border-b-secondary transition-all duration-500">
+<span class="font-data-mono text-[10px] text-secondary/60 uppercase">Active Rovers</span>
+<p class="text-3xl font-black text-secondary font-['Space_Grotesk']">06</p>
 </div>
-<div class="glass-panel p-6 inner-glow-orange relative overflow-hidden group">
-<div class="relative z-10">
-<p class="text-[10px] font-label-caps text-slate-500 mb-2">SYSTEM STATUS</p>
-<div class="flex items-center space-x-2 mb-4">
-<div class="w-3 h-3 rounded-full bg-orange-600 animate-pulse shadow-[0_0_10px_rgba(255,87,26,0.5)]"></div>
-<span class="text-xs font-mono text-orange-500">UPLINK: ACTIVE</span>
+<div class="glass-panel p-6 flex flex-col gap-2 border-b-2 border-b-transparent hover:border-b-primary transition-all duration-500">
+<span class="font-data-mono text-[10px] text-secondary/60 uppercase">Anomaly Delta</span>
+<p class="text-3xl font-black text-primary font-['Space_Grotesk']">+12.4%</p>
 </div>
-<div class="space-y-2">
-<div class="h-1 bg-slate-800 rounded-full overflow-hidden">
-<div class="w-[88%] h-full bg-orange-600"></div>
+<div class="glass-panel p-6 flex flex-col gap-2 border-b-2 border-b-transparent hover:border-b-secondary transition-all duration-500">
+<span class="font-data-mono text-[10px] text-secondary/60 uppercase">Storage Capacity</span>
+<p class="text-3xl font-black text-on-surface font-['Space_Grotesk'] opacity-80">84.2 TB</p>
 </div>
-<div class="flex justify-between text-[10px] font-mono text-slate-600">
-<span>BANDWIDTH</span>
-<span>88% CAP</span>
+</section>
 </div>
-</div>
-</div>
-<div class="absolute -right-4 -bottom-4 opacity-10 scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
-<span class="material-symbols-outlined text-[120px]" data-icon="rocket">rocket</span>
-</div>
-</div>
-</div>
-<!-- Archives Table -->
-<div class="col-span-12 glass-panel overflow-hidden inner-glow-orange">
-<div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/20">
-<div class="flex items-center space-x-4">
-<span class="material-symbols-outlined text-orange-500" data-icon="database">database</span>
-<h2 class="font-headline-md">MISSION ARCHIVES</h2>
-</div>
-<div class="flex space-x-2">
-<button class="px-3 py-1 border border-slate-700 text-slate-500 hover:text-red-500 transition-colors text-[10px] font-label-caps" onclick="clearArchives()">PURGE</button>
-<button class="px-3 py-1 border border-slate-700 text-slate-500 hover:text-white transition-colors">
-<span class="material-symbols-outlined text-sm align-middle" data-icon="filter_list">filter_list</span>
-</button>
-</div>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left font-data-point">
-<thead class="bg-slate-900/50 text-slate-500 text-[10px] font-label-caps uppercase">
-<tr>
-<th class="px-6 py-4">Status</th>
-<th class="px-6 py-4">Title</th>
-<th class="px-6 py-4">Sol</th>
-<th class="px-6 py-4">Rover</th>
-<th class="px-6 py-4">Lead</th>
-<th class="px-6 py-4 text-right">Actions</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-800/50" id="archivesBody">
-<!-- Dynamic Content -->
-</tbody>
-</table>
-</div>
-<div class="p-4 bg-slate-900/30 flex justify-between items-center text-[10px] font-label-caps text-slate-600" id="paginationLabel">
-<span>Showing 0 entries</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Decorative Background Elements -->
-<div class="absolute top-[10%] left-[5%] w-px h-64 bg-gradient-to-b from-orange-600/50 to-transparent opacity-20"></div>
-<div class="absolute top-[40%] right-[10%] w-px h-96 bg-gradient-to-b from-orange-600/50 to-transparent opacity-20"></div>
 </main>
-<!-- Floating HUD Elements -->
-<div class="fixed bottom-8 right-8 z-50 flex flex-col items-end space-y-4">
-<div class="glass-panel p-3 px-6 rounded-full flex items-center space-x-4 border-orange-600/30">
-<span class="text-[10px] font-label-caps text-orange-500 tracking-tighter">LAT: 18.4N / LONG: 77.4E</span>
-<div class="w-px h-4 bg-slate-800"></div>
-<span class="text-[10px] font-label-caps text-slate-500">TEMP: -62°C</span>
+<footer class="w-full py-6 px-12 flex flex-col md:flex-row justify-between items-center gap-4 bg-black/90 backdrop-blur-md border-t border-secondary/20">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] text-[10px] tracking-[0.2em] font-light text-primary">© 2084 MARTIAN COLONIAL AUTHORITY | SEC-07-A</span>
+<div class="hidden md:flex gap-4">
+<a class="font-['Space_Grotesk'] text-[10px] tracking-[0.2em] font-light text-slate-500 uppercase hover:text-secondary transition-colors" href="#">Admin Access</a>
+<a class="font-['Space_Grotesk'] text-[10px] tracking-[0.2em] font-light text-slate-500 uppercase hover:text-secondary transition-colors" href="#">System Logs</a>
+<a class="font-['Space_Grotesk'] text-[10px] tracking-[0.2em] font-light text-slate-500 uppercase hover:text-secondary transition-colors" href="#">Technical Credits</a>
 </div>
 </div>
+<div class="flex items-center gap-4">
+<span class="w-3 h-3 rounded-full bg-secondary shadow-[0_0_10px_rgba(87,184,120,0.8)] animate-pulse"></span>
+<span class="font-data-mono text-[10px] text-secondary uppercase tracking-widest">All Systems Nominal</span>
 </div>
-<script>
-    const ACCESS_CODE = 'MarsAlive1967!';
-
-    function validateAccess() {
-        const input = document.getElementById('accessCode');
-        const gate = document.getElementById('securityGate');
-        const dashboard = document.getElementById('dashboard');
-        const error = document.getElementById('errorMessage');
-
-        if (input.value === ACCESS_CODE) {
-            gate.classList.add('gate-hidden');
-            setTimeout(() => {
-                gate.classList.add('hidden');
-                dashboard.classList.remove('hidden');
-                setTimeout(() => {
-                    dashboard.classList.add('dashboard-visible');
-                    renderArchives();
-                }, 50);
-            }, 800);
-        } else {
-            error.classList.remove('hidden');
-            input.classList.add('border-red-600');
-            setTimeout(() => {
-                error.classList.add('hidden');
-                input.classList.remove('border-red-600');
-            }, 3000);
-        }
-    }
-
-    // Allow Enter key to trigger login
-    document.getElementById('accessCode').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') validateAccess();
-    });
-
-    // Form Handling & Local Storage
-    const anomalyForm = document.getElementById('anomalyForm');
-    const jsonPreview = document.getElementById('jsonPreview');
-    const jsonStreamLabel = document.getElementById('jsonStreamLabel');
-
-    anomalyForm.addEventListener('input', (e) => {
-        const formData = new FormData(anomalyForm);
-        const data = Object.fromEntries(formData.entries());
-        data.id = "ANOM-" + Math.floor(Math.random() * 9000 + 1000);
-        data.timestamp = new Date().toISOString();
-        jsonPreview.textContent = JSON.stringify(data, null, 2);
-        jsonStreamLabel.textContent = "// STREAMING BUFFER...";
-    });
-
-    anomalyForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(anomalyForm);
-        const entry = Object.fromEntries(formData.entries());
-        entry.id = "ANOM-" + Math.floor(Math.random() * 9000 + 1000);
-        entry.timestamp = new Date().toISOString();
-        entry.status = "Pending";
-
-        let archives = JSON.parse(localStorage.getItem('mars_archives') || '[]');
-        archives.unshift(entry);
-        localStorage.setItem('mars_archives', JSON.stringify(archives));
-
-        anomalyForm.reset();
-        jsonPreview.textContent = '{\n  "status": "TRANSMISSION_COMPLETE",\n  "id": "' + entry.id + '"\n}';
-        jsonStreamLabel.textContent = "// REAL-TIME STREAM READY";
-        renderArchives();
-    });
-
-    function renderArchives() {
-        const archives = JSON.parse(localStorage.getItem('mars_archives') || '[]');
-        const body = document.getElementById('archivesBody');
-        const label = document.getElementById('paginationLabel');
-        
-        body.innerHTML = '';
-        
-        if (archives.length === 0) {
-            body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-600 font-mono text-xs uppercase">No mission data recorded in local buffer</td></tr>';
-            label.innerHTML = '<span>Showing 0 entries</span>';
-            return;
-        }
-
-        archives.forEach((entry, index) => {
-            const row = document.createElement('tr');
-            row.className = 'hover:bg-orange-600/5 transition-colors group border-b border-slate-800/50';
-            row.innerHTML = `
-                <td class="px-6 py-4">
-                    <span class="inline-block w-2 h-2 rounded-full ${index === 0 ? 'bg-orange-500' : 'bg-emerald-500'} mr-2"></span>
-                    <span class="text-xs ${index === 0 ? 'text-orange-500' : 'text-emerald-500'}">${index === 0 ? 'Pending' : 'Verified'}</span>
-                </td>
-                <td class="px-6 py-4 font-medium text-on-surface">${entry.title}</td>
-                <td class="px-6 py-4 text-slate-400">${entry.sol}</td>
-                <td class="px-6 py-4 text-slate-400">${entry.rover}</td>
-                <td class="px-6 py-4 text-slate-400">${entry.lead}</td>
-                <td class="px-6 py-4 text-right">
-                    <button class="text-slate-600 hover:text-orange-500 transition-colors">
-                        <span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
-                    </button>
-                </td>
-            `;
-            body.appendChild(row);
-        });
-
-        label.innerHTML = `<span>Showing 1-${archives.length} of ${archives.length} entries</span>`;
-    }
-
-    function clearArchives() {
-        if(confirm('PURGE LOCAL BUFFER? This action is irreversible.')) {
-            localStorage.removeItem('mars_archives');
-            renderArchives();
-        }
-    }
-</script>
+</footer>
 </body></html>
