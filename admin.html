@@ -7,7 +7,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -93,7 +92,13 @@
             left: 0;
             z-index: 100;
             pointer-events: none;
-            box-shadow: 0 0 10px rgba(255, 87, 26, 0.2);
+            animation: scan 8s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
         }
         .starfield {
             background-image: 
@@ -106,38 +111,45 @@
             background-size: 200px 200px;
             opacity: 0.2;
         }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        .animate-flicker {
+            animation: flicker 0.1s infinite;
+        }
     </style>
 </head>
 <body class="font-body-base text-on-background min-h-screen selection:bg-primary-container selection:text-white">
 <div class="fixed inset-0 starfield pointer-events-none"></div>
 <div class="scanline"></div>
 <!-- Section 1: Security Gate (Overlay for focus) -->
-<!-- Note: In a real dashboard, this would hide the content. Here it's the entry point. -->
-<div class="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-sm" id="security-gate">
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-sm transition-opacity duration-700" id="security-gate">
 <div class="w-full max-w-md p-8 border border-outline-variant bg-surface-container/60 backdrop-blur-xl rounded-none shadow-2xl relative overflow-hidden group">
 <div class="absolute top-0 left-0 w-full h-1 bg-primary-container/50"></div>
 <div class="flex flex-col items-center mb-8">
-<span class="material-symbols-outlined text-primary-container text-5xl mb-4" data-icon="shield_lock">shield_lock</span>
+<span class="material-symbols-outlined text-primary-container text-5xl mb-4" data-icon="shield_lock" id="lock-icon">shield_lock</span>
 <h1 class="font-headline-md text-headline-md text-primary-container tracking-widest uppercase">MISSION CONTROL ACCESS</h1>
 <p class="font-label-caps text-label-caps text-outline uppercase mt-2">Restricted Area: Sector 07-A</p>
 </div>
 <div class="space-y-6">
 <div>
 <label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Mission ID</label>
-<input class="w-full bg-surface-container-highest/30 border-b border-outline-variant text-on-surface px-4 py-3 focus:outline-none focus:border-primary-container transition-colors font-data-point" placeholder="CMD-ALPHA-01" type="text"/>
+<input class="w-full bg-surface-container-highest/30 border-b border-outline-variant text-on-surface px-4 py-3 focus:outline-none focus:border-primary-container transition-colors font-data-point" id="mission-id" placeholder="CMD-ALPHA-01" type="text" value="CMD-ALPHA-01"/>
 </div>
 <div>
 <label class="block font-label-caps text-label-caps text-primary mb-2 uppercase">Access Code</label>
-<input class="w-full bg-surface-container-highest/30 border-b border-outline-variant text-on-surface px-4 py-3 focus:outline-none focus:border-primary-container transition-colors font-data-point" type="password" value="MarsAlive1967!"/>
+<input class="w-full bg-surface-container-highest/30 border-b border-outline-variant text-on-surface px-4 py-3 focus:outline-none focus:border-primary-container transition-colors font-data-point" id="access-code" type="password" value="MarsAlive1967!"/>
 </div>
 <div class="flex gap-4">
-<button class="flex-1 bg-primary-container text-on-primary-container font-label-caps text-label-caps py-4 transition-all hover:brightness-110 active:scale-95 uppercase tracking-widest">
+<button class="flex-1 bg-primary-container text-on-primary-container font-label-caps text-label-caps py-4 transition-all hover:brightness-110 active:scale-95 uppercase tracking-widest" onclick="handleInitialize()">
                         Initialize Link
                     </button>
 </div>
 <div class="pt-4 border-t border-outline-variant/30 flex justify-between items-center">
-<button class="text-error font-label-caps text-label-caps hover:underline uppercase tracking-tighter">System Override</button>
-<span class="text-secondary font-label-caps text-label-caps flex items-center gap-1">
+<button class="text-error font-label-caps text-label-caps hover:underline uppercase tracking-tighter" id="override-btn" onclick="handleOverride()">System Override</button>
+<span class="text-secondary font-label-caps text-label-caps flex items-center gap-1" id="access-status">
 <span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
                         Status: Nominal
                     </span>
@@ -150,9 +162,9 @@
 <div class="flex items-center gap-4">
 <span class="text-xl font-bold text-orange-600 tracking-widest font-['Space_Grotesk'] uppercase">MISSION CONTROL</span>
 <div class="hidden md:flex gap-6 ml-10">
-<a class="font-['Space_Grotesk'] text-orange-500 border-b-2 border-orange-500 tracking-tighter uppercase transition-all duration-300 ease-in-out px-2 py-1" href="#">Dashboard</a>
-<a class="font-['Space_Grotesk'] text-slate-400 hover:text-orange-400 hover:bg-white/5 tracking-tighter uppercase transition-all duration-300 ease-in-out px-2 py-1" href="#">Discovery Log</a>
-<a class="font-['Space_Grotesk'] text-slate-400 hover:text-orange-400 hover:bg-white/5 tracking-tighter uppercase transition-all duration-300 ease-in-out px-2 py-1" href="#">Archives</a>
+<a class="font-['Space_Grotesk'] text-orange-500 border-b-2 border-orange-500 tracking-tighter uppercase transition-all duration-300 ease-in-out px-2 py-1" href="index.html">Dashboard</a>
+<a class="font-['Space_Grotesk'] text-slate-400 hover:text-orange-400 hover:bg-white/5 tracking-tighter uppercase transition-all duration-300 ease-in-out px-2 py-1" href="discovery.html">Discovery Log</a>
+<a class="font-['Space_Grotesk'] text-slate-400 hover:text-orange-400 hover:bg-white/5 tracking-tighter uppercase transition-all duration-300 ease-in-out px-2 py-1" href="archives.html">Archives</a>
 </div>
 </div>
 <div class="flex items-center gap-4">
@@ -174,22 +186,22 @@
 </div>
 </div>
 <div class="flex-1 space-y-1">
-<div class="group flex items-center px-6 py-3 text-orange-500 bg-orange-500/10 border-r-2 border-orange-500 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer">
+<a class="group flex items-center px-6 py-3 text-orange-500 bg-orange-500/10 border-r-2 border-orange-500 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer" href="index.html">
 <span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
                 Dashboard
-            </div>
-<div class="group flex items-center px-6 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-orange-300 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer">
+            </a>
+<a class="group flex items-center px-6 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-orange-300 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer" href="discovery.html">
 <span class="material-symbols-outlined mr-3" data-icon="biotech">biotech</span>
                 Discovery Log
-            </div>
-<div class="group flex items-center px-6 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-orange-300 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer">
+            </a>
+<a class="group flex items-center px-6 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-orange-300 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer" href="terminal.html">
 <span class="material-symbols-outlined mr-3" data-icon="terminal">terminal</span>
                 Live Terminal
-            </div>
-<div class="group flex items-center px-6 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-orange-300 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer">
+            </a>
+<a class="group flex items-center px-6 py-3 text-slate-500 hover:bg-slate-800/50 hover:text-orange-300 font-['Space_Grotesk'] text-sm font-medium transition-colors cursor-pointer" href="archives.html">
 <span class="material-symbols-outlined mr-3" data-icon="inventory_2">inventory_2</span>
                 Archives
-            </div>
+            </a>
 </div>
 <div class="px-6 space-y-4">
 <button class="w-full border border-primary-container/50 text-primary-container py-3 font-label-caps text-label-caps hover:bg-primary-container/10 transition-colors uppercase tracking-widest">
@@ -200,7 +212,7 @@
 <span class="material-symbols-outlined mr-2 text-sm" data-icon="verified_user">verified_user</span>
                     Security
                 </div>
-<div class="flex items-center text-slate-500 hover:text-orange-300 font-['Space_Grotesk'] text-xs py-2 cursor-pointer">
+<div class="flex items-center text-slate-500 hover:text-orange-300 font-['Space_Grotesk'] text-xs py-2 cursor-pointer" onclick="window.location.reload()">
 <span class="material-symbols-outlined mr-2 text-sm" data-icon="logout">logout</span>
                     Logout
                 </div>
@@ -295,7 +307,7 @@
 <textarea class="w-full bg-background/50 border border-outline-variant/50 focus:border-primary-container text-on-surface p-3 transition-all focus:ring-0" placeholder="Input spectral analysis and visual observation notes..." rows="4"></textarea>
 </div>
 <div class="col-span-2 flex justify-end gap-4">
-<button class="px-8 py-3 border border-outline-variant text-outline font-label-caps text-label-caps uppercase tracking-widest hover:bg-outline-variant/10 transition-colors" type="button">Clear Deck</button>
+<button class="px-8 py-3 border border-outline-variant text-outline font-label-caps text-label-caps uppercase tracking-widest hover:bg-outline-variant/10 transition-colors" type="reset">Clear Deck</button>
 <button class="px-8 py-3 bg-primary-container text-on-primary-container font-label-caps text-label-caps uppercase tracking-widest shadow-[0_0_20px_rgba(255,87,26,0.2)] hover:shadow-[0_0_30px_rgba(255,87,26,0.4)] transition-all" type="submit">Transmit Data</button>
 </div>
 </form>
@@ -310,7 +322,7 @@
 </div>
 <div class="flex-1 p-4 font-mono text-[11px] overflow-hidden">
 <div class="bg-black/60 p-4 rounded-none border border-outline-variant/20 h-full text-secondary/80 overflow-y-auto leading-relaxed">
-<pre>{
+<pre id="json-preview">{
   "packet_id": "MARS-77-DELTA",
   "origin": "JEZERO-CRATER",
   "payload": {
@@ -331,8 +343,8 @@
 </div>
 </div>
 <div class="p-6 space-y-3">
-<button class="w-full py-4 bg-[#24292e] text-white flex items-center justify-center gap-2 font-label-caps text-label-caps hover:bg-black transition-colors uppercase tracking-widest border border-white/10">
-<span class="material-symbols-outlined" data-icon="cloud_upload">cloud_upload</span>
+<button class="w-full py-4 bg-[#24292e] text-white flex items-center justify-center gap-2 font-label-caps text-label-caps hover:bg-black transition-colors uppercase tracking-widest border border-white/10 group" id="github-export-btn">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="cloud_upload">cloud_upload</span>
                         GITHUB EXPORT
                     </button>
 <p class="text-[10px] text-outline text-center uppercase tracking-tighter opacity-60">Last sync: 04:12 minutes ago</p>
@@ -371,7 +383,7 @@
 <td class="p-4">
 <div class="flex items-center gap-3">
 <div class="w-12 h-12 bg-surface-variant overflow-hidden">
-<img alt="Martian terrain with strange rock formation" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="close-up of rocky martian landscape with reddish dust and interesting jagged geological structures under dim orange lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAes_WAGNJ-bOgrFIMggGBIOgn_Qef1SmFXSITaQGRwoSD0ue7FwhkS6bWTrBeoC7aU_BRywkVWbLcLlvTfoi9QpLdcLx_UL03Qd-yJc4aYUudiPNzbZCn6hI5bTn6WcNY64xtTqaCmtik1AHGka4X-UQd6isOegkZQ5v2g3S2DD2rAK9Hi9ngNxaIMl1-E0yTG1O0i2YbmIRaJMxchG0gwj8Wh1VF96CuYA3QXdyziGZzJTtTxj7KbuIDCnNRVXw6wOH-t19cPdKw"/>
+<img alt="Martian terrain" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAes_WAGNJ-bOgrFIMggGBIOgn_Qef1SmFXSITaQGRwoSD0ue7FwhkS6bWTrBeoC7aU_BRywkVWbLcLlvTfoi9QpLdcLx_UL03Qd-yJc4aYUudiPNzbZCn6hI5bTn6WcNY64xtTqaCmtik1AHGka4X-UQd6isOegkZQ5v2g3S2DD2rAK9Hi9ngNxaIMl1-E0yTG1O0i2YbmIRaJMxchG0gwj8Wh1VF96CuYA3QXdyziGZzJTtTxj7KbuIDCnNRVXw6wOH-t19cPdKw"/>
 </div>
 <span class="font-medium">Basaltic Crystalline Drift</span>
 </div>
@@ -390,7 +402,7 @@
 <td class="p-4">
 <div class="flex items-center gap-3">
 <div class="w-12 h-12 bg-surface-variant overflow-hidden">
-<img alt="Dust storm on Mars horizon" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="distant view of a massive dust storm rising over a barren martian horizon with dramatic silhouettes and dark atmospheric mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ30OMOYD1qNl6_9KNlb_nYqb3YHPTKxDn7r9SJHm2fNKpKDtqKWEncydevXGqHwR42Rnq7Ohn2fufm7VQxQ1PP2h9SQkY-_nSeYUQOBy9MoCshETBqLeIct93ot46Sm6mV0Vh9YzUB4NWlJCD8y1KGHya4ki37DyudyrxPbLmoelXZzFK4BsARQZqA0Gr8oRhdKD6AiuyyhKitL9P6R69JNzeve2U8lu-ClFaw4X8NQPdbS5_2qHReA_ouz0UWl2mhwhjY7Gt6Og"/>
+<img alt="Dust storm" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ30OMOYD1qNl6_9KNlb_nYqb3YHPTKxDn7r9SJHm2fNKpKDtqKWEncydevXGqHwR42Rnq7Ohn2fufm7VQxQ1PP2h9SQkY-_nSeYUQOBy9MoCshETBqLeIct93ot46Sm6mV0Vh9YzUB4NWlJCD8y1KGHya4ki37DyudyrxPbLmoelXZzFK4BsARQZqA0Gr8oRhdKD6AiuyyhKitL9P6R69JNzeve2U8lu-ClFaw4X8NQPdbS5_2qHReA_ouz0UWl2mhwhjY7Gt6Og"/>
 </div>
 <span class="font-medium">Synoptic Dust Tower</span>
 </div>
@@ -420,4 +432,75 @@
 </div>
 </div>
 </div>
+<script>
+        function handleInitialize() {
+            const accessCode = document.getElementById('access-code').value;
+            const gate = document.getElementById('security-gate');
+            const status = document.getElementById('access-status');
+            
+            if (accessCode === 'MarsAlive1967!') {
+                status.innerHTML = '<span class="material-symbols-outlined text-sm text-secondary" data-icon="verified">verified</span> Status: Authenticated';
+                gate.classList.add('opacity-0');
+                setTimeout(() => gate.style.display = 'none', 700);
+            } else {
+                status.innerHTML = '<span class="material-symbols-outlined text-sm text-error" data-icon="error">error</span> Status: Denied';
+                status.classList.add('animate-shake');
+                setTimeout(() => status.classList.remove('animate-shake'), 500);
+            }
+        }
+
+        function handleOverride() {
+            const btn = document.getElementById('override-btn');
+            const icon = document.getElementById('lock-icon');
+            
+            btn.classList.add('animate-flicker');
+            icon.innerText = 'warning';
+            icon.classList.add('text-error', 'animate-pulse');
+            
+            setTimeout(() => {
+                document.getElementById('access-code').value = 'MarsAlive1967!';
+                btn.classList.remove('animate-flicker');
+                handleInitialize();
+            }, 1200);
+        }
+
+        document.getElementById('github-export-btn').addEventListener('click', function() {
+            const icon = this.querySelector('.material-symbols-outlined');
+            icon.innerText = 'sync';
+            icon.classList.add('animate-spin');
+            this.innerText = 'EXPORTING...';
+            
+            setTimeout(() => {
+                icon.innerText = 'check_circle';
+                icon.classList.remove('animate-spin');
+                this.innerText = 'EXPORT COMPLETE';
+                setTimeout(() => {
+                    icon.innerText = 'cloud_upload';
+                    this.innerHTML = `<span class="material-symbols-outlined" data-icon="cloud_upload">cloud_upload</span> GITHUB EXPORT`;
+                }, 2000);
+            }, 1500);
+        });
+
+        // Form Submission visual logic
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = 'TRANSMITTING...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerText = 'TRANSMISSION SENT';
+                submitBtn.classList.replace('bg-primary-container', 'bg-secondary-container');
+                submitBtn.classList.replace('text-on-primary-container', 'text-on-secondary-container');
+                setTimeout(() => {
+                    submitBtn.innerText = originalText;
+                    submitBtn.classList.replace('bg-secondary-container', 'bg-primary-container');
+                    submitBtn.classList.replace('text-on-secondary-container', 'text-on-primary-container');
+                    submitBtn.disabled = false;
+                    e.target.reset();
+                }, 2000);
+            }, 1500);
+        });
+    </script>
 </body></html>
