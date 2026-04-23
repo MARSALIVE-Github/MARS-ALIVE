@@ -138,21 +138,6 @@
 </head>
 <body class="bg-background text-on-background font-body-base antialiased selection:bg-primary-container selection:text-white">
 <div id="starfield"></div>
-<script>
-    const starfield = document.getElementById('starfield');
-    for (let i = 0; i < 200; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2 + 1 + 'px';
-        star.style.width = size;
-        star.style.height = size;
-        star.style.left = Math.random() * 100 + 'vw';
-        star.style.top = Math.random() * 100 + 'vh';
-        star.style.animationDuration = Math.random() * 30 + 20 + 's';
-        star.style.opacity = Math.random();
-        starfield.appendChild(star);
-    }
-</script>
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full border-b border-primary/20 bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 z-50 shadow-[0_0_20px_rgba(255,77,0,0.1)]">
 <a class="text-2xl font-black text-primary tracking-tighter italic" href="index.html">MARS ALIVE</a>
@@ -173,27 +158,27 @@
 <aside class="fixed left-0 h-full w-20 hover:w-64 border-r border-primary/10 bg-zinc-950/40 backdrop-blur-md transition-all duration-500 group flex flex-col py-20 z-40 overflow-hidden">
 <div class="px-6 mb-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 <div class="font-['Space_Grotesk'] text-[10px] uppercase font-medium text-primary">SECTOR 7-G</div>
-<div class="font-['Space_Grotesk'] text-[8px] uppercase font-light text-zinc-500">LOCAL TIME: 24:40 MSD</div>
+<div class="font-['Space_Grotesk'] text-[8px] uppercase font-light text-zinc-500" id="local-time">LOCAL TIME: 00:00 MSD</div>
 </div>
 <nav class="flex-1 space-y-2">
 <a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="analysis.html">
-<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span class="material-symbols-outlined">biotech</span>
 <span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">BIOSENSORS</span>
 </a>
 <a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="rover.html">
-<span class="material-symbols-outlined" data-icon="airwave">airwave</span>
+<span class="material-symbols-outlined">airwave</span>
 <span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">ATMOSPHERICS</span>
 </a>
 <a class="flex items-center px-6 py-4 text-primary bg-primary/10 border-r-4 border-primary cursor-crosshair" href="gallery.html">
-<span class="material-symbols-outlined" data-icon="terrain">terrain</span>
+<span class="material-symbols-outlined">terrain</span>
 <span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">GEO-SCAN</span>
 </a>
 <a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="index.html">
-<span class="material-symbols-outlined" data-icon="radar">radar</span>
+<span class="material-symbols-outlined">radar</span>
 <span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">MISSION HUB</span>
 </a>
 <a class="flex items-center px-6 py-4 text-zinc-600 hover:bg-primary/5 hover:text-white transition-all cursor-crosshair" href="gallery.html">
-<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+<span class="material-symbols-outlined">emergency_home</span>
 <span class="ml-4 font-['Space_Grotesk'] text-[10px] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">ANOMALIES</span>
 </a>
 </nav>
@@ -203,11 +188,11 @@
         </button>
 <div class="flex flex-col space-y-2">
 <a class="flex items-center px-4 py-2 text-zinc-600 hover:text-primary cursor-crosshair" href="gallery.html">
-<span class="material-symbols-outlined text-sm" data-icon="folder_open">folder_open</span>
+<span class="material-symbols-outlined text-sm">folder_open</span>
 <span class="ml-4 font-['Space_Grotesk'] text-[9px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">ARCHIVES</span>
 </a>
 <a class="flex items-center px-4 py-2 text-zinc-600 hover:text-primary cursor-crosshair" href="index.html">
-<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
+<span class="material-symbols-outlined text-sm">terminal</span>
 <span class="ml-4 font-['Space_Grotesk'] text-[9px] uppercase opacity-0 group-hover:opacity-100 transition-opacity">PROTOCOLS</span>
 </a>
 </div>
@@ -217,161 +202,40 @@
 <main class="ml-20 pt-24 pb-12 px-8 min-h-screen relative z-10">
 <!-- Dashboard Header -->
 <div class="mb-12 max-w-7xl mx-auto">
-<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2">ANOMALY ARCHIVE</h1>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2 uppercase">Anomaly Archive</h1>
 <p class="font-body-base text-on-surface-variant max-w-2xl">Classified biological and geological signatures detected within Hellas Planitia. All data points are synchronised with the Deep Space Network.</p>
 </div>
 <!-- Filter Bar -->
 <div class="max-w-7xl mx-auto mb-10 p-6 bg-surface-container-low/80 border border-outline-variant/30 glass-panel flex flex-wrap gap-6 items-end">
 <div class="flex-1 min-w-[200px]">
-<label class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Filter by Sol Range</label>
-<div class="relative">
-<input class="w-full bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all placeholder:text-zinc-700" placeholder="0 - 4500" type="text" value="0 - 4500"/>
+<label class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Filter by Sol Range (Min - Max)</label>
+<div class="relative flex gap-2">
+<input class="w-1/2 bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all placeholder:text-zinc-700" id="sol-min" placeholder="0" type="number" value="0"/>
+<input class="w-1/2 bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all placeholder:text-zinc-700" id="sol-max" placeholder="4500" type="number" value="4500"/>
 </div>
 </div>
 <div class="flex-1 min-w-[200px]">
 <label class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Filter by Rover</label>
-<select class="w-full bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all appearance-none cursor-pointer">
+<select class="w-full bg-surface-container-lowest border-b border-outline-variant focus:border-primary text-on-surface py-2 px-3 font-data-point text-sm outline-none transition-all appearance-none cursor-pointer" id="rover-filter">
 <option value="all">ALL UNITS</option>
 <option value="perseverance">PERSEVERANCE</option>
 <option value="curiosity">CURIOSITY</option>
-<option value="zhurong">ZHU RONG</option>
+<option value="mro">MARS RECON ORBITER</option>
+<option value="ds4">DEEP SPACE 4</option>
 </select>
 </div>
 <div class="flex-1 min-w-[200px]">
 <label class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Mission Status</label>
 <div class="flex space-x-2">
-<button class="flex-1 py-2 px-3 border border-primary text-primary font-label-caps text-[10px] hover:bg-primary hover:text-white transition-all bg-primary/10">ACTIVE</button>
-<button class="flex-1 py-2 px-3 border border-outline-variant text-outline-variant font-label-caps text-[10px] hover:border-primary hover:text-primary transition-all">ARCHIVED</button>
+<button class="flex-1 py-2 px-3 border border-primary text-primary font-label-caps text-[10px] hover:bg-primary hover:text-white transition-all bg-primary/10" id="status-active" onclick="toggleStatusFilter('active')">ACTIVE</button>
+<button class="flex-1 py-2 px-3 border border-outline-variant text-outline-variant font-label-caps text-[10px] hover:border-primary hover:text-primary transition-all" id="status-archived" onclick="toggleStatusFilter('archived')">ARCHIVED</button>
 </div>
 </div>
-<button class="bg-primary text-white font-label-caps text-[10px] px-8 py-3 hover:bg-primary/80 transition-colors h-[41px]" onclick="console.log('Search Executed')">EXECUTE SEARCH</button>
+<button class="bg-primary text-white font-label-caps text-[10px] px-8 py-3 hover:bg-primary/80 transition-colors h-[41px]" onclick="applyFilters()">EXECUTE SEARCH</button>
 </div>
 <!-- Anomaly Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-<!-- Card 1 -->
-<div class="group relative overflow-hidden border border-outline-variant/30 bg-surface-container-lowest transition-all duration-500 hover:border-primary/50">
-<div class="scanline"></div>
-<div class="relative aspect-[4/5] overflow-hidden">
-<img alt="Martian surface anomaly" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH1t_yhPzKu9nu9NLZ4D5Od5nmRUyFSq0cMPepbAC8wfU7EU4PUCn_Z0tOGCj8BeltpsR8RYqj8rT5eXRA77em8I5F0wX9UU0wjrXPJXyRHLm8KeZno-IZg86M78l-AwRRZJwbIkVnhuu96dopb1V5x_ARFJW_o7_-CUjVKuFY27kJ2VybE0KoTC_ijjmNkqozb2MmjgEBs2m4ViVhpbn6sHhTGYTQlINQW7mDZV1_NIXpztwA468B74DUJaFKSG-Gy_jKy4s-OfA"/>
-<div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-<div class="absolute top-4 right-4 flex flex-col gap-2">
-<span class="bg-primary/20 backdrop-blur-md text-primary text-[9px] font-label-caps px-2 py-1 border border-primary/40">ANOMALY: LEVEL 4</span>
-</div>
-<div class="absolute bottom-4 left-4">
-<div class="font-headline-md text-headline-md text-white drop-shadow-lg">BLUE QUARTZITE</div>
-<div class="font-label-caps text-primary text-[10px] tracking-widest mt-1">SIG: 99.4% BIOTIC</div>
-</div>
-</div>
-<div class="p-5 space-y-4">
-<div class="grid grid-cols-2 gap-4">
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Sol Count</div>
-<div class="font-data-point text-on-surface text-sm">3442</div>
-</div>
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Unit ID</div>
-<div class="font-data-point text-on-surface text-sm">Perseverance</div>
-</div>
-</div>
-<div class="pt-4 border-t border-white/5 flex justify-between items-center">
-<span class="text-zinc-600 font-label-caps text-[8px]">CREDIT: ARES DATA NETWORK</span>
-<a class="material-symbols-outlined text-primary hover:text-white transition-colors" href="analysis.html" style="font-variation-settings: 'FILL' 1;">zoom_in</a>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="group relative overflow-hidden border border-outline-variant/30 bg-surface-container-lowest transition-all duration-500 hover:border-primary/50">
-<div class="scanline"></div>
-<div class="relative aspect-[4/5] overflow-hidden">
-<img alt="Martian surface anomaly" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR3jLwnCmZHlATD0kYllyIMUC-5ntGsjIiQ4yvWiQSZ2F_HfvQ9pZ4SrdmWjqp1s9Gan5DUHDITT6ZBwKELsnIjraZeBpyYlMXMROPGzc7xrZQibJWk_2-5NgajEDs_HJ4-XGytYt8NyXz4GrMLEx7EeyXhtVt0Ryb7wiyFIUIJlcDliXvIip7iLkCL881W0kaXzG5F6tIg5tdX1r0oDdBbKLGiWEyrfwlFUUzhVIsl9lqp0DR_JfcS4AOCmrcw7QVtDzNxcoe1dg"/>
-<div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-<div class="absolute top-4 right-4 flex flex-col gap-2">
-<span class="bg-primary/20 backdrop-blur-md text-primary text-[9px] font-label-caps px-2 py-1 border border-primary/40">THERMAL SPIKE</span>
-</div>
-<div class="absolute bottom-4 left-4">
-<div class="font-headline-md text-headline-md text-white drop-shadow-lg">JEZERO VORTEX</div>
-<div class="font-label-caps text-primary text-[10px] tracking-widest mt-1">ATMOSPHERIC ANOMALY</div>
-</div>
-</div>
-<div class="p-5 space-y-4">
-<div class="grid grid-cols-2 gap-4">
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Sol Count</div>
-<div class="font-data-point text-on-surface text-sm">4102</div>
-</div>
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Unit ID</div>
-<div class="font-data-point text-on-surface text-sm">Mars Recon Orbiter</div>
-</div>
-</div>
-<div class="pt-4 border-t border-white/5 flex justify-between items-center">
-<span class="text-zinc-600 font-label-caps text-[8px]">CREDIT: NASA / JPL-CALTECH</span>
-<a class="material-symbols-outlined text-primary hover:text-white transition-colors" href="analysis.html">analytics</a>
-</div>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="group relative overflow-hidden border border-outline-variant/30 bg-surface-container-lowest transition-all duration-500 hover:border-primary/50">
-<div class="scanline"></div>
-<div class="relative aspect-[4/5] overflow-hidden">
-<img alt="Martian surface anomaly" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz0mKIs-1GQOh5XhfeG-WjxNIZVyupqY1MOkDmm-DOCJnmrQTn0hEmGrZD5vL2OP-jS4vhoP8dm98Vm8WgFGQD3LzjFSyrv0qaM5nJ6hpMAjFmpJPLMQk3StBst7DJ53MzfX40ZhmenDB1Ljo-6AYaAR2q7MkYR5rEZs3KMGAyP2esV6rqXzV_OlYfrROabFMJ0lckrLfu3jj83XsaSH_ZADff40p4iEbjK_J8bDipRaSbyOd4-p9wPwQ_7uZc6bnVBACr0lz-gZo"/>
-<div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-<div class="absolute top-4 right-4 flex flex-col gap-2">
-<span class="bg-primary/20 backdrop-blur-md text-primary text-[9px] font-label-caps px-2 py-1 border border-primary/40">MICROSCOPIC</span>
-</div>
-<div class="absolute bottom-4 left-4">
-<div class="font-headline-md text-headline-md text-white drop-shadow-lg">CELLULAR STRATA</div>
-<div class="font-label-caps text-primary text-[10px] tracking-widest mt-1">FOSSILIZED MATRIX</div>
-</div>
-</div>
-<div class="p-5 space-y-4">
-<div class="grid grid-cols-2 gap-4">
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Sol Count</div>
-<div class="font-data-point text-on-surface text-sm">1289</div>
-</div>
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Unit ID</div>
-<div class="font-data-point text-on-surface text-sm">Curiosity</div>
-</div>
-</div>
-<div class="pt-4 border-t border-white/5 flex justify-between items-center">
-<span class="text-zinc-600 font-label-caps text-[8px]">CREDIT: HELLAS GEOLOGY TEAM</span>
-<a class="material-symbols-outlined text-primary hover:text-white transition-colors" href="analysis.html">biotech</a>
-</div>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="group relative overflow-hidden border border-outline-variant/30 bg-surface-container-lowest transition-all duration-500 hover:border-primary/50">
-<div class="scanline"></div>
-<div class="relative aspect-[4/5] overflow-hidden">
-<img alt="Martian surface anomaly" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYZyktOs8iR_JJLnDET4EQatfjdLsq72q2gmX9Mo_uVUVLkhmjhMKPrVWZHRYmDJlQV0b-6-w50nJG5Nx8Q8KMBeghr6dSCJYJY9s7JY1-wkIlUZl2dyxSbTLDC434gdltRnK2yqHjxEp1ZN8rrWtjrB74zRVlJ9AlA5qQcN4M6fpq89E8FANqk6102Gw1V88_v6Nu3tCaj7dJ9knR_EbZ__rh9Ni0B72I_QGTf2dKbW-CJ4-mpIp6dYE7jbpZMNO5XtFisU-DoPo"/>
-<div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-<div class="absolute top-4 right-4 flex flex-col gap-2">
-<span class="bg-primary/20 backdrop-blur-md text-primary text-[9px] font-label-caps px-2 py-1 border border-primary/40">LUMINANCE</span>
-</div>
-<div class="absolute bottom-4 left-4">
-<div class="font-headline-md text-headline-md text-white drop-shadow-lg">AURORA MARS</div>
-<div class="font-label-caps text-primary text-[10px] tracking-widest mt-1">MAGNETIC DISTURBANCE</div>
-</div>
-</div>
-<div class="p-5 space-y-4">
-<div class="grid grid-cols-2 gap-4">
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Sol Count</div>
-<div class="font-data-point text-on-surface text-sm">0822</div>
-</div>
-<div>
-<div class="text-zinc-500 font-label-caps text-[8px] uppercase">Unit ID</div>
-<div class="font-data-point text-on-surface text-sm">Deep Space 4</div>
-</div>
-</div>
-<div class="pt-4 border-t border-white/5 flex justify-between items-center">
-<span class="text-zinc-600 font-label-caps text-[8px]">CREDIT: ARES DATA NETWORK</span>
-<a class="material-symbols-outlined text-primary hover:text-white transition-colors" href="analysis.html">waves</a>
-</div>
-</div>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto" id="anomaly-grid">
+<!-- Grid contents injected via JS -->
 </div>
 </main>
 <!-- Footer -->
@@ -390,4 +254,186 @@
 <div class="fixed top-24 right-12 w-12 h-12 border-t-2 border-r-2 border-primary/20 pointer-events-none z-0"></div>
 <div class="fixed bottom-24 left-24 w-12 h-12 border-b-2 border-l-2 border-primary/20 pointer-events-none z-0"></div>
 <div class="fixed bottom-24 right-12 w-12 h-12 border-b-2 border-r-2 border-primary/20 pointer-events-none z-0"></div>
+<script>
+    // Initialize Starfield
+    const starfield = document.getElementById('starfield');
+    for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2 + 1 + 'px';
+        star.style.width = size;
+        star.style.height = size;
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDuration = Math.random() * 30 + 20 + 's';
+        star.style.opacity = Math.random();
+        starfield.appendChild(star);
+    }
+
+    // Demo Data
+    const demoAnomalies = [
+        {
+            id: 'demo-1',
+            title: 'BLUE QUARTZITE',
+            subtitle: 'SIG: 99.4% BIOTIC',
+            tag: 'ANOMALY: LEVEL 4',
+            sol: 3442,
+            rover: 'perseverance',
+            roverName: 'Perseverance',
+            credit: 'ARES DATA NETWORK',
+            icon: 'zoom_in',
+            status: 'active',
+            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDH1t_yhPzKu9nu9NLZ4D5Od5nmRUyFSq0cMPepbAC8wfU7EU4PUCn_Z0tOGCj8BeltpsR8RYqj8rT5eXRA77em8I5F0wX9UU0wjrXPJXyRHLm8KeZno-IZg86M78l-AwRRZJwbIkVnhuu96dopb1V5x_ARFJW_o7_-CUjVKuFY27kJ2VybE0KoTC_ijjmNkqozb2MmjgEBs2m4ViVhpbn6sHhTGYTQlINQW7mDZV1_NIXpztwA468B74DUJaFKSG-Gy_jKy4s-OfA'
+        },
+        {
+            id: 'demo-2',
+            title: 'JEZERO VORTEX',
+            subtitle: 'ATMOSPHERIC ANOMALY',
+            tag: 'THERMAL SPIKE',
+            sol: 4102,
+            rover: 'mro',
+            roverName: 'Mars Recon Orbiter',
+            credit: 'NASA / JPL-CALTECH',
+            icon: 'analytics',
+            status: 'active',
+            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBR3jLwnCmZHlATD0kYllyIMUC-5ntGsjIiQ4yvWiQSZ2F_HfvQ9pZ4SrdmWjqp1s9Gan5DUHDITT6ZBwKELsnIjraZeBpyYlMXMROPGzc7xrZQibJWk_2-5NgajEDs_HJ4-XGytYt8NyXz4GrMLEx7EeyXhtVt0Ryb7wiyFIUIJlcDliXvIip7iLkCL881W0kaXzG5F6tIg5tdX1r0oDdBbKLGiWEyrfwlFUUzhVIsl9lqp0DR_JfcS4AOCmrcw7QVtDzNxcoe1dg'
+        },
+        {
+            id: 'demo-3',
+            title: 'CELLULAR STRATA',
+            subtitle: 'FOSSILIZED MATRIX',
+            tag: 'MICROSCOPIC',
+            sol: 1289,
+            rover: 'curiosity',
+            roverName: 'Curiosity',
+            credit: 'HELLAS GEOLOGY TEAM',
+            icon: 'biotech',
+            status: 'archived',
+            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCz0mKIs-1GQOh5XhfeG-WjxNIZVyupqY1MOkDmm-DOCJnmrQTn0hEmGrZD5vL2OP-jS4vhoP8dm98Vm8WgFGQD3LzjFSyrv0qaM5nJ6hpMAjFmpJPLMQk3StBst7DJ53MzfX40ZhmenDB1Ljo-6AYaAR2q7MkYR5rEZs3KMGAyP2esV6rqXzV_OlYfrROabFMJ0lckrLfu3jj83XsaSH_ZADff40p4iEbjK_J8bDipRaSbyOd4-p9wPwQ_7uZc6bnVBACr0lz-gZo'
+        },
+        {
+            id: 'demo-4',
+            title: 'AURORA MARS',
+            subtitle: 'MAGNETIC DISTURBANCE',
+            tag: 'LUMINANCE',
+            sol: 822,
+            rover: 'ds4',
+            roverName: 'Deep Space 4',
+            credit: 'ARES DATA NETWORK',
+            icon: 'waves',
+            status: 'active',
+            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYZyktOs8iR_JJLnDET4EQatfjdLsq72q2gmX9Mo_uVUVLkhmjhMKPrVWZHRYmDJlQV0b-6-w50nJG5Nx8Q8KMBeghr6dSCJYJY9s7JY1-wkIlUZl2dyxSbTLDC434gdltRnK2yqHjxEp1ZN8rrWtjrB74zRVlJ9AlA5qQcN4M6fpq89E8FANqk6102Gw1V88_v6Nu3tCaj7dJ9knR_EbZ__rh9Ni0B72I_QGTf2dKbW-CJ4-mpIp6dYE7jbpZMNO5XtFisU-DoPo'
+        }
+    ];
+
+    let currentStatusFilter = 'active';
+
+    function getAnomalies() {
+        const localData = localStorage.getItem('mars_anomalies');
+        const localAnomalies = localData ? JSON.parse(localData) : [];
+        return [...localAnomalies, ...demoAnomalies];
+    }
+
+    function createAnomalyCard(data) {
+        return `
+            <div class="anomaly-card group relative overflow-hidden border border-outline-variant/30 bg-surface-container-lowest transition-all duration-500 hover:border-primary/50" 
+                 data-sol="${data.sol}" 
+                 data-rover="${data.rover}" 
+                 data-status="${data.status}">
+                <div class="scanline"></div>
+                <div class="relative aspect-[4/5] overflow-hidden">
+                    <img alt="${data.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" src="${data.img}"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 right-4 flex flex-col gap-2">
+                        <span class="bg-primary/20 backdrop-blur-md text-primary text-[9px] font-label-caps px-2 py-1 border border-primary/40">${data.tag}</span>
+                    </div>
+                    <div class="absolute bottom-4 left-4">
+                        <div class="font-headline-md text-headline-md text-white drop-shadow-lg">${data.title}</div>
+                        <div class="font-label-caps text-primary text-[10px] tracking-widest mt-1">${data.subtitle}</div>
+                    </div>
+                </div>
+                <div class="p-5 space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-zinc-500 font-label-caps text-[8px] uppercase">Sol Count</div>
+                            <div class="font-data-point text-on-surface text-sm">${data.sol}</div>
+                        </div>
+                        <div>
+                            <div class="text-zinc-500 font-label-caps text-[8px] uppercase">Unit ID</div>
+                            <div class="font-data-point text-on-surface text-sm">${data.roverName}</div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex justify-between items-center">
+                        <span class="text-zinc-600 font-label-caps text-[8px]">CREDIT: ${data.credit}</span>
+                        <a class="material-symbols-outlined text-primary hover:text-white transition-colors" href="analysis.html">
+                            ${data.icon}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderGallery() {
+        const grid = document.getElementById('anomaly-grid');
+        const anomalies = getAnomalies();
+        grid.innerHTML = anomalies.map(data => createAnomalyCard(data)).join('');
+        applyFilters();
+    }
+
+    function toggleStatusFilter(status) {
+        currentStatusFilter = status;
+        const activeBtn = document.getElementById('status-active');
+        const archivedBtn = document.getElementById('status-archived');
+        
+        if (status === 'active') {
+            activeBtn.classList.add('bg-primary/10', 'border-primary', 'text-primary');
+            activeBtn.classList.remove('border-outline-variant', 'text-outline-variant');
+            archivedBtn.classList.add('border-outline-variant', 'text-outline-variant');
+            archivedBtn.classList.remove('bg-primary/10', 'border-primary', 'text-primary');
+        } else {
+            archivedBtn.classList.add('bg-primary/10', 'border-primary', 'text-primary');
+            archivedBtn.classList.remove('border-outline-variant', 'text-outline-variant');
+            activeBtn.classList.add('border-outline-variant', 'text-outline-variant');
+            activeBtn.classList.remove('bg-primary/10', 'border-primary', 'text-primary');
+        }
+        applyFilters();
+    }
+
+    function applyFilters() {
+        const minSol = parseInt(document.getElementById('sol-min').value) || 0;
+        const maxSol = parseInt(document.getElementById('sol-max').value) || 99999;
+        const rover = document.getElementById('rover-filter').value;
+        const cards = document.querySelectorAll('.anomaly-card');
+
+        cards.forEach(card => {
+            const sol = parseInt(card.dataset.sol);
+            const cardRover = card.dataset.rover;
+            const cardStatus = card.dataset.status;
+
+            const solMatch = sol >= minSol && sol <= maxSol;
+            const roverMatch = rover === 'all' || rover === cardRover;
+            const statusMatch = cardStatus === currentStatusFilter;
+
+            if (solMatch && roverMatch && statusMatch) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Initial Load
+    window.addEventListener('DOMContentLoaded', () => {
+        renderGallery();
+        
+        // Update Local Time
+        setInterval(() => {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('local-time').textContent = `LOCAL TIME: ${h}:${m} MSD`;
+        }, 1000);
+    });
+</script>
 </body></html>
