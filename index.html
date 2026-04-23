@@ -3,423 +3,302 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARES COMMAND - MARS ALIVE</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "primary": "#ffb59e",
-                    "surface-tint": "#ffb59e",
-                    "on-primary": "#5e1700",
-                    "on-surface": "#e2e2e8",
-                    "on-tertiary-fixed-variant": "#3a4859",
-                    "secondary-fixed": "#9cf0ff",
-                    "surface-bright": "#37393e",
-                    "inverse-primary": "#ae3200",
-                    "surface-container-low": "#1a1c20",
-                    "on-surface-variant": "#e6beb2",
-                    "surface-container-lowest": "#0c0e12",
-                    "on-tertiary": "#243142",
-                    "on-secondary-fixed-variant": "#004f58",
-                    "surface-variant": "#333539",
-                    "surface-container-highest": "#333539",
-                    "surface-container-high": "#282a2e",
-                    "primary-container": "#ff571a",
-                    "on-primary-fixed-variant": "#852400",
-                    "secondary-container": "#00e3fd",
-                    "background": "#111318",
-                    "tertiary": "#b9c8dd",
-                    "primary-fixed-dim": "#ffb59e",
-                    "error-container": "#93000a",
-                    "on-secondary": "#00363d",
-                    "outline-variant": "#5c4037",
-                    "on-tertiary-container": "#1d2b3b",
-                    "surface-dim": "#111318",
-                    "secondary": "#bdf4ff",
-                    "on-tertiary-fixed": "#0e1c2c",
-                    "primary-fixed": "#ffdbd0",
-                    "on-secondary-container": "#00616d",
-                    "surface": "#111318",
-                    "on-primary-fixed": "#3a0b00",
-                    "tertiary-fixed-dim": "#b9c8dd",
-                    "on-error": "#690005",
-                    "inverse-on-surface": "#2f3035",
-                    "on-error-container": "#ffdad6",
-                    "on-primary-container": "#521300",
-                    "surface-container": "#1e2024",
-                    "on-secondary-fixed": "#001f24",
-                    "on-background": "#e2e2e8",
-                    "tertiary-fixed": "#d5e4f9",
-                    "outline": "#ad897e",
-                    "inverse-surface": "#e2e2e8",
-                    "tertiary-container": "#8492a5",
-                    "secondary-fixed-dim": "#00daf3",
-                    "error": "#ffb4ab",
-                    "mars-orange": "#FF4D00"
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#3a0b00",
+                      "secondary-container": "#04381f",
+                      "on-background": "#fcdcd3",
+                      "on-surface": "#fcdcd3",
+                      "tertiary-container": "#2492ff",
+                      "on-primary-fixed-variant": "#852400",
+                      "on-secondary-container": "#4ade80",
+                      "on-error-container": "#ffdad6",
+                      "background": "#0a0504",
+                      "surface-tint": "#f37b4b",
+                      "surface-container": "#1a0f0d",
+                      "on-tertiary-container": "#002a53",
+                      "inverse-primary": "#ae3200",
+                      "outline": "#ad897e",
+                      "tertiary-fixed": "#d4e3ff",
+                      "secondary": "#4ade80",
+                      "on-surface-variant": "#e6beb2",
+                      "secondary-fixed": "#bbefc9",
+                      "primary-fixed": "#ffdbd0",
+                      "on-tertiary": "#00315e",
+                      "surface-bright": "#331f1a",
+                      "error": "#ffb4ab",
+                      "outline-variant": "#5c4037",
+                      "surface-container-low": "#140b09",
+                      "on-secondary-fixed-variant": "#205034",
+                      "primary-fixed-dim": "#f37b4b",
+                      "on-primary-container": "#521300",
+                      "inverse-surface": "#fcdcd3",
+                      "inverse-on-surface": "#3f2c26",
+                      "secondary-fixed-dim": "#4ade80",
+                      "on-tertiary-fixed": "#001c3a",
+                      "primary": "#f37b4b",
+                      "tertiary": "#a5c8ff",
+                      "surface-container-highest": "#241512",
+                      "on-primary": "#5e1700",
+                      "on-tertiary-fixed-variant": "#004785",
+                      "surface-variant": "#2d1b16",
+                      "surface-dim": "#0a0504",
+                      "on-secondary-fixed": "#00210f",
+                      "surface-container-high": "#221310",
+                      "surface-container-lowest": "#050202",
+                      "primary-container": "#f37b4b",
+                      "error-container": "#93000a",
+                      "surface": "#0a0504",
+                      "on-error": "#690005",
+                      "tertiary-fixed-dim": "#a5c8ff",
+                      "on-secondary": "#10b981"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "panel-padding": "24px",
+                      "stack-gap": "8px",
+                      "margin": "32px",
+                      "unit": "4px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "data-mono": ["Space Grotesk"],
+                      "display-xl": ["Space Grotesk"],
+                      "label-sm": ["Space Grotesk"],
+                      "body-md": ["Space Grotesk"],
+                      "headline-lg": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "data-mono": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                      "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
             },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "label-caps": ["Space Grotesk"],
-                    "headline-xl": ["Space Grotesk"],
-                    "body-base": ["Space Grotesk"],
-                    "data-point": ["Space Grotesk"],
-                    "headline-md": ["Space Grotesk"]
-            }
           },
-        },
-      }
-    </script>
+        }
+      </script>
 <style>
-        body { font-family: 'Space Grotesk', sans-serif; background-color: #0a0c10; color: #e2e2e8; overflow-x: hidden; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-        .scanline {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 77, 0, 0.15);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 50;
-            pointer-events: none;
-            box-shadow: 0 0 10px rgba(255, 77, 0, 0.3);
-        }
-        .hud-corner {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-color: rgba(255, 77, 0, 0.4);
-        }
         .starfield {
-            background-image: radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
-                              radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
-                              radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
-                              radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            opacity: 0.15;
-            animation: drift 120s linear infinite;
+            background: radial-gradient(circle at center, #1a0f0d 0%, #000 100%);
+            position: fixed;
+            inset: 0;
+            z-index: -2;
         }
-        @keyframes drift {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%);
+            background-size: 100% 4px;
+            z-index: -1;
+            pointer-events: none;
         }
         .glass-panel {
-            background: rgba(16, 19, 24, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 77, 0, 0.15);
+            background: rgba(26, 15, 13, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(243, 123, 75, 0.2);
         }
-        @keyframes scan {
-            from { top: 0%; opacity: 0.1; }
-            50% { opacity: 0.4; }
-            to { top: 100%; opacity: 0.1; }
+        .glowing-border {
+            box-shadow: 0 0 15px rgba(243, 123, 75, 0.2), inset 0 0 10px rgba(243, 123, 75, 0.05);
         }
-        .animate-scan {
-            animation: scan 4s linear infinite;
+        .hud-accent-green {
+            color: #4ade80;
+            text-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+        }
+        .hud-accent-orange {
+            color: #f37b4b;
+            text-shadow: 0 0 10px rgba(243, 123, 75, 0.5);
         }
     </style>
 </head>
-<body class="bg-background text-on-background min-h-screen flex flex-col">
-<!-- Cinematic Background -->
-<div class="fixed inset-0 pointer-events-none z-0">
-<div class="absolute inset-0 bg-[#0a0c10]"></div>
-<div class="absolute inset-0 starfield"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-[#0a0c10]/40"></div>
+<body class="bg-background font-body-md text-on-background min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<div class="starfield">
+<div class="star w-0.5 h-0.5 top-[15%] left-[25%]"></div>
+<div class="star w-1 h-1 top-[45%] left-[85%] opacity-60"></div>
+<div class="star w-0.5 h-0.5 top-[65%] left-[15%]"></div>
+<div class="star w-1 h-1 top-[25%] left-[55%]"></div>
+<div class="star w-0.5 h-0.5 top-[80%] left-[70%] opacity-40"></div>
+<div class="star w-0.5 h-0.5 top-[10%] left-[90%]"></div>
+<div class="star w-1 h-1 top-[90%] left-[10%]"></div>
 </div>
-<!-- Top Navigation Bar -->
-<header class="bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)] fixed top-0 z-50 w-full px-6 py-3 flex justify-between items-center">
-<div class="flex items-center gap-8">
-<nav class="hidden md:flex items-center gap-6">
-<a class="text-mars-orange font-bold font-['Space_Grotesk'] uppercase tracking-widest text-xs hover:text-orange-400 transition-all" href="index.html">Home</a>
-<a class="text-slate-500 font-['Space_Grotesk'] uppercase tracking-widest text-xs hover:text-mars-orange transition-all" href="gallery.html">Gallery</a>
+<div class="scanlines"></div>
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-10 h-20 bg-black/60 backdrop-blur-xl border-b border-[#f37b4b]/20 shadow-[0_1px_15px_rgba(243,123,75,0.1)]">
+<div class="font-['Space_Grotesk'] text-2xl font-black text-[#f37b4b] drop-shadow-[0_0_10px_rgba(243,123,75,0.5)] tracking-widest uppercase">
+        ARES COMMAND
+    </div>
+<div class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold">
+<a class="text-[#f37b4b] border-b-2 border-[#f37b4b] font-black brightness-125 transition-all duration-300" href="#">Telemetry</a>
+<a class="text-slate-500 font-medium hover:text-[#4ade80] hover:bg-[#4ade80]/10 hover:backdrop-blur-lg transition-all duration-300 px-3 py-1" href="#">Sector Map</a>
+<a class="text-slate-500 font-medium hover:text-[#4ade80] hover:bg-[#4ade80]/10 hover:backdrop-blur-lg transition-all duration-300 px-3 py-1" href="#">Comms</a>
+<a class="text-slate-500 font-medium hover:text-[#4ade80] hover:bg-[#4ade80]/10 hover:backdrop-blur-lg transition-all duration-300 px-3 py-1" href="#">Archive</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer active:scale-95 transition-transform hover:text-[#4ade80]" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer active:scale-95 transition-transform hover:text-[#f37b4b]" data-icon="settings">settings</span>
+<div class="w-10 h-10 rounded-full border border-[#f37b4b]/50 overflow-hidden">
+<img alt="Commander Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlHGuXKBN5sLSQ0QkgNT5G50J-4HCSOLqPmx0vi66-naidkQingSRZ8DEYeXED7EGjgYArvfmtZGNmRhL1sB_prkqTEkF70bPrKKgu1jEscJh_3D41cbNUrzViIPgCGCFvg9UpQWM-mP4HE0z725-o-gQJ3tI1PdL0D10WhvtpaWC3IoZx6R2BZ8jOY5F_1yLU5DeI7kBziAPyutIgrhhzHtj3D_rY4oCLsXNigZePXfoHTM1_8mMoSTXuwYW5X68jpV6zR_GKQiA"/>
+</div>
+</div>
 </nav>
+<main class="pt-32 pb-24 px-margin max-w-7xl mx-auto space-y-12">
+<header class="flex flex-col items-center text-center space-y-6">
+<div class="relative group">
+<div class="absolute -inset-8 bg-[#f37b4b]/10 blur-3xl rounded-full opacity-40 group-hover:opacity-70 transition-opacity"></div>
+<img alt="MARS ALIVE" class="relative w-96 h-auto object-contain drop-shadow-[0_0_40px_rgba(243,123,75,0.3)]" src="https://lh3.googleusercontent.com/aida/ADBb0uhOzysinEjAc3Q_L61jEx8T5zL3fkYq0jfbvPk43sD12oXHfSLB9mJZxYrYlWxmehGlb02Rxig4ihJ84vVdv-8bCaULf4ZphXUGlmpHcV9K7mZ3Gy5lYEIe0vqUGp18xY2-Xy4EaHm5gV6La9BiYMSytcJVAk_YQ6oPNqFdtxKDYq_AHXWlYMgy6DJO7JE3q3NgD7Ka8WGh9kK04OrH75n7-60hqv2R4W15lAN8INZL_ZczLbL_Ym45FgSCdx0Ugdkj4-2OeQL5Fw"/>
 </div>
-<div class="absolute left-1/2 -translate-x-1/2 flex items-center">
-<img alt="MARS ALIVE Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ugNiodTF6cPUPc8slf-jxKD2YzYBntq-MV-TaRK4Vdo-zKQcGmKN5aqlo8cl6CEhtaHhHRujbTrNtg1-otEOUBCS9t8LYBkam6iXWTHAtQzQCuc0o2ylUVUJS4yjzFcGCRTdTljqBwuNpwbp-7-M9aGgKoxqVtpBi3CbME--K2Bil5NNYa78OMMrmfJWl8mIlF2yxD9BsUgjTb7PLWlvgH9CMX_1WQHY63nW0M-Vx2__0fQ6nQRiMlcwOh5t24rmLzhY_wR1XOEew"/>
-</div>
-<div class="flex items-center gap-4">
-<button class="text-slate-500 hover:text-mars-orange hover:bg-slate-800/30 transition-all scale-95 active:scale-90 duration-150 p-2">
-<span class="material-symbols-outlined" data-icon="search">search</span>
-</button>
-<button class="text-slate-500 hover:text-mars-orange hover:bg-slate-800/30 transition-all scale-95 active:scale-90 duration-150 p-2">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-</button>
-<div class="h-8 w-8 rounded-full border border-mars-orange/30 bg-surface-container overflow-hidden">
-<img alt="Commander Avatar" class="h-full w-full object-cover" data-alt="professional portrait of a high-ranking space commander in a sleek charcoal jumpsuit with subtle orange accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6td-BcgrPaw3TTdtofEy9LWOP-sSLqpsAs7vFe6hWFozThdW6R55uHflJEx1W_3Kqf6N-I-h8vrQiI-GyAG-94-b73KNrQAhnGSe5_8RKHpwKTj8FjNViFu5uTP_3VGFrPU-Oy2sgGsr64QKoTUCiLAoqh4gyY8AvRptSJVUNweCA59XI2RFsNesG_FX3mp2EURV1reSWUjJRR9AXpgoFlANBfJbCmOkaixdb8sySGxyOdY2aiMCEP3EPp4t7YYNpcl9viBcORvM"/>
-</div>
+<div class="mt-4">
+<p class="font-data-mono text-data-mono text-[#4ade80] tracking-[0.4em] uppercase opacity-80">Sector 07-A / Mission Hub V4 Ultra</p>
 </div>
 </header>
-<!-- Sidebar Navigation -->
-<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-[#0a0c10]/90 backdrop-blur-2xl border-slate-800/40 border-r-[1px] w-64 pt-20 hidden md:flex">
-<div class="px-6 py-4 mb-6">
-<div class="text-mars-orange font-black font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">STRATOS-1</div>
-<div class="text-slate-500 font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Mars Sector 7</div>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center space-x-4 bg-mars-orange/10 text-mars-orange border-l-2 border-mars-orange py-3 px-6 hover:bg-slate-800/50 transition-colors ease-in-out duration-300" href="index.html">
-<span class="material-symbols-outlined" data-icon="home_max">home_max</span>
-<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Home</span>
-</a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-in-out duration-300" href="gallery.html">
-<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
-<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Gallery</span>
-</a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-6 hover:text-slate-300 hover:bg-slate-800/50 transition-colors ease-in-out duration-300" href="rover.html">
-<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
-<span class="font-['Space_Grotesk'] tracking-wide uppercase text-[10px]">Rover</span>
-</a>
-</nav>
-<div class="p-6">
-<button class="w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps py-4 rounded-lg flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,77,0,0.2)]">
-<span class="material-symbols-outlined text-[18px]" data-icon="radar">radar</span>
-                INITIATE SCAN
-            </button>
-</div>
-</aside>
-<!-- Main Canvas -->
-<main class="flex-1 mt-16 md:ml-64 p-8 relative z-10">
-<!-- HUD Telemetry Header -->
-<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-<div class="glass-panel p-4 relative overflow-hidden">
-<div class="hud-corner border-t-2 border-l-2 top-0 left-0 border-mars-orange/40"></div>
-<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">LOCAL TIME (SOL 492)</div>
-<div class="text-mars-orange text-2xl font-bold font-data-point">14:42:09 <span class="text-xs text-mars-orange/50">LST</span></div>
-</div>
-<div class="glass-panel p-4 relative overflow-hidden">
-<div class="hud-corner border-t-2 border-l-2 top-0 left-0 border-mars-orange/40"></div>
-<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">ORBITAL VELOCITY</div>
-<div class="text-mars-orange text-2xl font-bold font-data-point">3.41 <span class="text-xs text-mars-orange/50">KM/S</span></div>
-</div>
-<div class="glass-panel p-4 relative overflow-hidden">
-<div class="hud-corner border-t-2 border-l-2 top-0 left-0 border-mars-orange/40"></div>
-<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">SIGNAL STRENGTH</div>
-<div class="flex items-center gap-2 mt-1">
-<div class="flex gap-1">
-<div class="h-4 w-1 bg-mars-orange"></div>
-<div class="h-4 w-1 bg-mars-orange"></div>
-<div class="h-4 w-1 bg-mars-orange"></div>
-<div class="h-4 w-1 bg-slate-700"></div>
-</div>
-<span class="text-mars-orange text-sm font-bold">-74 dBm</span>
-</div>
-</div>
-<div class="glass-panel p-4 relative overflow-hidden">
-<div class="hud-corner border-t-2 border-l-2 top-0 left-0 border-mars-orange/40"></div>
-<div class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mb-1">MISSION STATUS</div>
-<div class="flex items-center gap-2 text-mars-orange font-bold">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-mars-orange opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-mars-orange"></span>
-</span>
-                    OPERATIONAL
-                </div>
-</div>
-</section>
-<!-- Main Hero Visualization -->
-<section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-<div class="lg:col-span-2 relative group aspect-video lg:aspect-auto h-[500px] border border-slate-800/40 overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-<img alt="Martian Surface" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="vast cinematic vista of martian landscape with crimson dust clouds orange sky and jagged crater rim in sharp detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkegbdIU6ppjQvP7pRJvP1Qia58e5FABBW_kZSGmSagfdceHX_fIMb9C3RlAsIRDK9HM2wFJDT45xJY1OCalleV5ypSF_VxYg5wE4QC3yMfC40RMJ03YeLjMHyKtOfQOJWqDeUuJs4O-sCKjYC3qF1aOXWCYUdAEKMCtjA-w9eZZY1eEdryNcYzXiQhkdCJPgy4oa20AHH439gW8PSZ534gk3oMgfVLMNd_tPGaW68b1y-HW6Zly2AAfZAZL2NhOfvVhr_nYOr7cs"/>
-<!-- Scanning Overlay -->
-<div class="absolute inset-0 pointer-events-none">
-<div class="scanline animate-scan"></div>
-<div class="absolute inset-0 flex items-center justify-center opacity-40">
-<div class="w-[80%] h-[80%] border border-mars-orange/20 flex items-center justify-center relative">
-<div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-mars-orange"></div>
-<div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-mars-orange"></div>
-<div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-mars-orange"></div>
-<div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-mars-orange"></div>
-<div class="w-4 h-4 bg-mars-orange/30 rounded-full blur-xl animate-pulse"></div>
-</div>
-</div>
-</div>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent">
-<div class="flex items-center justify-between">
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="glass-panel glowing-border p-panel-padding flex items-center justify-between border-l-4 border-l-[#f37b4b]">
 <div>
-<span class="bg-mars-orange/30 text-mars-orange text-[10px] font-bold px-2 py-1 rounded tracking-[0.2em] mb-2 inline-block backdrop-blur-sm border border-mars-orange/20">LIVE TELEMETRY FEED</span>
-<h2 class="font-headline-md text-headline-md text-on-surface">Jezero Crater - Sector 7</h2>
+<span class="font-data-mono text-label-sm text-slate-500 uppercase">Ambient Temp</span>
+<div class="text-headline-lg font-headline-lg hud-accent-orange">-74°C</div>
 </div>
-<button class="bg-mars-orange text-white font-label-caps text-label-caps px-4 py-2 rounded-full flex items-center gap-2 hover:bg-orange-600 transition-colors shadow-lg">
-<span class="material-symbols-outlined text-[16px]" data-icon="fullscreen">fullscreen</span>
-                            WIDE VIEW
-                        </button>
+<span class="material-symbols-outlined text-4xl text-[#f37b4b]/30" data-icon="thermostat">thermostat</span>
 </div>
-</div>
-</div>
-<div class="flex flex-col gap-6">
-<div class="glass-panel flex-1 p-6 relative">
-<h3 class="font-label-caps text-label-caps text-slate-500 mb-4 flex items-center justify-between">
-                        ANOMALY DETECTOR
-                        <span class="material-symbols-outlined text-sm" data-icon="troubleshoot">troubleshoot</span>
-</h3>
-<div class="space-y-4">
-<div class="flex items-center gap-4 p-3 bg-slate-800/30 border-l-2 border-mars-orange">
-<div class="h-10 w-10 bg-slate-900 flex items-center justify-center border border-slate-700">
-<span class="material-symbols-outlined text-mars-orange" data-icon="volcano">volcano</span>
-</div>
+<div class="glass-panel glowing-border p-panel-padding flex items-center justify-between border-l-4 border-l-[#4ade80]">
 <div>
-<div class="text-xs font-bold text-on-surface">Seismic Spike #42</div>
-<div class="text-[10px] text-slate-500 uppercase">Mag 2.4 - Northern Rift</div>
+<span class="font-data-mono text-label-sm text-slate-500 uppercase">Wind Speed</span>
+<div class="text-headline-lg font-headline-lg hud-accent-green">22 km/h</div>
 </div>
+<span class="material-symbols-outlined text-4xl text-[#4ade80]/30" data-icon="air">air</span>
 </div>
-<div class="flex items-center gap-4 p-3 bg-slate-800/10 border-l-2 border-slate-600">
-<div class="h-10 w-10 bg-slate-900 flex items-center justify-center border border-slate-700">
-<span class="material-symbols-outlined text-slate-500" data-icon="air">air</span>
-</div>
+<div class="glass-panel glowing-border p-panel-padding flex items-center justify-between border-l-4 border-l-[#f37b4b]">
 <div>
-<div class="text-xs font-bold text-on-surface">Atmospheric Shift</div>
-<div class="text-[10px] text-slate-500 uppercase">Methane +0.4% - Gale Crater</div>
+<span class="font-data-mono text-label-sm text-slate-500 uppercase">Pressure</span>
+<div class="text-headline-lg font-headline-lg hud-accent-orange">610 Pa</div>
 </div>
+<span class="material-symbols-outlined text-4xl text-[#f37b4b]/30" data-icon="compress">compress</span>
 </div>
-<div class="flex items-center gap-4 p-3 bg-slate-800/10 border-l-2 border-slate-600">
-<div class="h-10 w-10 bg-slate-900 flex items-center justify-center border border-slate-700">
-<span class="material-symbols-outlined text-slate-500" data-icon="radio">radio</span>
-</div>
+<div class="glass-panel glowing-border p-panel-padding flex items-center justify-between border-l-4 border-l-[#4ade80]">
 <div>
-<div class="text-xs font-bold text-on-surface">Signal Interference</div>
-<div class="text-[10px] text-slate-500 uppercase">Unknown Origin - Sector 7-B</div>
+<span class="font-data-mono text-label-sm text-slate-500 uppercase">Atmospheric Density</span>
+<div class="text-headline-lg font-headline-lg hud-accent-green">0.021 <span class="text-sm">kg/m³</span></div>
 </div>
+<span class="material-symbols-outlined text-4xl text-[#4ade80]/30" data-icon="blur_on">blur_on</span>
 </div>
+<div class="glass-panel glowing-border p-panel-padding flex items-center justify-between border-l-4 border-l-[#f37b4b]">
+<div>
+<span class="font-data-mono text-label-sm text-slate-500 uppercase">Methane Conc.</span>
+<div class="text-headline-lg font-headline-lg hud-accent-orange">12.4 <span class="text-sm">ppb</span></div>
 </div>
-<div class="absolute bottom-6 left-6 right-6">
-<button class="w-full border border-slate-700 text-slate-400 font-label-caps text-label-caps py-3 hover:bg-slate-800/50 hover:text-on-surface transition-all">
-                            VIEW FULL LOGS
-                        </button>
+<span class="material-symbols-outlined text-4xl text-[#f37b4b]/30" data-icon="science">science</span>
 </div>
+<div class="glass-panel glowing-border p-panel-padding flex items-center justify-between border-l-4 border-l-[#4ade80]">
+<div>
+<span class="font-data-mono text-label-sm text-slate-500 uppercase">Radiation Flux</span>
+<div class="text-headline-lg font-headline-lg hud-accent-green">450 <span class="text-sm">mSv/yr</span></div>
+</div>
+<span class="material-symbols-outlined text-4xl text-[#4ade80]/30" data-icon="radioactive">radioactive</span>
+</div>
+<div class="glass-panel glowing-border overflow-hidden relative h-28 sm:h-auto group lg:col-span-2">
+<img alt="Rover Map" class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzZwRcN6Dwhwrsqr7yAFyButX-Vxy9QCcMPQBXEDDEg13QKxzqW6dXKcplWgU6SM8kxic25blsaVmURa8il8JEFWwfLkzAvWFtte2B3yr21YdjhOiqJ715V24zLv0X-XxogMoIWSN7RVo1gee99R26JuhnNchT47BzmxTbIFrIaUSYaVQp4yXwscwVRcOq8SLk-uCCr8pjDBInAkq9RMXONV0Hcd2MMFQ7syEvaeApRCd90rfWRSLbNCQDBmMOCXUd6TqjoGNvMCI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 flex flex-col justify-end">
+<span class="font-data-mono text-xs text-white uppercase tracking-widest flex items-center gap-2">
+<span class="w-2 h-2 bg-[#f37b4b] rounded-full animate-pulse shadow-[0_0_8px_#f37b4b]"></span>
+                    Rover Tracking: Jezero-01
+                </span>
 </div>
 </div>
 </section>
-<!-- Gallery & Recent Anomalies Grid -->
-<section>
-<div class="flex items-center justify-between mb-6">
-<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-3">
-<span class="material-symbols-outlined text-mars-orange" data-icon="browse_gallery">browse_gallery</span>
-                    RECENT DISCOVERIES
-                </h2>
+<section class="space-y-8">
+<div class="flex items-center justify-between border-b border-[#f37b4b]/20 pb-4">
+<div class="flex items-center gap-4">
+<span class="w-2 h-8 bg-[#f37b4b]"></span>
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Anomalies Gallery</h2>
+</div>
 <div class="flex gap-2">
-<button class="h-10 w-10 glass-panel flex items-center justify-center text-slate-500 hover:text-mars-orange transition-all">
-<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
-</button>
-<button class="h-10 w-10 glass-panel flex items-center justify-center text-slate-500 hover:text-mars-orange transition-all">
-<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-</button>
+<span class="px-3 py-1 bg-[#04381f] text-[#4ade80] font-data-mono text-[10px] rounded border border-[#4ade80]/30 uppercase">[SYSTEM_STABLE]</span>
+<span class="px-3 py-1 bg-[#f37b4b]/10 text-[#f37b4b] font-data-mono text-[10px] rounded border border-[#f37b4b]/30 uppercase">[LIVE_FEED]</span>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Discovery Card 1 -->
-<div class="group border border-slate-800/40 bg-transparent flex flex-col hover:border-mars-orange/40 transition-colors">
-<div class="aspect-square relative overflow-hidden">
-<img alt="Space imagery" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up high-resolution satellite image of layered sediment on mars cliff face with golden light highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ErsEJiaUsbtYXkd4MJaDlhwTS9FrsQRgkiUDGVf5X7bsfGjPqLsaC7gSoqowBEDStdoFTaFTmkObiEch5YKM_tCqx66VPu6YFALZECXXeFBKMfFbsK2lt6IQL0gczN0Mz3oYPz2kA3EQX73P7nFnkpMrMFPDTUz9MOGHCINY1yPIOHnECGQtYTAjt5zxoe4gcuH-sGptYpC7vBEVJKhVi5wGoO37xNZXj3VS0Uz1x44CpT4-lMIrdBs1ovRyZUm2qQI6QtSXduc"/>
-<div class="absolute top-3 left-3">
-<span class="bg-mars-orange text-white text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">GEOLOGICAL</span>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<article class="glass-panel group overflow-hidden flex flex-col hover:border-[#f37b4b]/40 transition-colors">
+<div class="relative h-64 overflow-hidden">
+<img alt="Anomaly 01" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBia7le_X2xUNzWk3lcq2WfAMWyPAdOUM1EUySch1c5tiWTAsVW5CAPb4WVYHA9XnUd2sHkykChv0RFfeb4FzUqafPq90zKhXgvWpTcXnNuH9n5BTQYjgUQXeSOEZ1pmtC093QorOLVM_rTCOk30JdHsBVH2Wt54_3rFdqd6Tey-wIO95GbpdNbJ-kxN-nAYXa_-uGUEj9ep6GTUaulTgu6qERdZV1X4JRhX4b8yzw9irAktFcKC8lZVoIYFUZZY4x30mveCunfxLk"/>
+<div class="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-md border border-[#f37b4b]/40 font-data-mono text-xs text-[#f37b4b]">SOL 1042</div>
 </div>
+<div class="p-panel-padding space-y-4">
+<h3 class="font-headline-lg text-xl uppercase tracking-tight text-on-surface group-hover:text-[#f37b4b] transition-colors">Crystalline Spire Formation</h3>
+<p class="text-sm text-slate-400 line-clamp-2">Detected unusual refractive patterns near the North Basin. Signature suggests highly organized silicate structures.</p>
+<button class="w-full py-3 bg-[#f37b4b] text-[#1a0f0d] font-data-mono uppercase tracking-widest text-sm font-bold hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_4px_15px_rgba(243,123,75,0.2)]">
+                        View Analysis
+                    </button>
 </div>
-<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
-<div class="text-on-surface font-bold text-sm uppercase tracking-wide group-hover:text-mars-orange transition-colors">Sedimentary Strata</div>
-<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
-<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
-                            Eberswalde Delta
-                        </div>
+</article>
+<article class="glass-panel group overflow-hidden flex flex-col hover:border-[#4ade80]/40 transition-colors">
+<div class="relative h-64 overflow-hidden">
+<img alt="Anomaly 02" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv8Vm-q5USXgDWibwPgWK6WkCynmpYEDPnRF-OdthWEIt_IQ7t7AM8c9jCOaSbynq-k1eVAvmK6HmYY9owEtXBBmG_m66BQ1-R0twjS8eilxxBRDz2zu3RX0hjhlpfVKepAkHDwLvslJUN-PBcu2t2YjJSvXPiGWycdZ9fNsDX8uAKn9XKz5zKR9ViAGtjpzyFiyqxl3fZjA7oIYiOmyFLgf0q_b_baeHe7xTd9Ws37XkZF9KUfml0yOEOlujR0NKemAT-OhWAKSI"/>
+<div class="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-md border border-[#4ade80]/40 font-data-mono text-xs text-[#4ade80]">SOL 1045</div>
 </div>
+<div class="p-panel-padding space-y-4">
+<h3 class="font-headline-lg text-xl uppercase tracking-tight text-on-surface group-hover:text-[#4ade80] transition-colors">Subsurface Thermal Flare</h3>
+<p class="text-sm text-slate-400 line-clamp-2">Localized heat signature Spike in Sector 09. Methane sensors showing 15% increase over baseline.</p>
+<button class="w-full py-3 bg-[#4ade80] text-[#0a0504] font-data-mono uppercase tracking-widest text-sm font-bold hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_4px_15px_rgba(74,222,128,0.2)]">
+                        View Analysis
+                    </button>
 </div>
-<!-- Discovery Card 2 -->
-<div class="group border border-slate-800/40 bg-transparent flex flex-col hover:border-mars-orange/40 transition-colors">
-<div class="aspect-square relative overflow-hidden">
-<img alt="Orbital view" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="dramatic orbital view of earth at night with electric blue city lights shimmering through thin cloud layer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAJcrnlMx7AnrtSoXKBEA-fji01MbZQybVos6dYGdaNh5LPYDj7TwW6U3foNBooXtrUZLALwrsaBXmEw0LRQHQsyzBWvdO4X5bKaRHy5LpSEYBSbeBAtuW9NnRDQwzNo-2lrhMIXWn4lHGgklfWxvJcnsnkr8CkzgNnIgEV65mgHN2Juo7oksGOktSas1_ASbTPhYIXpd6gZJYLWX67GHRFLkEn6NyzwAp-ZMIs9DauEAC37q_RPis_fG3HItpMyHUNqwmzFlSNzk"/>
-<div class="absolute top-3 left-3">
-<span class="bg-secondary-container text-on-secondary-container text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">ORBITAL</span>
+</article>
+<article class="glass-panel group overflow-hidden flex flex-col hover:border-[#f37b4b]/40 transition-colors">
+<div class="relative h-64 overflow-hidden">
+<img alt="Anomaly 03" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk5im9WiDSVR2XK5xdJ5Ta_feo9NFJi68FNCxAKWrdOn45PvSCvk3abYGjs1JoRR94nO8tjL2AgD1bZ8FbZOPWtvR0IOv7rAR2r3xZcky7zOL2_9-Kp71UygZQBGnb8zi5sFO8RiWZk8o09XVRBPbunkmxOo2lAt-PQIUWBk3am_m8x9dn0wPqVI_gIFx7OHpXKeupuB9_YZRsgAxh4s2QEZxb2KTS5C8_BjTzJ1xDq9HkZ7KpmdAFu-YGgXPX7lEfK4uZ6j5163o"/>
+<div class="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-md border border-[#f37b4b]/40 font-data-mono text-xs text-[#f37b4b]">SOL 1048</div>
 </div>
+<div class="p-panel-padding space-y-4">
+<h3 class="font-headline-lg text-xl uppercase tracking-tight text-on-surface group-hover:text-[#f37b4b] transition-colors">Geometric Erosion Site</h3>
+<p class="text-sm text-slate-400 line-clamp-2">Satellite imaging reveals recurring hexagonal patterns in dust accumulation. Investigating possible magnetic anomaly.</p>
+<button class="w-full py-3 bg-[#f37b4b] text-[#1a0f0d] font-data-mono uppercase tracking-widest text-sm font-bold hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_4px_15px_rgba(243,123,75,0.2)]">
+                        View Analysis
+                    </button>
 </div>
-<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
-<div class="text-on-surface font-bold text-sm uppercase tracking-wide group-hover:text-mars-orange transition-colors">Lumina Scan V-1</div>
-<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
-<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
-                            Orbital Path 9
-                        </div>
-</div>
-</div>
-<!-- Discovery Card 3 -->
-<div class="group border border-slate-800/40 bg-transparent flex flex-col hover:border-mars-orange/40 transition-colors">
-<div class="aspect-square relative overflow-hidden">
-<img alt="Rover view" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="monochrome thermal scan of martian ground showing varied heat signatures in cold blue and white tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQoHXpcW7Id05XpJNg4W0DT6-wmPqIEU0c1mznUa-eFzmVISi-ijG6ukcV5hbeqUflB0JghB0f8gQ5Mj3a74Sm9VtFyIUGM8BjczsF1KiMgaZijAgsFqVI50QnMRaSQmOv89RXP32SpnSbRDDrHAI4grSDcgP5RUpmrgdd1cW7B_XglJ2576mRLVuLva5NmXpevXEOm8TUD4dPkS5kPtDeK_yA_hHyWHjS5gWR5TIp1DuoBwzRtWjW9lju7Hc9RDe_fL9W3ckdGmw"/>
-<div class="absolute top-3 left-3">
-<span class="bg-error text-on-error text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">THERMAL</span>
-</div>
-</div>
-<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
-<div class="text-on-surface font-bold text-sm uppercase tracking-wide group-hover:text-mars-orange transition-colors">Basaltic Heat Sig</div>
-<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
-<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
-                            Gusev Crater
-                        </div>
-</div>
-</div>
-<!-- Discovery Card 4 -->
-<div class="group border border-slate-800/40 bg-transparent flex flex-col hover:border-mars-orange/40 transition-colors">
-<div class="aspect-square relative overflow-hidden">
-<img alt="Sky view" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="dark starry martian night sky with the planet earth appearing as a bright blue star on the horizon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3aDQRFL18LPZn_V_qutQpQgGPaaPXLfMhn_-rVz4WsFiKPIz2IHfGPKXrMBlvPloFsPrbNQKDvMXCrKhMoMZfoR_PzK8Aq52L66Ws-zRcZBtA-_4P_Per7HNt4ida1v-Vt6TSdO4a9A5i3Llqbxp9XANeG_UxBxyonZM0VcR1yxQvxOKWC7yVPc8Zua4wComYAoUiZucmfdNbLUx5-US269BD4jifUOsfK653LgfVj06hpgkSI_b1frA7GysuXI05TTk1kE_lqnY"/>
-<div class="absolute top-3 left-3">
-<span class="bg-tertiary text-on-tertiary text-[9px] font-bold px-2 py-1 uppercase tracking-tighter">CELESTIAL</span>
-</div>
-</div>
-<div class="p-4 glass-panel border-t-0 flex flex-col gap-2">
-<div class="text-on-surface font-bold text-sm uppercase tracking-wide group-hover:text-mars-orange transition-colors">Earth Alignment</div>
-<div class="text-slate-500 text-[10px] font-medium flex items-center gap-1 uppercase">
-<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
-                            Horizon Cam
-                        </div>
-</div>
-</div>
+</article>
 </div>
 </section>
 </main>
-<!-- Footer -->
-<footer class="mt-auto relative z-10 p-8 border-t border-slate-800/40 bg-[#0a0c10]/95 backdrop-blur-md">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-<div class="flex items-center gap-4">
-<img alt="MARS ALIVE" class="h-6 opacity-50 grayscale hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida/ADBb0ugNiodTF6cPUPc8slf-jxKD2YzYBntq-MV-TaRK4Vdo-zKQcGmKN5aqlo8cl6CEhtaHhHRujbTrNtg1-otEOUBCS9t8LYBkam6iXWTHAtQzQCuc0o2ylUVUJS4yjzFcGCRTdTljqBwuNpwbp-7-M9aGgKoxqVtpBi3CbME--K2Bil5NNYa78OMMrmfJWl8mIlF2yxD9BsUgjTb7PLWlvgH9CMX_1WQHY63nW0M-Vx2__0fQ6nQRiMlcwOh5t24rmLzhY_wR1XOEew"/>
-<div class="text-slate-600 font-label-caps text-[10px] tracking-widest border-l border-slate-800 pl-4">
-                    © 2042 MARS ALIVE MISSION CONTROL. ALL DATA ENCRYPTED.
-                </div>
+<footer class="w-full py-8 px-12 flex flex-col md:flex-row justify-between items-center gap-4 bg-black/90 backdrop-blur-md border-t border-[#f37b4b]/10">
+<div class="font-['Space_Grotesk'] text-[10px] tracking-[0.2em] font-light text-slate-600 uppercase">
+        © 2084 MARTIAN COLONIAL AUTHORITY | <span class="text-[#f37b4b] font-bold">SEC-07-A</span>
 </div>
-<div class="flex items-center gap-8">
-<nav class="flex gap-6">
-<a class="text-slate-500 hover:text-mars-orange transition-all font-label-caps text-[10px]" href="#">PROTOCOLS</a>
-<a class="text-slate-500 hover:text-mars-orange transition-all font-label-caps text-[10px]" href="#">TELEMETRY API</a>
-<a class="text-slate-500 hover:text-mars-orange transition-all font-label-caps text-[10px]" href="#">ARCHIVE</a>
-</nav>
-<!-- Discreet Admin Entry -->
-<a class="group flex items-center gap-2 opacity-20 hover:opacity-100 transition-opacity" href="admin.html">
-<span class="material-symbols-outlined text-slate-500 text-sm group-hover:text-error transition-colors" data-icon="security">security</span>
-<span class="text-slate-600 group-hover:text-error font-mono text-[9px] transition-colors">SEC-07-A</span>
-</a>
+<div class="flex gap-8 font-['Space_Grotesk'] text-[10px] tracking-[0.2em] font-light">
+<a class="text-slate-600 uppercase hover:text-[#4ade80] transition-colors" href="#">Admin Access</a>
+<a class="text-[#f37b4b] underline decoration-dotted hover:opacity-80 transition-all" href="#">System Logs</a>
+<a class="text-slate-600 uppercase hover:text-[#4ade80] transition-colors" href="#">Technical Credits</a>
 </div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#4ade80] shadow-[0_0_8px_#4ade80]"></div>
+<span class="font-data-mono text-[10px] text-[#4ade80]/80">UPLINK ACTIVE: 4.8 GBPS</span>
 </div>
 </footer>
-<!-- Bottom Nav Bar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#0a0c10]/90 backdrop-blur-xl border-t border-slate-800/40 flex justify-around p-4 z-50">
-<a class="flex flex-col items-center gap-1 text-mars-orange" href="index.html">
-<span class="material-symbols-outlined" data-icon="home_max">home_max</span>
-<span class="text-[9px] font-bold uppercase tracking-widest">Home</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-slate-500" href="gallery.html">
-<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
-<span class="text-[9px] font-bold uppercase tracking-widest">Gallery</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-slate-500" href="rover.html">
-<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
-<span class="text-[9px] font-bold uppercase tracking-widest">Rover</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-slate-500" href="admin.html">
-<span class="material-symbols-outlined" data-icon="security">security</span>
-<span class="text-[9px] font-bold uppercase tracking-widest">Admin</span>
-</a>
-</nav>
+<div class="fixed bottom-10 right-10 flex flex-col gap-4">
+<button class="w-16 h-16 rounded-full bg-[#f37b4b] text-[#1a0f0d] flex items-center justify-center shadow-[0_0_20px_rgba(243,123,75,0.4)] border border-[#f37b4b]/50 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl" data-icon="add_a_photo">add_a_photo</span>
+</button>
+</div>
 </body></html>
