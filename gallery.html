@@ -6,7 +6,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .glass-panel {
             background: rgba(10, 12, 16, 0.7);
@@ -24,6 +23,9 @@
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0c0e12; }
         ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
+        .logo-glow {
+            filter: drop-shadow(0 0 15px rgba(255, 181, 158, 0.3));
+        }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -97,23 +99,16 @@
                         "body-base": ["Space Grotesk"],
                         "data-point": ["Space Grotesk"],
                         "headline-md": ["Space Grotesk"]
-                    },
-                    "fontSize": {
-                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
-                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-base": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
-                        "data-point": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                        "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}]
                     }
                 },
             },
         }
     </script>
 </head>
-<body class="bg-background text-on-surface font-body-base selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<body class="bg-background text-on-surface font-body-base selection:bg-primary-container selection:text-on-primary-container overflow-hidden h-screen flex flex-col">
 <!-- Cinematic Background -->
 <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&amp;w=2000')] bg-cover bg-center opacity-20 scale-110" data-alt="extreme wide cinematic shot of the martian landscape with dusty orange atmosphere and rocky silhouettes under a dark star-filled sky"></div>
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&amp;w=2000')] bg-cover bg-center opacity-20 scale-110"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50"></div>
 </div>
 <!-- Side Navigation Bar -->
@@ -126,36 +121,40 @@
 <div class="mt-1 font-label-caps text-slate-500 text-[10px]">Mars Sector 7</div>
 </div>
 <nav class="flex-1 px-2 space-y-1 mt-4">
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="index.html">
 <span class="material-symbols-outlined" data-icon="home_max">home_max</span>
 <span>Home</span>
 </a>
-<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-4 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<a class="flex items-center space-x-4 bg-orange-600/10 text-orange-500 border-l-2 border-orange-600 py-3 px-4 transition-colors font-label-caps uppercase text-[10px]" href="gallery.html">
 <span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
 <span>Gallery</span>
 </a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="rover.html">
 <span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
 <span>Rover</span>
 </a>
-<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="#">
+<a class="flex items-center space-x-4 text-slate-500 py-3 px-4 hover:text-slate-300 hover:bg-slate-800/50 transition-colors font-label-caps uppercase text-[10px]" href="admin.html">
 <span class="material-symbols-outlined" data-icon="security">security</span>
 <span>Admin SEC-07-A</span>
 </a>
 </nav>
 <div class="p-6">
 <button class="w-full bg-primary-container text-on-primary-container py-3 font-label-caps uppercase text-[10px] tracking-widest hover:brightness-110 active:scale-95 transition-all">
-                INITIATE SCAN
-            </button>
+            INITIATE SCAN
+        </button>
 </div>
 </aside>
 <!-- Top App Bar -->
 <header class="fixed top-0 left-64 right-0 z-30 bg-[#0a0c10]/80 backdrop-blur-xl border-slate-800/50 border-b-[1px] shadow-[0_0_15px_rgba(255,77,0,0.1)]">
-<div class="flex justify-between items-center w-full px-8 py-3">
+<div class="flex justify-between items-center w-full px-8 py-2">
 <div class="flex items-center gap-8">
 <div class="text-orange-600 font-bold tracking-tighter text-xl font-headline-md">MARS ALIVE</div>
 <div class="h-4 w-[1px] bg-slate-800"></div>
 <div class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-orange-600">ARES-V COMMAND</div>
+</div>
+<!-- Centered Logo -->
+<div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-10">
+<img alt="Mars Alive Logo" class="h-full w-auto object-contain logo-glow" src="https://lh3.googleusercontent.com/aida/ADBb0ugNiodTF6cPUPc8slf-jxKD2YzYBntq-MV-TaRK4Vdo-zKQcGmKN5aqlo8cl6CEhtaHhHRujbTrNtg1-otEOUBCS9t8LYBkam6iXWTHAtQzQCuc0o2ylUVUJS4yjzFcGCRTdTljqBwuNpwbp-7-M9aGgKoxqVtpBi3CbME--K2Bil5NNYa78OMMrmfJWl8mIlF2yxD9BsUgjTb7PLWlvgH9CMX_1WQHY63nW0M-Vx2__0fQ6nQRiMlcwOh5t24rmLzhY_wR1XOEew"/>
 </div>
 <div class="flex items-center gap-6">
 <div class="relative group">
@@ -176,25 +175,27 @@
 </div>
 </header>
 <!-- Main Canvas -->
-<main class="ml-64 pt-20 h-screen overflow-y-auto px-8 pb-12 relative z-10">
+<main class="ml-64 pt-16 h-full overflow-hidden flex flex-col">
+<div class="flex-1 overflow-y-auto px-8 py-8 scroll-smooth">
 <!-- Filter HUD Panel -->
-<section class="mt-4 mb-8 glass-panel p-6 border-l-4 border-l-primary-container">
+<section class="mb-8 glass-panel p-6 border-l-4 border-l-primary-container">
 <div class="flex flex-wrap items-end gap-8">
 <div class="flex-1 min-w-[200px]">
-<label class="block font-label-caps text-[10px] text-slate-500 mb-2 uppercase tracking-widest">Temporal Range (Sol)</label>
+<label class="block font-label-caps text-[10px] text-slate-500 mb-2 uppercase tracking-widest">Temporal Range (Sol): <span class="text-primary font-data-point" id="sol-display">1250</span></label>
 <div class="flex items-center gap-4">
-<span class="text-data-point font-data-point text-primary">0000</span>
-<input class="flex-1 accent-primary bg-slate-800 h-1 appearance-none cursor-pointer" max="4000" min="0" type="range" value="1250"/>
-<span class="text-data-point font-data-point text-primary">4000</span>
+<span class="text-data-point font-data-point text-slate-500 text-[10px]">0</span>
+<input class="flex-1 accent-primary bg-slate-800 h-1 appearance-none cursor-pointer" id="sol-range" max="4000" min="0" type="range" value="1250"/>
+<span class="text-data-point font-data-point text-slate-500 text-[10px]">4000</span>
 </div>
 </div>
 <div class="w-48">
 <label class="block font-label-caps text-[10px] text-slate-500 mb-2 uppercase tracking-widest">Active Rover</label>
-<select class="w-full bg-surface-container-lowest border-slate-800 text-on-surface font-label-caps text-[10px] p-2 outline-none focus:border-primary">
-<option>PERSEVERANCE</option>
-<option>CURIOSITY</option>
-<option>SPIRIT</option>
-<option>OPPORTUNITY</option>
+<select class="w-full bg-surface-container-lowest border-slate-800 text-on-surface font-label-caps text-[10px] p-2 outline-none focus:border-primary" id="rover-select">
+<option value="ALL">ALL PLATFORMS</option>
+<option value="PERSEVERANCE">PERSEVERANCE</option>
+<option value="CURIOSITY">CURIOSITY</option>
+<option value="SPIRIT">SPIRIT</option>
+<option value="OPPORTUNITY">OPPORTUNITY</option>
 </select>
 </div>
 <div class="w-48">
@@ -204,24 +205,22 @@
 <button class="flex-1 py-2 px-1 border border-slate-800 text-slate-500 font-label-caps text-[9px] text-center hover:border-slate-600">ARCHIVED</button>
 </div>
 </div>
-<button class="h-10 px-6 bg-secondary-container text-on-secondary-container font-label-caps text-[10px] tracking-widest hover:brightness-110 active:scale-95 flex items-center gap-2">
+<button class="h-10 px-6 bg-secondary-container text-on-secondary-container font-label-caps text-[10px] tracking-widest hover:brightness-110 active:scale-95 flex items-center gap-2" id="apply-filters">
 <span class="material-symbols-outlined text-sm" data-icon="filter_alt">filter_alt</span>
                     APPLY FILTERS
                 </button>
 </div>
 </section>
 <!-- Gallery Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="gallery-grid">
+<!-- Static Demo Content -->
 <!-- Discovery Card 1 -->
-<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
+<div class="gallery-item group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]" data-rover="PERSEVERANCE" data-sol="3412">
 <div class="relative aspect-[4/3] overflow-hidden">
-<img alt="Anomaly 01" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="close-up view of unusual hexagonal rock formations on a dusty martian surface with sharp shadows and red dust details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIRWXjnV-iKYLS_kjb4dLGMn_nTbVrdRfc0fSApVZ_ZnbQzlGC0Xe4gsSCGk_f7ZqrUpThGHP0G1ufzR1MREfAcuH_9c_SdhA9IdvlIxrXXOMqJiZjGiUVjZ2n6svGnkzMnUnBjdbD0Mf4YtKJHYb5CGJiy1Z-7Aw6yymdq7ODsBJrW5SYJgTo7LcAypVixyRbZRHWIf-AHDMBF-1_FTE5mYYfaqjt3uNwUdlNQzURAfj-WzrLJnZC0dsBu--EVsmSMJkDRbjQepo"/>
+<img alt="Anomaly 01" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIRWXjnV-iKYLS_kjb4dLGMn_nTbVrdRfc0fSApVZ_ZnbQzlGC0Xe4gsSCGk_f7ZqrUpThGHP0G1ufzR1MREfAcuH_9c_SdhA9IdvlIxrXXOMqJiZjGiUVjZ2n6svGnkzMnUnBjdbD0Mf4YtKJHYb5CGJiy1Z-7Aw6yymdq7ODsBJrW5SYJgTo7LcAypVixyRbZRHWIf-AHDMBF-1_FTE5mYYfaqjt3uNwUdlNQzURAfj-WzrLJnZC0dsBu--EVsmSMJkDRbjQepo"/>
 <div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
 <div class="absolute top-2 left-2 flex gap-1">
 <span class="bg-primary/20 text-primary text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-primary/30">GEOLOGICAL</span>
-</div>
-<div class="absolute bottom-2 right-2 flex gap-2">
-<span class="material-symbols-outlined text-primary text-lg" data-icon="monitored_heart" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
 </div>
 </div>
 <div class="p-5 flex-1 flex flex-col">
@@ -229,24 +228,20 @@
 <h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">HEXAGONAL CRYSTALLINE STRATA</h3>
 <span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 3412</span>
 </div>
-<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
-                        Anomalous geometric formations detected in the Jezero Crater floor. Structural integrity suggests non-volcanic origin.
-                    </p>
+<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">Anomalous geometric formations detected in the Jezero Crater floor. Structural integrity suggests non-volcanic origin.</p>
 <div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
 <span class="font-label-caps text-[10px] text-slate-400">PERSEVERANCE</span>
 </div>
-<button class="text-primary hover:text-primary-fixed transition-colors">
-<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-</button>
+<button class="text-primary hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
 </div>
 </div>
 </div>
 <!-- Discovery Card 2 -->
-<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
+<div class="gallery-item group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]" data-rover="CURIOSITY" data-sol="1288">
 <div class="relative aspect-[4/3] overflow-hidden">
-<img alt="Anomaly 02" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="satellite view of martian atmosphere showing glowing blue auroras or thin atmospheric ripples against the curvature of the dark planet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNC-mSBaCaN1SC8BLbsFMyD_keSNDOnaTlcr-4p5USHVoolk8Ke1B-CRappgmgst4BMIr7tt8cHB7V2XD6YMUU16xf79zPI1kI6grJDf8-CveIJTGDJprxirIJs7w7Dt6-LD78yfR3MxpgmNrG_yOyEIRd91_D9gVa9DkUdxFkS_0xiMA9bMmI7N9ULRKWMgvoluNx-Yp8QvBHnT-iX8bUbN6OaXsnaVHwO4pYbAA7nzPCAq5aA-6_NXVMKMu_spxIxt2mbLT_l34"/>
+<img alt="Anomaly 02" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNC-mSBaCaN1SC8BLbsFMyD_keSNDOnaTlcr-4p5USHVoolk8Ke1B-CRappgmgst4BMIr7tt8cHB7V2XD6YMUU16xf79zPI1kI6grJDf8-CveIJTGDJprxirIJs7w7Dt6-LD78yfR3MxpgmNrG_yOyEIRd91_D9gVa9DkUdxFkS_0xiMA9bMmI7N9ULRKWMgvoluNx-Yp8QvBHnT-iX8bUbN6OaXsnaVHwO4pYbAA7nzPCAq5aA-6_NXVMKMu_spxIxt2mbLT_l34"/>
 <div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
 <div class="absolute top-2 left-2 flex gap-1">
 <span class="bg-secondary-container/20 text-secondary-container text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-secondary-container/30">ATMOSPHERIC</span>
@@ -257,24 +252,20 @@
 <h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">METHANE PLUME PHENOMENON</h3>
 <span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 1288</span>
 </div>
-<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
-                        High-concentration methane spike detected in Gale Crater. Temporal variance indicates possible subsurface biological activity.
-                    </p>
+<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">High-concentration methane spike detected in Gale Crater. Temporal variance indicates possible subsurface biological activity.</p>
 <div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
 <span class="font-label-caps text-[10px] text-slate-400">CURIOSITY</span>
 </div>
-<button class="text-primary hover:text-primary-fixed transition-colors">
-<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-</button>
+<button class="text-primary hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
 </div>
 </div>
 </div>
 <!-- Discovery Card 3 -->
-<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
+<div class="gallery-item group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]" data-rover="OPPORTUNITY" data-sol="452">
 <div class="relative aspect-[4/3] overflow-hidden">
-<img alt="Anomaly 03" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="macro photo of iridescent metallic soil grains glinting under sunlight on a dark sandy surface of mars" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAInlR0Gs-5mIwVO6iugxRTpPeVkimOBdbkvhoJexGJ9aLCARGkvLzCRGAFId0hcKGBC9vY0SqkcbOyNx8FQpr-Q3PfAR-okH_RIUeW3AZcXc1PDWwI-EuZLHlAYGmR9BuiwONqlEFNDv1lM9icM2YAOdPXswnzdPCKfeZVZEhNPHG7qsHBzbLSCIfYQC2GWfIJFhAPmICduZ5WmpHsuFgwUMZqy7XRrxV4M3ijujnVYwlSx2KLibUqxoWzPYcnaUshrBS54FBHNY8"/>
+<img alt="Anomaly 03" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAInlR0Gs-5mIwVO6iugxRTpPeVkimOBdbkvhoJexGJ9aLCARGkvLzCRGAFId0hcKGBC9vY0SqkcbOyNx8FQpr-Q3PfAR-okH_RIUeW3AZcXc1PDWwI-EuZLHlAYGmR9BuiwONqlEFNDv1lM9icM2YAOdPXswnzdPCKfeZVZEhNPHG7qsHBzbLSCIfYQC2GWfIJFhAPmICduZ5WmpHsuFgwUMZqy7XRrxV4M3ijujnVYwlSx2KLibUqxoWzPYcnaUshrBS54FBHNY8"/>
 <div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
 <div class="absolute top-2 left-2 flex gap-1">
 <span class="bg-error-container/20 text-error text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-error/30">MINERALOGICAL</span>
@@ -285,69 +276,115 @@
 <h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">METALLIC VEIN INTRUSION</h3>
 <span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 0452</span>
 </div>
-<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
-                        Exposed rich iron-nickel vein in the Burns Cliff formation. High reflectivity interfering with infrared spectrometers.
-                    </p>
+<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">Exposed rich iron-nickel vein in the Burns Cliff formation. High reflectivity interfering with infrared spectrometers.</p>
 <div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
 <span class="font-label-caps text-[10px] text-slate-400">OPPORTUNITY</span>
 </div>
-<button class="text-primary hover:text-primary-fixed transition-colors">
-<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-</button>
+<button class="text-primary hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
 </div>
 </div>
 </div>
-<!-- Discovery Card 4 -->
-<div class="group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]">
-<div class="relative aspect-[4/3] overflow-hidden">
-<img alt="Anomaly 04" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="frozen blue water ice trapped in deep rocky crevices on a shadowed martian crater wall at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALk3SmN6vqe-sAl1Q4480ig7mnw6gSPv7wnEfzcvS2sQvgxa-RmqvH2_ARKAtTzGpRk9Fg6q51s4s1MB1hvnpxHvEcfrIcaBW1toRWBpct-FqCRZfGMbvJDErteeLRaZ-xFQ4PD4ZFP9Sg4UYKr21qBFiQ3TiQJI45FR-jsNONT6F2aYf7ah8yxC8CblZxOqhE_gX4opVR2ubcjYmSYgBJRobOc5iBW5-Vra2Tc8qHTgtQ2in3Rsi7mPrFJsfFOF8U4UkU4rT-NYs"/>
-<div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
-<div class="absolute top-2 left-2 flex gap-1">
-<span class="bg-primary/20 text-primary text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-primary/30">HYDROMORPHIC</span>
-</div>
-</div>
-<div class="p-5 flex-1 flex flex-col">
-<div class="flex justify-between items-start mb-3">
-<h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">PERMAFROST SUBLIMATION REVEAL</h3>
-<span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL 2110</span>
-</div>
-<p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">
-                        Fresh exposure of water-ice strata in a recent impact crater. Sublimation rate exceeding prior mathematical models.
-                    </p>
-<div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
-<span class="font-label-caps text-[10px] text-slate-400">CURIOSITY</span>
-</div>
-<button class="text-primary hover:text-primary-fixed transition-colors">
-<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Placeholder for Local Storage Sync Posts -->
-<div class="col-span-full border border-dashed border-slate-800 flex flex-col items-center justify-center py-12 opacity-50">
-<span class="material-symbols-outlined text-4xl mb-2" data-icon="sync">sync</span>
-<p class="font-label-caps text-[10px] uppercase tracking-widest text-slate-500">Syncing custom logs from Admin Terminal SEC-07-A...</p>
-</div>
+<!-- Local Storage Items will be injected here -->
 </div>
 <!-- Footer Data -->
-<footer class="mt-12 flex justify-between items-center text-slate-500 font-label-caps text-[9px] uppercase tracking-widest border-t border-slate-800 pt-6">
+<footer class="mt-12 flex justify-between items-center text-slate-500 font-label-caps text-[9px] uppercase tracking-widest border-t border-slate-800 pt-6 pb-8">
 <div class="flex gap-6">
 <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-orange-600 rounded-full"></span> STATION ACTIVE</span>
 <span>LAT: 18.44°N | LON: 77.45°E</span>
 <span>LINK: QUANTUM-7 (STABLE)</span>
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="admin.html">
+<span class="material-symbols-outlined text-[10px]" data-icon="terminal">terminal</span>
+                    SEC-07-A
+                </a>
 </div>
 <div class="flex gap-4">
 <a class="hover:text-primary transition-colors" href="#">PRIVACY PROTOCOL</a>
 <a class="hover:text-primary transition-colors" href="#">COMMAND MANUAL</a>
 </div>
 </footer>
+</div>
 </main>
 <!-- FAB Action Button -->
-<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-none flex items-center justify-center shadow-[0_0_20px_rgba(255,181,158,0.4)] hover:scale-105 active:scale-95 transition-all z-50">
+<a class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-none flex items-center justify-center shadow-[0_0_20px_rgba(255,181,158,0.4)] hover:scale-105 active:scale-95 transition-all z-50" href="admin.html">
 <span class="material-symbols-outlined text-2xl" data-icon="add_photo_alternate">add_photo_alternate</span>
-</button>
+</a>
+<script>
+    // Local Storage Integration
+    function loadUserPosts() {
+        const grid = document.getElementById('gallery-grid');
+        const userPosts = JSON.parse(localStorage.getItem('mars_anomalies') || '[]');
+        
+        userPosts.forEach(post => {
+            const card = document.createElement('div');
+            card.className = "gallery-item group relative flex flex-col border border-slate-800/40 bg-[#0a0c10]/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,181,158,0.1)]";
+            card.setAttribute('data-rover', post.rover || 'UNKNOWN');
+            card.setAttribute('data-sol', post.sol || '0');
+            
+            card.innerHTML = `
+                <div class="relative aspect-[4/3] overflow-hidden">
+                    <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+                    <div class="absolute inset-0 scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute top-2 left-2 flex gap-1">
+                        <span class="bg-primary/20 text-primary text-[8px] font-label-caps px-2 py-1 backdrop-blur-md border border-primary/30 uppercase">${post.category || 'USER LOG'}</span>
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-headline-md text-base text-on-surface tracking-tight leading-tight uppercase">${post.title}</h3>
+                        <span class="font-data-point text-primary text-xs bg-primary/5 px-2 py-0.5 border border-primary/20">SOL ${post.sol}</span>
+                    </div>
+                    <p class="text-slate-400 font-body-base text-xs leading-relaxed line-clamp-3 mb-6">${post.description}</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-slate-800/40">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-slate-500 text-sm" data-icon="robot_2">robot_2</span>
+                            <span class="font-label-caps text-[10px] text-slate-400">${post.rover}</span>
+                        </div>
+                        <button class="text-primary hover:text-primary-fixed transition-colors">
+                            <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // Filtering Logic
+    function applyFilters() {
+        const selectedRover = document.getElementById('rover-select').value;
+        const maxSol = parseInt(document.getElementById('sol-range').value);
+        const items = document.querySelectorAll('.gallery-item');
+
+        items.forEach(item => {
+            const itemRover = item.getAttribute('data-rover');
+            const itemSol = parseInt(item.getAttribute('data-sol'));
+            
+            const roverMatch = (selectedRover === 'ALL' || itemRover === selectedRover);
+            const solMatch = itemSol <= maxSol;
+
+            if (roverMatch && solMatch) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        loadUserPosts();
+        
+        const solRange = document.getElementById('sol-range');
+        const solDisplay = document.getElementById('sol-display');
+        const filterBtn = document.getElementById('apply-filters');
+
+        solRange.addEventListener('input', (e) => {
+            solDisplay.textContent = e.target.value;
+        });
+
+        filterBtn.addEventListener('click', applyFilters);
+    });
+</script>
 </body></html>
